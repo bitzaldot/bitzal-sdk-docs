@@ -1,0 +1,20 @@
+[package]
+name = "staging-pallets"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+parity-scale-codec = { version = "3.0.0", default-features = false }
+scale-info = { version = "2.6.0", default-features = false }
+
+frame = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false, features = ["runtime"] }
+
+[features]
+default = ["std"]
+std = [
+	"parity-scale-codec/std",
+	"scale-info/std",
+
+	"frame/std",
+]

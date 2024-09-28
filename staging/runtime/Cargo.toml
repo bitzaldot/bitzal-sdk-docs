@@ -1,0 +1,41 @@
+[package]
+name = "staging-runtime"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+parity-scale-codec = { version = "3.0.0", default-features = false }
+scale-info = { version = "2.6.0", default-features = false }
+
+frame = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false, features = ["runtime"] }
+staging-pallets = { path = "../pallets", default-features = false }
+
+# Pallets that we want to use
+pallet-balances = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false, features = ["insecure_zero_ed"] }
+pallet-sudo = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
+pallet-timestamp = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
+pallet-transaction-payment = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
+pallet-transaction-payment-rpc-runtime-api = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
+
+[build-dependencies]
+substrate-wasm-builder = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", optional = true }
+
+[features]
+default = ["std"]
+std = [
+	"parity-scale-codec/std",
+	"scale-info/std",
+
+	"frame/std",
+	"staging-pallets/std",
+
+	"pallet-balances/std",
+	"pallet-sudo/std",
+	"pallet-timestamp/std",
+	"pallet-transaction-payment/std",
+	"pallet-transaction-payment-rpc-runtime-api/std",
+
+	"substrate-wasm-builder",
+]
+
+
