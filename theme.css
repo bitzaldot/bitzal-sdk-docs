@@ -18,5 +18,5 @@ body.sdk-docs {
 }
 
 html[data-theme="light"] .sidebar-crate > .logo-container > img {
-  content: url("https://raw.githubusercontent.com/bitzaldot/bitzal-sdk/master/docs/images/bitzal_Logo_Horizontal_Pink_Black.png");
+  content: url("https://raw.githubusercontent.com/bitzaldot/bitzal-sdk-docs/blob/main/static.files/logos.PNG");
 }
