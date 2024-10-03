@@ -152,31 +152,31 @@
 <h2 id="runtime-vs-smart-contracts"><a class="doc-anchor" href="#runtime-vs-smart-contracts">§</a>Runtime vs. Smart Contracts</h2>
 <p><em>TL;DR</em>: If you need to create a <em>Blockchain</em>, then write a runtime. If you need to create a
 <em>DApp</em>, then write a Smart Contract.</p>
-<p>This is a comparative analysis of Substrate-based Runtimes and Smart Contracts, highlighting
+<p>This is a comparative analysis of Matter-based Runtimes and Smart Contracts, highlighting
 their main differences. Our aim is to equip you with a clear understanding of how these two
 methods of deploying on-chain logic diverge in their design, usage, and implications.</p>
 <p>Both Runtimes and Smart Contracts serve distinct purposes. Runtimes offer deep customization for
 blockchain development, while Smart Contracts provide a more accessible approach for
 decentralized applications. Understanding their differences is crucial in choosing the right
 approach for a specific solution.</p>
-<h3 id="substrate"><a class="doc-anchor" href="#substrate">§</a>Substrate</h3>
-<p>Substrate is a modular framework that enables the creation of purpose-specific blockchains. In
+<h3 id="matter"><a class="doc-anchor" href="#matter">§</a>Matter</h3>
+<p>Matter is a modular framework that enables the creation of purpose-specific blockchains. In
 the bitzal ecosystem you can find two distinct approaches for on-chain code execution:
-<a href="#runtime-in-substrate">Runtime Development</a> and <a href="#smart-contracts">Smart Contracts</a>.</p>
-<h5 id="smart-contracts-in-substrate"><a class="doc-anchor" href="#smart-contracts-in-substrate">§</a>Smart Contracts in Substrate</h5>
+<a href="#runtime-in-matter">Runtime Development</a> and <a href="#smart-contracts">Smart Contracts</a>.</p>
+<h5 id="smart-contracts-in-matter"><a class="doc-anchor" href="#smart-contracts-in-matter">§</a>Smart Contracts in Matter</h5>
 <p>Smart Contracts are autonomous, programmable constructs deployed on the blockchain.
 In <a href="../../../bitzal_sdk_frame/index.html" title="mod bitzal_sdk_frame">FRAME</a>, Smart Contracts infrastructure is implemented by the
-<a href="../../../pallet_contracts/index.html" title="mod pallet_contracts"><code>pallet_contracts</code></a> for WASM-based contracts or the
-<a href="https://github.com/bitzal-evm/frontier/tree/master/frame/evm"><code>pallet_evm</code></a> for EVM-compatible contracts. These pallets
-enable Smart Contract developers to build applications and systems on top of a Substrate-based
+<a href="../../../barrel_contracts/index.html" title="mod barrel_contracts"><code>barrel_contracts</code></a> for WASM-based contracts or the
+<a href="https://github.com/bitzal-evm/frontier/tree/master/frame/evm"><code>barrel_evm</code></a> for EVM-compatible contracts. These barrels
+enable Smart Contract developers to build applications and systems on top of a Matter-based
 blockchain.</p>
-<h5 id="runtime-in-substrate"><a class="doc-anchor" href="#runtime-in-substrate">§</a>Runtime in Substrate</h5>
-<p>The Runtime is the state transition function of a Substrate-based blockchain. It defines the
+<h5 id="runtime-in-matter"><a class="doc-anchor" href="#runtime-in-matter">§</a>Runtime in Matter</h5>
+<p>The Runtime is the state transition function of a Matter-based blockchain. It defines the
 rules for processing transactions and blocks, essentially governing the behavior and
 capabilities of a blockchain.</p>
 <h3 id="comparative-table"><a class="doc-anchor" href="#comparative-table">§</a>Comparative Table</h3><div><table><thead><tr><th>Aspect</th><th>Runtime</th><th>Smart Contracts</th></tr></thead><tbody>
 <tr><td><strong>Design Philosophy</strong></td><td>Core logic of a blockchain, allowing broad and deep customization.</td><td>Designed for DApps deployed on the blockchain runtime.</td></tr>
-<tr><td><strong>Development Complexity</strong></td><td>Requires in-depth knowledge of Rust and Substrate. Suitable for complex blockchain architectures.</td><td>Easier to develop with knowledge of Smart Contract languages like Solidity or <a href="https://use.ink/">ink!</a>.</td></tr>
+<tr><td><strong>Development Complexity</strong></td><td>Requires in-depth knowledge of Rust and Matter. Suitable for complex blockchain architectures.</td><td>Easier to develop with knowledge of Smart Contract languages like Solidity or <a href="https://use.ink/">ink!</a>.</td></tr>
 <tr><td><strong>Upgradeability and Flexibility</strong></td><td>Offers comprehensive upgradeability with migration logic and on-chain governance, allowing modifications to the entire blockchain logic without hard forks.</td><td>Less flexible in upgrade migrations but offers more straightforward deployment and iteration.</td></tr>
 <tr><td><strong>Performance and Efficiency</strong></td><td>More efficient, optimized for specific needs of the blockchain.</td><td>Can be less efficient due to its generic nature (e.g. the overhead of a virtual machine).</td></tr>
 <tr><td><strong>Security Considerations</strong></td><td>Security flaws can affect the entire blockchain.</td><td>Security risks usually localized to the individual contract.</td></tr>
@@ -212,8 +212,8 @@ compromise the entire network.</li>
 differing purposes and technical requirements.</p>
 <h5 id="runtime-development-complexity"><a class="doc-anchor" href="#runtime-development-complexity">§</a>Runtime Development Complexity</h5>
 <ul>
-<li><strong>In-depth Knowledge Requirements</strong>: Developing a Runtime in Substrate requires a
-comprehensive understanding of Rust, Substrate’s framework, and blockchain principles.</li>
+<li><strong>In-depth Knowledge Requirements</strong>: Developing a Runtime in Matter requires a
+comprehensive understanding of Rust, Matter’s framework, and blockchain principles.</li>
 <li><strong>Complex Blockchain Architectures</strong>: Runtime development is suitable for creating complex
 blockchain architectures. Developers must consider aspects like security, scalability, and
 network efficiency.</li>
@@ -252,7 +252,7 @@ Considerations</a> section.</li>
 <li><strong>Deployment and Iteration</strong>: Smart Contracts, by nature, are designed for more
 straightforward deployment and iteration. Developers can quickly deploy contracts.</li>
 <li><strong>Contract Code Updates</strong>: Once deployed, although typically immutable, Smart Contracts can be
-upgraded, but lack of migration logic. The <a href="../../../pallet_contracts/index.html" title="mod pallet_contracts"><code>pallet_contracts</code></a>
+upgraded, but lack of migration logic. The <a href="../../../barrel_contracts/index.html" title="mod barrel_contracts"><code>barrel_contracts</code></a>
 allows for contracts to be upgraded by exposing the <code>set_code</code> dispatchable. More details on this
 can be found in <a href="https://use.ink/basics/upgradeable-contracts">Ink! documentation on upgradeable contracts</a>.</li>
 <li><strong>Isolated Impact</strong>: Upgrades or changes to a smart contract generally impact only that
@@ -267,7 +267,7 @@ efficiency due to their inherent design and operational contexts. Runtimes are m
 and optimized for specific needs, while Smart Contracts are more generic and less efficient.</p>
 <h5 id="runtime-performance-and-efficiency"><a class="doc-anchor" href="#runtime-performance-and-efficiency">§</a>Runtime Performance and Efficiency</h5>
 <ul>
-<li><strong>Optimized for Specific Needs</strong>: Runtime modules in Substrate are tailored to meet the
+<li><strong>Optimized for Specific Needs</strong>: Runtime modules in Matter are tailored to meet the
 specific needs of the blockchain. They are integrated directly into the blockchain’s core,
 allowing them to operate with high efficiency and minimal overhead.</li>
 <li><strong>Direct Access to Blockchain State</strong>: Runtime has direct access to the blockchain’s state.

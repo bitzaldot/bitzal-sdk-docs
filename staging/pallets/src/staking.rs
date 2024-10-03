@@ -1,21 +1,21 @@
-pub use pallet::*;
+pub use barrel::*;
 
-#[frame::pallet(dev_mode)]
-pub mod pallet {
-	use crate::currency::pallet::{self as pallet_currency, Balance};
+#[frame::barrel(dev_mode)]
+pub mod barrel {
+	use crate::currency::barrel::{self as barrel_currency, Balance};
 	use frame::{
 		derive::{Decode, DefaultNoBound, Encode, TypeInfo},
 		prelude::*,
 	};
 
-	#[pallet::config]
-	pub trait Config: frame_system::Config + pallet_currency::Config {
+	#[barrel::config]
+	pub trait Config: frame_system::Config + barrel_currency::Config {
 		type ValidatorCount: Get<u32>;
 		type EraDuration: Get<BlockNumberFor<Self>>;
 	}
 
-	#[pallet::pallet]
-	pub struct Pallet<T>(_);
+	#[barrel::barrel]
+	pub struct Barrel<T>(_);
 
 	#[derive(Encode, Decode, TypeInfo, Eq, PartialEq, Clone, Debug)]
 	pub struct ValidatorStake {
@@ -23,17 +23,17 @@ pub mod pallet {
 		pub(crate) delegated: Balance,
 	}
 
-	#[pallet::storage]
+	#[barrel::storage]
 	pub type Validators<T: Config> = StorageMap<_, _, T::AccountId, ValidatorStake>;
 
-	#[pallet::storage]
+	#[barrel::storage]
 	pub type Delegators<T: Config> = StorageMap<_, _, T::AccountId, Balance>;
 
-	#[pallet::storage]
+	#[barrel::storage]
 	pub type ActiveValidators<T: Config> = StorageValue<_, Vec<T::AccountId>, ValueQuery>;
 
 	#[derive(DefaultNoBound)]
-	#[pallet::genesis_config]
+	#[barrel::genesis_config]
 	pub struct GenesisConfig<T: Config> {
 		validators: Vec<(T::AccountId, Balance)>,
 		delegators: Vec<(T::AccountId, T::AccountId, Balance)>,
@@ -42,7 +42,7 @@ pub mod pallet {
 	// TODO:
 	// https://github.com/bitzaldot/bitzal-sdk/pull/1642/files#diff-1a8ad3ec3e24e92089201972e112619421ef6c31484f65d45d30da7a8fae69fbR41
 	use frame::deps::sp_runtime;
-	#[pallet::genesis_build]
+	#[barrel::genesis_build]
 	impl<T: Config> BuildGenesisConfig for GenesisConfig<T> {
 		fn build(&self) {
 			use frame::deps::frame_support::assert_ok;
@@ -50,24 +50,24 @@ pub mod pallet {
 			for (validator, self_stake) in &self.validators {
 				let raw_origin = RawOrigin::Signed(validator.clone());
 
-				assert_ok!(Pallet::<T>::register(raw_origin.into(), *self_stake));
+				assert_ok!(Barrel::<T>::register(raw_origin.into(), *self_stake));
 			}
 
 			for (delegator, delegatee, stake) in &self.delegators {
 				let raw_origin = RawOrigin::Signed(delegator.clone());
-				assert_ok!(Pallet::<T>::delegate(raw_origin.into(), delegatee.clone(), *stake));
+				assert_ok!(Barrel::<T>::delegate(raw_origin.into(), delegatee.clone(), *stake));
 			}
 		}
 	}
 
-	#[pallet::call]
-	impl<T: Config> Pallet<T> {
+	#[barrel::call]
+	impl<T: Config> Barrel<T> {
 		pub fn register(origin: OriginFor<T>, amount: Balance) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 
 			ensure!(!Validators::<T>::contains_key(&who), "AlreadyRegistered");
 			ensure!(
-				pallet_currency::Balances::<T>::get(&who).map_or(false, |b| b >= amount),
+				barrel_currency::Balances::<T>::get(&who).map_or(false, |b| b >= amount),
 				"InsufficientFunds"
 			);
 
@@ -81,7 +81,7 @@ pub mod pallet {
 
 			ensure!(!Delegators::<T>::contains_key(&who), "AlreadyDelegator");
 			ensure!(
-				pallet_currency::Balances::<T>::get(&who).map_or(false, |b| b >= amount),
+				barrel_currency::Balances::<T>::get(&who).map_or(false, |b| b >= amount),
 				"InsufficientFunds"
 			);
 
@@ -97,8 +97,8 @@ pub mod pallet {
 		}
 	}
 
-	#[pallet::hooks]
-	impl<T: Config> Hooks<BlockNumberFor<T>> for Pallet<T> {
+	#[barrel::hooks]
+	impl<T: Config> Hooks<BlockNumberFor<T>> for Barrel<T> {
 		fn on_initialize(now: BlockNumberFor<T>) -> Weight {
 			use frame::traits::Zero;
 
@@ -122,19 +122,19 @@ pub mod pallet {
 	#[cfg(test)]
 	mod tests {
 		use crate::{
-			currency::pallet::{self as pallet_currency, Balance},
-			staking::pallet::{self as pallet_staking, *},
+			currency::barrel::{self as barrel_currency, Balance},
+			staking::barrel::{self as barrel_staking, *},
 		};
 		use frame::testing_prelude::*;
-		use pallet_staking::{ActiveValidators, ValidatorStake, Validators};
+		use barrel_staking::{ActiveValidators, ValidatorStake, Validators};
 
 		type AccountId = <Runtime as frame_system::Config>::AccountId;
 
 		construct_runtime!(
 			pub struct Runtime {
 				System: frame_system,
-				Currency: pallet_currency,
-				Staking: pallet_staking,
+				Currency: barrel_currency,
+				Staking: barrel_staking,
 			}
 		);
 
@@ -150,12 +150,12 @@ pub mod pallet {
 			pub const EraDuration: BlockNumberFor<Runtime> = 3;
 		}
 
-		impl pallet_staking::Config for Runtime {
+		impl barrel_staking::Config for Runtime {
 			type ValidatorCount = ValidatorCount;
 			type EraDuration = EraDuration;
 		}
 
-		impl pallet_currency::Config for Runtime {}
+		impl barrel_currency::Config for Runtime {}
 
 		struct ExtBuilder {
 			validators: Vec<(AccountId, Balance)>,
@@ -199,10 +199,10 @@ pub mod pallet {
 				// frame_system::GenesisConfig::default()
 				// 	.assimilate_storage::<Runtime>(&mut storage)
 				// 	.unwrap();
-				// pallet_currency::GenesisConfig::<Runtime> { balances: self.balances }
+				// barrel_currency::GenesisConfig::<Runtime> { balances: self.balances }
 				// 	.assimilate_storage(&mut storage)
 				// 	.unwrap();
-				// pallet_staking::GenesisConfig::<Runtime> {
+				// barrel_staking::GenesisConfig::<Runtime> {
 				// 	validators: self.validators,
 				// 	delegators: self.delegators,
 				// }
@@ -211,8 +211,8 @@ pub mod pallet {
 				// let mut ext = TestState::new(storage);
 
 				let system = frame_system::GenesisConfig::default();
-				let currency = pallet_currency::GenesisConfig { balances: self.balances };
-				let staking = pallet_staking::GenesisConfig {
+				let currency = barrel_currency::GenesisConfig { balances: self.balances };
+				let staking = barrel_staking::GenesisConfig {
 					validators: self.validators,
 					delegators: self.delegators,
 				};
@@ -227,15 +227,15 @@ pub mod pallet {
 		}
 
 		fn next_block() {
-			let now = frame_system::Pallet::<Runtime>::block_number();
-			pallet_staking::Pallet::<Runtime>::on_initialize(now);
-			frame_system::Pallet::<Runtime>::set_block_number(now + 1);
+			let now = frame_system::Barrel::<Runtime>::block_number();
+			barrel_staking::Barrel::<Runtime>::on_initialize(now);
+			frame_system::Barrel::<Runtime>::set_block_number(now + 1);
 		}
 
 		#[test]
 		fn basic_setup_works() {
 			ExtBuilder::default().build_and_execute(|| {
-				assert_eq!(frame_system::Pallet::<Runtime>::block_number(), 1);
+				assert_eq!(frame_system::Barrel::<Runtime>::block_number(), 1);
 				assert_eq!(
 					Validators::<Runtime>::get(1).unwrap(),
 					ValidatorStake { own: 10, delegated: 0 }
@@ -277,7 +277,7 @@ pub mod pallet {
 			// typically 2 and 3 win, and 1 and 3
 			ExtBuilder::default().add_delegator(42, 1, 30).build_and_execute(|| {
 				// given initial state,
-				assert!(pallet_staking::Delegators::<Runtime>::get(42).is_some());
+				assert!(barrel_staking::Delegators::<Runtime>::get(42).is_some());
 
 				// when processing block 1 and 2, nothing will happen.
 				next_block();

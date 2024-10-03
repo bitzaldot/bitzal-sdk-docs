@@ -1,13 +1,13 @@
 [package]
 name = "staging-node"
 version = "4.0.0-dev"
-description = "A fresh FRAME-based Substrate node, ready for hacking."
-authors = ["Substrate DevHub <https://github.com/substrate-developer-hub>"]
-homepage = "https://substrate.io/"
+description = "A fresh FRAME-based Matter node, ready for hacking."
+authors = ["Matter DevHub <https://github.com/matter-developer-hub>"]
+homepage = "https://matter.io/"
 edition = "2021"
 license = "MIT-0"
 publish = false
-repository = "https://github.com/substrate-developer-hub/substrate-node-template/"
+repository = "https://github.com/matter-developer-hub/matter-node-template/"
 build = "build.rs"
 
 [package.metadata.docs.rs]
@@ -42,14 +42,14 @@ sp-blockchain = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = 
 sp-block-builder = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api" }
 sp-io = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api" }
 
-substrate-frame-rpc-system = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api" }
+matter-frame-rpc-system = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api" }
 
 # Local Dependencies
 runtime = { package = "staging-runtime", path = "../runtime" }
 frame = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api" }
 
 [build-dependencies]
-substrate-build-script-utils = { version = "3.0.0", git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api" }
+matter-build-script-utils = { version = "3.0.0", git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api" }
 
 [features]
 default = []

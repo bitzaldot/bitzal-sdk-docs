@@ -162,7 +162,7 @@ defined in this module is as of now the best way to learn about these types.</p>
 <h3 id="composite-enums"><a class="doc-anchor" href="#composite-enums">§</a>Composite Enums</h3>
 <p>Many types within a FRAME runtime follow the following structure:</p>
 <ul>
-<li>Each individual pallet defines a type, for example <code>Foo</code>.</li>
+<li>Each individual barrel defines a type, for example <code>Foo</code>.</li>
 <li>At the runtime level, these types are amalgamated into a single type, for example
 <code>RuntimeFoo</code>.</li>
 </ul>
@@ -172,36 +172,36 @@ runtime.</p>
 <p>Composite enums are generally convertible to their individual parts as such:</p>
 <pre class="mermaid" style="text-align:center;background: transparent;">
 flowchart LR
-    RuntimeCall --"TryInto"--> PalletCall
-    PalletCall --"Into"--> RuntimeCall
+    RuntimeCall --"TryInto"--> BarrelCall
+    BarrelCall --"Into"--> RuntimeCall
 
 </pre><script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";var doc_theme = localStorage.getItem("rustdoc-theme");if (doc_theme === "dark" || doc_theme === "ayu") mermaid.initialize({theme: "dark"});</script>
 <p>In that one can always convert from the inner type into the outer type, but not vice versa. This
 is usually expressed by implementing <code>From</code>, <code>TryFrom</code>, <code>From&lt;Result&lt;_&gt;&gt;</code> and similar traits.</p>
 <h4 id="example"><a class="doc-anchor" href="#example">§</a>Example</h4>
-<p>We provide the following two pallets: <a href="pallet_foo/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::pallet_foo"><code>pallet_foo</code></a> and <a href="pallet_bar/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::pallet_bar"><code>pallet_bar</code></a>. Each define a
+<p>We provide the following two barrels: <a href="barrel_foo/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::barrel_foo"><code>barrel_foo</code></a> and <a href="barrel_bar/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::barrel_bar"><code>barrel_bar</code></a>. Each define a
 dispatchable, and <code>Foo</code> also defines a custom origin. Lastly, <code>Bar</code> defines an additional
 <code>GenesisConfig</code>.</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet(dev_mode)]
-</span><span class="kw">pub mod </span>pallet_foo {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel(dev_mode)]
+</span><span class="kw">pub mod </span>barrel_foo {
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-	<span class="attr">#[pallet::config]
+	<span class="attr">#[barrel::config]
 	</span><span class="kw">pub trait </span>Config: frame_system::Config {}
 
-	<span class="attr">#[pallet::origin]
+	<span class="attr">#[barrel::origin]
 	#[derive(PartialEq, Eq, Clone, RuntimeDebug, Encode, Decode, TypeInfo, MaxEncodedLen)]
 	</span><span class="kw">pub enum </span>Origin {
 		A,
 		B,
 	}
 
-	<span class="attr">#[pallet::pallet]
-	</span><span class="kw">pub struct </span>Pallet&lt;T&gt;(<span class="kw">_</span>);
+	<span class="attr">#[barrel::barrel]
+	</span><span class="kw">pub struct </span>Barrel&lt;T&gt;(<span class="kw">_</span>);
 
-	<span class="attr">#[pallet::call]
-	</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+	<span class="attr">#[barrel::call]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Barrel&lt;T&gt; {
 		<span class="kw">pub fn </span>foo(_origin: OriginFor&lt;T&gt;) -&gt; DispatchResult {
 			<span class="macro">todo!</span>();
 		}
@@ -212,29 +212,29 @@ dispatchable, and <code>Foo</code> also defines a custom origin. Lastly, <code>B
 	}
 }</code></pre></div>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet(dev_mode)]
-</span><span class="kw">pub mod </span>pallet_bar {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel(dev_mode)]
+</span><span class="kw">pub mod </span>barrel_bar {
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-	<span class="attr">#[pallet::config]
+	<span class="attr">#[barrel::config]
 	</span><span class="kw">pub trait </span>Config: frame_system::Config {}
 
-	<span class="attr">#[pallet::pallet]
-	</span><span class="kw">pub struct </span>Pallet&lt;T&gt;(<span class="kw">_</span>);
+	<span class="attr">#[barrel::barrel]
+	</span><span class="kw">pub struct </span>Barrel&lt;T&gt;(<span class="kw">_</span>);
 
-	<span class="attr">#[pallet::genesis_config]
+	<span class="attr">#[barrel::genesis_config]
 	#[derive(DefaultNoBound)]
 	</span><span class="kw">pub struct </span>GenesisConfig&lt;T: Config&gt; {
 		<span class="kw">pub </span>initial_account: <span class="prelude-ty">Option</span>&lt;T::AccountId&gt;,
 	}
 
-	<span class="attr">#[pallet::genesis_build]
+	<span class="attr">#[barrel::genesis_build]
 	</span><span class="kw">impl</span>&lt;T: Config&gt; BuildGenesisConfig <span class="kw">for </span>GenesisConfig&lt;T&gt; {
 		<span class="kw">fn </span>build(<span class="kw-2">&amp;</span><span class="self">self</span>) {}
 	}
 
-	<span class="attr">#[pallet::call]
-	</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+	<span class="attr">#[barrel::call]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Barrel&lt;T&gt; {
 		<span class="kw">pub fn </span>bar(_origin: OriginFor&lt;T&gt;) -&gt; DispatchResult {
 			<span class="macro">todo!</span>();
 		}
@@ -242,13 +242,13 @@ dispatchable, and <code>Foo</code> also defines a custom origin. Lastly, <code>B
 }</code></pre></div>
 <p>Let’s explore how each of these affect the <a href="runtime/enum.RuntimeCall.html" title="enum bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::RuntimeCall"><code>RuntimeCall</code></a>, <a href="runtime/struct.RuntimeOrigin.html" title="struct bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::RuntimeOrigin"><code>RuntimeOrigin</code></a> and
 <a href="runtime/struct.RuntimeGenesisConfig.html" title="struct bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::RuntimeGenesisConfig"><code>RuntimeGenesisConfig</code></a> generated in <a href="runtime/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime"><code>runtime</code></a> respectively.</p>
-<p>As observed, <a href="runtime/enum.RuntimeCall.html" title="enum bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::RuntimeCall"><code>RuntimeCall</code></a> has 3 variants, one for each pallet and one for <code>frame_system</code>. If
+<p>As observed, <a href="runtime/enum.RuntimeCall.html" title="enum bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::RuntimeCall"><code>RuntimeCall</code></a> has 3 variants, one for each barrel and one for <code>frame_system</code>. If
 you explore further, you will soon realize that each variant is merely a pointer to the <code>Call</code>
-type in each pallet, for example <a href="pallet_foo/enum.Call.html" title="enum bitzal_sdk_docs::reference_docs::frame_runtime_types::pallet_foo::Call"><code>pallet_foo::Call</code></a>.</p>
-<p><a href="runtime/struct.RuntimeOrigin.html" title="struct bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::RuntimeOrigin"><code>RuntimeOrigin</code></a>’s <a href="runtime/enum.OriginCaller.html" title="enum bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::OriginCaller"><code>OriginCaller</code></a> has two variants, one for system, and one for <code>pallet_foo</code>
-which utilized <a href="../../../frame_support_procedural/attr.origin.html" title="attr frame_support_procedural::origin"><code>frame::pallet_macros::origin</code></a>.</p>
-<p>Finally, <a href="runtime/struct.RuntimeGenesisConfig.html" title="struct bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::RuntimeGenesisConfig"><code>RuntimeGenesisConfig</code></a> is composed of <code>frame_system</code> and a variant for <code>pallet_bar</code>’s
-<a href="pallet_bar/struct.GenesisConfig.html" title="struct bitzal_sdk_docs::reference_docs::frame_runtime_types::pallet_bar::GenesisConfig"><code>pallet_bar::GenesisConfig</code></a>.</p>
+type in each barrel, for example <a href="barrel_foo/enum.Call.html" title="enum bitzal_sdk_docs::reference_docs::frame_runtime_types::barrel_foo::Call"><code>barrel_foo::Call</code></a>.</p>
+<p><a href="runtime/struct.RuntimeOrigin.html" title="struct bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::RuntimeOrigin"><code>RuntimeOrigin</code></a>’s <a href="runtime/enum.OriginCaller.html" title="enum bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::OriginCaller"><code>OriginCaller</code></a> has two variants, one for system, and one for <code>barrel_foo</code>
+which utilized <a href="../../../frame_support_procedural/attr.origin.html" title="attr frame_support_procedural::origin"><code>frame::barrel_macros::origin</code></a>.</p>
+<p>Finally, <a href="runtime/struct.RuntimeGenesisConfig.html" title="struct bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::RuntimeGenesisConfig"><code>RuntimeGenesisConfig</code></a> is composed of <code>frame_system</code> and a variant for <code>barrel_bar</code>’s
+<a href="barrel_bar/struct.GenesisConfig.html" title="struct bitzal_sdk_docs::reference_docs::frame_runtime_types::barrel_bar::GenesisConfig"><code>barrel_bar::GenesisConfig</code></a>.</p>
 <p>You can find other composite enums by scanning <a href="runtime/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime"><code>runtime</code></a> for other types who’s name starts
 with <code>Runtime</code>. Some of the more noteworthy ones are:</p>
 <ul>
@@ -257,57 +257,57 @@ with <code>Runtime</code>. Some of the more noteworthy ones are:</p>
 <li><a href="runtime/enum.RuntimeHoldReason.html" title="enum bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::RuntimeHoldReason"><code>RuntimeHoldReason</code></a></li>
 </ul>
 <h4 id="adding-further-constraints-to-runtime-composite-enums"><a class="doc-anchor" href="#adding-further-constraints-to-runtime-composite-enums">§</a>Adding Further Constraints to Runtime Composite Enums</h4>
-<p>This section explores a common scenario where a pallet has access to one of these runtime
+<p>This section explores a common scenario where a barrel has access to one of these runtime
 composite enums, but it wishes to further specify it by adding more trait bounds to it.</p>
 <p>Let’s take the example of <code>RuntimeCall</code>. This is an associated type in
-<a href="../../../frame_system/pallet/trait.Config.html#associatedtype.RuntimeCall" title="associated type frame_system::pallet::Config::RuntimeCall"><code>frame_system::Config::RuntimeCall</code></a>, and all pallets have access to this type, because they
-have access to <a href="../../../frame_system/pallet/trait.Config.html" title="trait frame_system::pallet::Config"><code>frame_system::Config</code></a>. Finally, this type is meant to be set to outer call of
+<a href="../../../frame_system/barrel/trait.Config.html#associatedtype.RuntimeCall" title="associated type frame_system::barrel::Config::RuntimeCall"><code>frame_system::Config::RuntimeCall</code></a>, and all barrels have access to this type, because they
+have access to <a href="../../../frame_system/barrel/trait.Config.html" title="trait frame_system::barrel::Config"><code>frame_system::Config</code></a>. Finally, this type is meant to be set to outer call of
 the entire runtime.</p>
 <p>But, let’s not forget that this is information that <em>we know</em>, and the Rust compiler does not.
 All that the rust compiler knows about this type is <em>ONLY</em> what the trait bounds of
-<a href="../../../frame_system/pallet/trait.Config.html#associatedtype.RuntimeCall" title="associated type frame_system::pallet::Config::RuntimeCall"><code>frame_system::Config::RuntimeCall</code></a> are specifying:</p>
+<a href="../../../frame_system/barrel/trait.Config.html#associatedtype.RuntimeCall" title="associated type frame_system::barrel::Config::RuntimeCall"><code>frame_system::Config::RuntimeCall</code></a> are specifying:</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::no_default_bounds]
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[barrel::no_default_bounds]
 </span><span class="kw">type </span>RuntimeCall: Parameter
 	+ Dispatchable&lt;RuntimeOrigin = <span class="self">Self</span>::RuntimeOrigin&gt;
 	+ Debug
 	+ From&lt;Call&lt;<span class="self">Self</span>&gt;&gt;;</code></pre></div>
-<p>So, when at a given pallet, one accesses <code>&lt;T as frame_system::Config&gt;::RuntimeCall</code>, the type is
+<p>So, when at a given barrel, one accesses <code>&lt;T as frame_system::Config&gt;::RuntimeCall</code>, the type is
 extremely opaque from the perspective of the Rust compiler.</p>
-<p>How can a pallet access the <code>RuntimeCall</code> type with further constraints? For example, each
-pallet has its own <code>enum Call</code>, and knows that its local <code>Call</code> is a part of <code>RuntimeCall</code>,
+<p>How can a barrel access the <code>RuntimeCall</code> type with further constraints? For example, each
+barrel has its own <code>enum Call</code>, and knows that its local <code>Call</code> is a part of <code>RuntimeCall</code>,
 therefore there should be a <code>impl From&lt;Call&lt;_&gt;&gt; for RuntimeCall</code>.</p>
-<p>The only way to express this using Rust’s associated types is for the pallet to <strong>define its own
+<p>The only way to express this using Rust’s associated types is for the barrel to <strong>define its own
 associated type <code>RuntimeCall</code>, and further specify what it thinks <code>RuntimeCall</code> should be</strong>.</p>
 <p>In this case, we will want to assert the existence of <a href="../../../frame_support/traits/misc/trait.IsSubType.html" title="trait frame_support::traits::misc::IsSubType"><code>frame::traits::IsSubType</code></a>, which is
 very similar to <a href="https://doc.rust-lang.org/1.77.0/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom"><code>TryFrom</code></a>.</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::config]
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[barrel::config]
 </span><span class="kw">pub trait </span>Config: frame_system::Config {
 	<span class="kw">type </span>RuntimeCall: IsSubType&lt;Call&lt;<span class="self">Self</span>&gt;&gt;;
 }</code></pre></div>
 <p>And indeed, at the runtime level, this associated type would be the same <code>RuntimeCall</code> that is
 passed to <code>frame_system</code>.</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>pallet_with_specific_runtime_call::Config <span class="kw">for </span>Runtime {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>barrel_with_specific_runtime_call::Config <span class="kw">for </span>Runtime {
 	<span class="comment">// an implementation of `IsSubType` is provided by `construct_runtime`.
 	</span><span class="kw">type </span>RuntimeCall = RuntimeCall;
 }</code></pre></div>
 <blockquote>
-<p>In other words, the degree of specificity that <a href="../../../frame_system/pallet/trait.Config.html#associatedtype.RuntimeCall" title="associated type frame_system::pallet::Config::RuntimeCall"><code>frame_system::Config::RuntimeCall</code></a> has is
-not enough for the pallet to work with. Therefore, the pallet has to define its own associated
+<p>In other words, the degree of specificity that <a href="../../../frame_system/barrel/trait.Config.html#associatedtype.RuntimeCall" title="associated type frame_system::barrel::Config::RuntimeCall"><code>frame_system::Config::RuntimeCall</code></a> has is
+not enough for the barrel to work with. Therefore, the barrel has to define its own associated
 type representing <code>RuntimeCall</code>.</p>
 </blockquote>
 <p>Another way to look at this is:</p>
-<p><code>pallet_with_specific_runtime_call::Config::RuntimeCall</code> and <code>frame_system::Config::RuntimeCall</code>
+<p><code>barrel_with_specific_runtime_call::Config::RuntimeCall</code> and <code>frame_system::Config::RuntimeCall</code>
 are two different representations of the same concrete type that is only known when the runtime
 is being constructed.</p>
-<p>Now, within this pallet, this new <code>RuntimeCall</code> can be used, and it can use its new trait
+<p>Now, within this barrel, this new <code>RuntimeCall</code> can be used, and it can use its new trait
 bounds, such as being <a href="../../../frame_support/traits/misc/trait.IsSubType.html" title="trait frame_support::traits::misc::IsSubType"><code>frame::traits::IsSubType</code></a>:</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl</span>&lt;T: Config&gt; Barrel&lt;T&gt; {
 	<span class="kw">fn </span>_do_something_useful_with_runtime_call(call: &lt;T <span class="kw">as </span>Config&gt;::RuntimeCall) {
-		<span class="comment">// check if the runtime call given is of this pallet's variant.
+		<span class="comment">// check if the runtime call given is of this barrel's variant.
 		</span><span class="kw">let </span>_maybe_my_call: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Call&lt;T&gt;&gt; = call.is_sub_type();
 		<span class="macro">todo!</span>();
 	}
@@ -323,8 +323,8 @@ have to represent them with two different associated types with different bounds
 be cool if we had a test to make sure they actually resolve to the same concrete type once the
 runtime is constructed? The following snippet exactly does that:</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::hooks]
-</span><span class="kw">impl</span>&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; <span class="kw">for </span>Pallet&lt;T&gt; {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[barrel::hooks]
+</span><span class="kw">impl</span>&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; <span class="kw">for </span>Barrel&lt;T&gt; {
 	<span class="kw">fn </span>integrity_test() {
 		<span class="kw">use </span>core::any::TypeId;
 		<span class="macro">assert_eq!</span>(
@@ -339,9 +339,9 @@ and what <a href="https://doc.rust-lang.org/1.77.0/core/any/struct.TypeId.html" 
 <h3 id="type-aliases"><a class="doc-anchor" href="#type-aliases">§</a>Type Aliases</h3>
 <p>A number of type aliases are generated by the <code>construct_runtime</code> which are also noteworthy:</p>
 <ul>
-<li><a href="runtime/type.PalletFoo.html" title="type bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::PalletFoo"><code>runtime::PalletFoo</code></a> is an alias to <a href="pallet_foo/struct.Pallet.html" title="struct bitzal_sdk_docs::reference_docs::frame_runtime_types::pallet_foo::Pallet"><code>pallet_foo::Pallet</code></a>. Same for <code>PalletBar</code>, and
+<li><a href="runtime/type.BarrelFoo.html" title="type bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::BarrelFoo"><code>runtime::BarrelFoo</code></a> is an alias to <a href="barrel_foo/struct.Barrel.html" title="struct bitzal_sdk_docs::reference_docs::frame_runtime_types::barrel_foo::Barrel"><code>barrel_foo::Barrel</code></a>. Same for <code>BarrelBar</code>, and
 <code>System</code></li>
-<li><a href="runtime/type.AllPalletsWithSystem.html" title="type bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::AllPalletsWithSystem"><code>runtime::AllPalletsWithSystem</code></a> is an alias for a tuple of all of the above. This type is
+<li><a href="runtime/type.AllBarrelsWithSystem.html" title="type bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime::AllBarrelsWithSystem"><code>runtime::AllBarrelsWithSystem</code></a> is an alias for a tuple of all of the above. This type is
 important to FRAME internals such as <code>executive</code>, as it implements traits such as
 <a href="../../../frame_support/traits/hooks/trait.Hooks.html" title="trait frame_support::traits::hooks::Hooks"><code>frame::traits::Hooks</code></a>.</li>
 </ul>
@@ -354,10 +354,10 @@ extrinsic. See <a href="../signed_extensions/index.html" title="mod bitzal_sdk_d
 <li>See the documentation of <a href="../../../frame_support_procedural/macro.construct_runtime.html" title="macro frame_support_procedural::construct_runtime"><code>construct_runtime</code></a>.</li>
 <li>See the corresponding lecture in the <a href="https://bitzal-blockchain-academy.github.io/pba-book/frame/outer-enum/page.html">pba-book</a>.</li>
 </ul>
-</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="pallet_bar/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::pallet_bar">pallet_bar</a></div><div class="desc docblock-short">The <code>pallet</code> module in each FRAME pallet hosts the most important items needed
-to construct this pallet.</div></li><li><div class="item-name"><a class="mod" href="pallet_foo/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::pallet_foo">pallet_foo</a></div><div class="desc docblock-short">The <code>pallet</code> module in each FRAME pallet hosts the most important items needed
-to construct this pallet.</div></li><li><div class="item-name"><a class="mod" href="pallet_with_specific_runtime_call/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::pallet_with_specific_runtime_call">pallet_with_specific_runtime_call</a></div><div class="desc docblock-short">The <code>pallet</code> module in each FRAME pallet hosts the most important items needed
-to construct this pallet.</div></li><li><div class="item-name"><a class="mod" href="runtime/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime">runtime</a></div></li><li><div class="item-name"><a class="mod" href="runtime_with_specific_runtime_call/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime_with_specific_runtime_call">runtime_with_specific_runtime_call</a></div></li></ul></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="barrel_bar/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::barrel_bar">barrel_bar</a></div><div class="desc docblock-short">The <code>barrel</code> module in each FRAME barrel hosts the most important items needed
+to construct this barrel.</div></li><li><div class="item-name"><a class="mod" href="barrel_foo/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::barrel_foo">barrel_foo</a></div><div class="desc docblock-short">The <code>barrel</code> module in each FRAME barrel hosts the most important items needed
+to construct this barrel.</div></li><li><div class="item-name"><a class="mod" href="barrel_with_specific_runtime_call/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::barrel_with_specific_runtime_call">barrel_with_specific_runtime_call</a></div><div class="desc docblock-short">The <code>barrel</code> module in each FRAME barrel hosts the most important items needed
+to construct this barrel.</div></li><li><div class="item-name"><a class="mod" href="runtime/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime">runtime</a></div></li><li><div class="item-name"><a class="mod" href="runtime_with_specific_runtime_call/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types::runtime_with_specific_runtime_call">runtime_with_specific_runtime_call</a></div></li></ul></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

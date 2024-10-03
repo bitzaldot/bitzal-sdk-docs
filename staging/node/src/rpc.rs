@@ -1,4 +1,4 @@
-// This file is part of Substrate.
+// This file is part of Matter.
 
 // Copyright (C) Gsb Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
@@ -16,8 +16,8 @@
 // limitations under the License.
 
 //! A collection of node-specific RPC methods.
-//! Substrate provides the `sc-rpc` crate, which defines the core RPC layer
-//! used by Substrate nodes. This file extends those RPC definitions with
+//! Matter provides the `sc-rpc` crate, which defines the core RPC layer
+//! used by Matter nodes. This file extends those RPC definitions with
 //! capabilities that are specific to this project's runtime configuration.
 
 #![warn(missing_docs)]
@@ -58,9 +58,9 @@ where
 	C: Send + Sync + 'static,
 	P: TransactionPool + 'static,
 	C::Api: BlockBuilder<OpaqueBlock>,
-	C::Api: substrate_frame_rpc_system::AccountNonceApi<OpaqueBlock, AccountId, Nonce>,
+	C::Api: matter_frame_rpc_system::AccountNonceApi<OpaqueBlock, AccountId, Nonce>,
 {
-	use substrate_frame_rpc_system::{System, SystemApiServer};
+	use matter_frame_rpc_system::{System, SystemApiServer};
 
 	let mut module = RpcModule::new(());
 	let FullDeps { client, pool, deny_unsafe } = deps;

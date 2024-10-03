@@ -1,25 +1,25 @@
 use frame::prelude::*;
 
-#[frame::pallet(dev_mode)]
-pub mod pallet {
+#[frame::barrel(dev_mode)]
+pub mod barrel {
 	use super::*;
 
 	pub type Balance = u128;
 
-	#[pallet::config]
+	#[barrel::config]
 	pub trait Config: frame_system::Config {}
 
-	#[pallet::storage]
+	#[barrel::storage]
 	pub type Balances<T: Config> = StorageMap<_, _, T::AccountId, Balance>;
 
-	#[pallet::storage]
+	#[barrel::storage]
 	pub type TotalIssuance<T: Config> = StorageValue<_, Balance, ValueQuery>;
 
-	#[pallet::pallet]
-	pub struct Pallet<T>(_);
+	#[barrel::barrel]
+	pub struct Barrel<T>(_);
 
-	#[pallet::call]
-	impl<T: Config> Pallet<T> {
+	#[barrel::call]
+	impl<T: Config> Barrel<T> {
 		pub fn mint(origin: OriginFor<T>, to: T::AccountId, amount: Balance) -> DispatchResult {
 			let _anyone = ensure_signed(origin)?;
 
@@ -46,12 +46,12 @@ pub mod pallet {
 	}
 
 	#[derive(frame::derive::DefaultNoBound)]
-	#[pallet::genesis_config]
+	#[barrel::genesis_config]
 	pub struct GenesisConfig<T: Config> {
 		pub balances: Vec<(T::AccountId, Balance)>,
 	}
 
-	#[pallet::genesis_build]
+	#[barrel::genesis_build]
 	impl<T: Config> GenesisBuild<T> for GenesisConfig<T> {
 		fn build(&self) {
 			for (who, amount) in &self.balances {
@@ -64,7 +64,7 @@ pub mod pallet {
 
 	#[cfg(test)]
 	mod tests {
-		use super::{pallet as pallet_currency, *};
+		use super::{barrel as barrel_currency, *};
 		use frame::testing_prelude::*;
 
 		type Extrinsic = MockUncheckedExtrinsic<Runtime>;
@@ -78,7 +78,7 @@ pub mod pallet {
 				UncheckedExtrinsic = Extrinsic,
 			{
 				System: frame_system,
-				Currency: pallet_currency,
+				Currency: barrel_currency,
 			}
 		);
 
@@ -87,12 +87,12 @@ pub mod pallet {
 			type RuntimeOrigin = RuntimeOrigin;
 			type RuntimeCall = RuntimeCall;
 			type RuntimeEvent = RuntimeEvent;
-			type PalletInfo = PalletInfo;
+			type BarrelInfo = BarrelInfo;
 			type BaseCallFilter = frame::traits::Everything;
 			type OnSetCode = ();
 		}
 
-		impl pallet::Config for Runtime {}
+		impl barrel::Config for Runtime {}
 
 		const ALICE: <Runtime as frame_system::Config>::AccountId = 1;
 		const BOB: <Runtime as frame_system::Config>::AccountId = 2;
@@ -102,7 +102,7 @@ pub mod pallet {
 		fn test_state_new() -> TestState {
 			let system = frame_system::GenesisConfig::default();
 			let currency =
-				pallet_currency::GenesisConfig { balances: vec![(ALICE, 100), (BOB, 100)] };
+				barrel_currency::GenesisConfig { balances: vec![(ALICE, 100), (BOB, 100)] };
 			let runtime_genesis = RuntimeGenesisConfig { system, currency };
 
 			TestState::new(runtime_genesis.build_storage().unwrap())
@@ -115,7 +115,7 @@ pub mod pallet {
 				&Default::default(),
 				&mut storage,
 			);
-			pallet_currency::GenesisConfig::<Runtime> { balances: vec![(ALICE, 100), (BOB, 100)] }
+			barrel_currency::GenesisConfig::<Runtime> { balances: vec![(ALICE, 100), (BOB, 100)] }
 				.assimilate_storage(&mut storage);
 			TestState::new(storage)
 		}
@@ -142,7 +142,7 @@ pub mod pallet {
 
 			fn build_and_execute(self, test: impl FnOnce() -> ()) {
 				let system = frame_system::GenesisConfig::default();
-				let currency = pallet_currency::GenesisConfig { balances: self.balances };
+				let currency = barrel_currency::GenesisConfig { balances: self.balances };
 				let runtime_genesis = RuntimeGenesisConfig { system, currency };
 
 				let mut ext = TestState::new(runtime_genesis.build_storage().unwrap());
@@ -154,18 +154,18 @@ pub mod pallet {
 		#[test]
 		fn initial_state_works() {
 			ExtBuilder::default().build_and_execute(|| {
-				assert_eq!(pallet::Balances::<Runtime>::get(&ALICE), Some(100));
-				assert_eq!(pallet::Balances::<Runtime>::get(&BOB), Some(100));
-				assert_eq!(pallet::Balances::<Runtime>::get(&EVE), None);
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 200);
+				assert_eq!(barrel::Balances::<Runtime>::get(&ALICE), Some(100));
+				assert_eq!(barrel::Balances::<Runtime>::get(&BOB), Some(100));
+				assert_eq!(barrel::Balances::<Runtime>::get(&EVE), None);
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 200);
 			});
 		}
 
 		#[test]
 		fn ext_builder_works() {
 			ExtBuilder::default().add_balance(EVE, 42).build_and_execute(|| {
-				assert_eq!(pallet::Balances::<Runtime>::get(&EVE), Some(42));
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 242);
+				assert_eq!(barrel::Balances::<Runtime>::get(&EVE), Some(42));
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 242);
 			})
 		}
 
@@ -176,8 +176,8 @@ pub mod pallet {
 				.add_balance(EVE, 42)
 				.add_balance(EVE, 43)
 				.build_and_execute(|| {
-					assert_eq!(pallet::Balances::<Runtime>::get(&EVE), None);
-					assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 242);
+					assert_eq!(barrel::Balances::<Runtime>::get(&EVE), None);
+					assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 242);
 				})
 		}
 
@@ -185,18 +185,18 @@ pub mod pallet {
 		fn test_mint() {
 			ExtBuilder::default().build_and_execute(|| {
 				// given the initial state, when:
-				assert_ok!(pallet::Pallet::<Runtime>::mint(RuntimeOrigin::signed(ALICE), BOB, 100));
+				assert_ok!(barrel::Barrel::<Runtime>::mint(RuntimeOrigin::signed(ALICE), BOB, 100));
 
 				// then:
-				assert_eq!(pallet::Balances::<Runtime>::get(&BOB), Some(200));
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 300);
+				assert_eq!(barrel::Balances::<Runtime>::get(&BOB), Some(200));
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 300);
 
 				// given:
-				assert_ok!(pallet::Pallet::<Runtime>::mint(RuntimeOrigin::signed(ALICE), EVE, 100));
+				assert_ok!(barrel::Barrel::<Runtime>::mint(RuntimeOrigin::signed(ALICE), EVE, 100));
 
 				// then:
-				assert_eq!(pallet::Balances::<Runtime>::get(&EVE), Some(100));
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 400);
+				assert_eq!(barrel::Balances::<Runtime>::get(&EVE), Some(100));
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 400);
 			});
 		}
 
@@ -204,28 +204,28 @@ pub mod pallet {
 		fn transfer_works() {
 			ExtBuilder::default().build_and_execute(|| {
 				// given the the initial state, when:
-				assert_ok!(pallet::Pallet::<Runtime>::transfer(
+				assert_ok!(barrel::Barrel::<Runtime>::transfer(
 					RuntimeOrigin::signed(ALICE),
 					BOB,
 					50
 				));
 
 				// them:
-				assert_eq!(pallet::Balances::<Runtime>::get(&ALICE), Some(50));
-				assert_eq!(pallet::Balances::<Runtime>::get(&BOB), Some(150));
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 200);
+				assert_eq!(barrel::Balances::<Runtime>::get(&ALICE), Some(50));
+				assert_eq!(barrel::Balances::<Runtime>::get(&BOB), Some(150));
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 200);
 
 				// when:
-				assert_ok!(pallet::Pallet::<Runtime>::transfer(
+				assert_ok!(barrel::Barrel::<Runtime>::transfer(
 					RuntimeOrigin::signed(BOB),
 					ALICE,
 					50
 				));
 
 				// then:
-				assert_eq!(pallet::Balances::<Runtime>::get(&ALICE), Some(100));
-				assert_eq!(pallet::Balances::<Runtime>::get(&BOB), Some(100));
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 200);
+				assert_eq!(barrel::Balances::<Runtime>::get(&ALICE), Some(100));
+				assert_eq!(barrel::Balances::<Runtime>::get(&BOB), Some(100));
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 200);
 			});
 		}
 
@@ -234,20 +234,20 @@ pub mod pallet {
 			ExtBuilder::default().build_and_execute(|| {
 				// given the the initial state, when:
 				assert_err!(
-					pallet::Pallet::<Runtime>::transfer(RuntimeOrigin::signed(EVE), ALICE, 10),
+					barrel::Barrel::<Runtime>::transfer(RuntimeOrigin::signed(EVE), ALICE, 10),
 					"NonExistentAccount"
 				);
 
 				// then nothing has changed.
-				assert_eq!(pallet::Balances::<Runtime>::get(&ALICE), Some(100));
-				assert_eq!(pallet::Balances::<Runtime>::get(&BOB), Some(100));
-				assert_eq!(pallet::Balances::<Runtime>::get(&EVE), None);
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 200);
+				assert_eq!(barrel::Balances::<Runtime>::get(&ALICE), Some(100));
+				assert_eq!(barrel::Balances::<Runtime>::get(&BOB), Some(100));
+				assert_eq!(barrel::Balances::<Runtime>::get(&EVE), None);
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 200);
 
 				// in fact, this frame-helper ensures that nothing in the state has been updated
 				// prior and after execution:
 				assert_noop!(
-					pallet::Pallet::<Runtime>::transfer(RuntimeOrigin::signed(EVE), ALICE, 10),
+					barrel::Barrel::<Runtime>::transfer(RuntimeOrigin::signed(EVE), ALICE, 10),
 					"NonExistentAccount"
 				);
 			});

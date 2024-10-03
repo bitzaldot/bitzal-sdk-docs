@@ -1,4 +1,4 @@
-// This file is part of Substrate.
+// This file is part of Matter.
 
 // Copyright (C) Gsb Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
@@ -15,7 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Substrate Node Template CLI library.
+//! Matter Node Template CLI library.
 #![warn(missing_docs)]
 
 mod chain_spec;

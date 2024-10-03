@@ -1,11 +1,11 @@
 [package]
-name = "step-0-pallets"
+name = "step-0-barrels"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-frame = { git = "https://github.com/bitzaldot/substrate.git", branch = "kiz-frame-api" }
+frame = { git = "https://github.com/bitzaldot/matter.git", branch = "kiz-frame-api" }
 
-# TODO https://github.com/bitzaldot/substrate/issues/14127
+# TODO https://github.com/bitzaldot/matter/issues/14127
 parity-scale-codec = { version = "3.0.0" }
 scale-info = { version = "2.6.0" }

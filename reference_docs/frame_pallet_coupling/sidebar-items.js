@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["pallet_author","pallet_foo","pallet_foo_loose","pallet_foo_tight","runtime"],"struct":["OtherAuthorProvider"],"trait":["AuthorProvider"]};
+window.SIDEBAR_ITEMS = {"mod":["barrel_author","barrel_foo","barrel_foo_loose","barrel_foo_tight","runtime"],"struct":["OtherAuthorProvider"],"trait":["AuthorProvider"]};

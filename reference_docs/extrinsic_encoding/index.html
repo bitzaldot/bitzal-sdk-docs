@@ -152,7 +152,7 @@
 <p>Extrinsics are payloads that are stored in blocks which are responsible for altering the state
 of a blockchain via the <a href="../blockchain_state_machines/index.html" title="mod bitzal_sdk_docs::reference_docs::blockchain_state_machines"><em>state transition
 function</em></a>.</p>
-<p>Substrate is configurable enough that extrinsics can take any format. In practice, runtimes
+<p>Matter is configurable enough that extrinsics can take any format. In practice, runtimes
 tend to use our <a href="../../../sp_runtime/generic/unchecked_extrinsic/struct.UncheckedExtrinsic.html" title="struct sp_runtime::generic::unchecked_extrinsic::UncheckedExtrinsic"><code>sp_runtime::generic::UncheckedExtrinsic</code></a> type to represent extrinsics,
 because it’s generic enough to cater for most (if not all) use cases. In bitzal, this is
 configured <a href="https://github.com/bitzal-fellows/runtimes/blob/94b2798b69ba6779764e20a50f056e48db78ebef/relay/bitzal/src/lib.rs#L1478">here</a>
@@ -171,7 +171,7 @@ are formed from concatenating some details together, as in the following pseudo-
     call_data
 )
 </code></pre></div>
-<p>For clarity, the actual implementation in Substrate looks like this:</p>
+<p>For clarity, the actual implementation in Matter looks like this:</p>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl</span>&lt;Address, Call, Signature, Extra&gt; Encode <span class="kw">for </span>UncheckedExtrinsic&lt;Address, Call, Signature, Extra&gt;
 <span class="kw">where
@@ -273,7 +273,7 @@ altered. This is defined by the second generic parameter of
 <a href="../../../sp_runtime/generic/unchecked_extrinsic/struct.UncheckedExtrinsic.html" title="struct sp_runtime::generic::unchecked_extrinsic::UncheckedExtrinsic"><code>sp_runtime::generic::UncheckedExtrinsic</code></a>.</p>
 <p>A call can be anything that implements [<code>Encode</code>][frame::deps::codec::Encode]. In FRAME-based
 runtimes, a call is represented as an enum of enums, where the outer enum represents the FRAME
-pallet being called, and the inner enum represents the call being made within that pallet, and
+barrel being called, and the inner enum represents the call being made within that barrel, and
 any arguments to it. Read more about the call enum
 <a href="../frame_runtime_types/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types">here</a>.</p>
 <p>FRAME <code>Call</code> enums are automatically generated, and end up looking something like this:</p>
@@ -282,50 +282,50 @@ any arguments to it. Read more about the call enum
 	<span class="kw">use </span>codec::{Decode, Encode};
 
 	<span class="comment">// The outer enum composes calls within
-	// different pallets together. We have two
-	// pallets, "PalletA" and "PalletB".
+	// different barrels together. We have two
+	// barrels, "BarrelA" and "BarrelB".
 	</span><span class="attr">#[derive(Encode, Decode)]
 	</span><span class="kw">pub enum </span>Call {
 		<span class="attr">#[codec(index = <span class="number">0</span>)]
-		</span>PalletA(PalletACall),
+		</span>BarrelA(BarrelACall),
 		<span class="attr">#[codec(index = <span class="number">7</span>)]
-		</span>PalletB(PalletBCall),
+		</span>BarrelB(BarrelBCall),
 	}
 
 	<span class="comment">// An inner enum represents the calls within
-	// a specific pallet. "PalletA" has one call,
+	// a specific barrel. "BarrelA" has one call,
 	// "Foo".
 	</span><span class="attr">#[derive(Encode, Decode)]
-	</span><span class="kw">pub enum </span>PalletACall {
+	</span><span class="kw">pub enum </span>BarrelACall {
 		<span class="attr">#[codec(index = <span class="number">0</span>)]
 		</span>Foo(String),
 	}
 
 	<span class="attr">#[derive(Encode, Decode)]
-	</span><span class="kw">pub enum </span>PalletBCall {
+	</span><span class="kw">pub enum </span>BarrelBCall {
 		<span class="attr">#[codec(index = <span class="number">0</span>)]
 		</span>Bar(String),
 	}
 }</code></pre></div>
 <p>In pseudo-code, this <code>Call</code> enum encodes equivalently to:</p>
 <div class="example-wrap"><pre class="language-text"><code>call_data = concat(
-    pallet_index,
+    barrel_index,
     call_index,
     call_args
 )
 </code></pre></div>
 <ul>
-<li><code>pallet_index</code> is a single byte denoting the index of the pallet that we are calling into, and
+<li><code>barrel_index</code> is a single byte denoting the index of the barrel that we are calling into, and
 is what the tag of the outermost enum will encode to.</li>
-<li><code>call_index</code> is a single byte denoting the index of the call that we are making the pallet,
+<li><code>call_index</code> is a single byte denoting the index of the call that we are making the barrel,
 and is what the tag of the inner enum will encode to.</li>
 <li><code>call_args</code> are the SCALE encoded bytes for each of the arguments that the call expects, and
 are typically provided as values to the inner enum.</li>
 </ul>
-<p>Information about the pallets that exist for a chain (including their indexes), the calls
-available in each pallet (including their indexes), and the arguments required for each call
+<p>Information about the barrels that exist for a chain (including their indexes), the calls
+available in each barrel (including their indexes), and the arguments required for each call
 can be found in the metadata for the chain. For V15 metadata, this information
-[is here][frame::deps::frame_support::__private::metadata::v15::PalletMetadata].</p>
+[is here][frame::deps::frame_support::__private::metadata::v15::BarrelMetadata].</p>
 <h2 id="the-signed-payload-format"><a class="doc-anchor" href="#the-signed-payload-format">§</a>The Signed Payload Format</h2>
 <p>All extrinsics submitted to a node from the outside world (also known as <em>transactions</em>) need to
 be <em>signed</em>. The data that needs to be signed for some extrinsic is called the <em>signed payload</em>,
@@ -353,7 +353,7 @@ for us, given <code>call_data</code> and a tuple of signed extensions.</p>
 as follows:</p>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">pub mod </span>encoding_example {
-	<span class="kw">use </span><span class="kw">super</span>::call_data::{Call, PalletACall};
+	<span class="kw">use </span><span class="kw">super</span>::call_data::{Call, BarrelACall};
 	<span class="kw">use </span><span class="kw">crate</span>::reference_docs::signed_extensions::signed_extensions_example;
 	<span class="kw">use </span>codec::Encode;
 	<span class="kw">use </span>sp_core::crypto::AccountId32;
@@ -385,7 +385,7 @@ as follows:</p>
 		);
 
 		<span class="comment">// Construct our call data:
-		</span><span class="kw">let </span>call_data = Call::PalletA(PalletACall::Foo(<span class="string">"Hello"</span>.to_string()));
+		</span><span class="kw">let </span>call_data = Call::BarrelA(BarrelACall::Foo(<span class="string">"Hello"</span>.to_string()));
 
 		<span class="comment">// The signed payload. This takes care of encoding the call_data,
 		// signed_extensions_extra and signed_extensions_additional, and hashing

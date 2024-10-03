@@ -9,7 +9,7 @@ A holistic, minimal documentation portal for the Bitzal developers.
 ## Master Tutorial
 
 The very, very rough plan that I have so far is written in [SCRIPT.md](./SCRIPT.md). Note that this
-topic is chosen such that it complements the imagine drawn in `mini_substrate` exercise in the PBA
+topic is chosen such that it complements the imagine drawn in `mini_matter` exercise in the PBA
 Rust entrance exam.
 
 ## Tutorial Structure

@@ -1,4 +1,4 @@
-// This file is part of Substrate.
+// This file is part of Matter.
 
 // Copyright (C) Gsb Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
@@ -19,7 +19,7 @@ use runtime::{BalancesConfig, RuntimeGenesisConfig, SudoConfig, SystemConfig, WA
 use sc_service::{ChainType, Properties};
 use sp_keyring::AccountKeyring;
 
-/// Specialized `ChainSpec`. This is a specialization of the general Substrate ChainSpec type.
+/// Specialized `ChainSpec`. This is a specialization of the general Matter ChainSpec type.
 pub type ChainSpec = sc_service::GenericChainSpec<RuntimeGenesisConfig>;
 
 fn props() -> Properties {

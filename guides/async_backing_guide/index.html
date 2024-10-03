@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="How to enable Async Backing on parachain projects that started in 2023 or before."><title>bitzal_sdk_docs::guides::async_backing_guide - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><script id="default-settings" data-theme="ayu" data-use_system_theme="false"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bitzal_sdk_docs" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.0 (aedd173a2 2024-03-17)" data-channel="1.77.0" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js"><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer="" src="../sidebar-items.js"></script><script defer="" src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="icon" href="../../../../../favicon.ico"><script>
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="How to enable Async Backing on synochain projects that started in 2023 or before."><title>bitzal_sdk_docs::guides::async_backing_guide - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><script id="default-settings" data-theme="ayu" data-use_system_theme="false"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bitzal_sdk_docs" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.0 (aedd173a2 2024-03-17)" data-channel="1.77.0" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js"><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer="" src="../sidebar-items.js"></script><script defer="" src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="icon" href="../../../../../favicon.ico"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -147,18 +147,18 @@
 </style>
 
 <script async="" defer="" src="../../../../../latest.js"></script><noscript><img src="../../../../../latest.js" alt="" referrerpolicy="no-referrer-when-downgrade"></noscript></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button><a class="logo-container" href="../../index.html"><img src="../../../static.files/logos.PNG" alt=""></a></nav><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../index.html"><img src="../../../static.files/logos.PNG" alt="logo"></a><h2><a href="../../index.html">bitzal_sdk_docs</a><span class="version">0.0.1</span></h2></div><h2 class="location"><a href="#">Module async_backing_guide</a></h2><div class="sidebar-elems"><h2><a href="../index.html">In bitzal_sdk_docs::guides</a></h2></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">bitzal_sdk_docs</a>::<wbr><a href="../index.html">guides</a>::<wbr><a class="mod" href="#">async_backing_guide</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/bitzal_sdk_docs/guides/async_backing_guide.rs.html#1-254">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open=""><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>How to enable Async Backing on parachain projects that started in 2023 or before.</p>
-<h2 id="upgrade-parachain-for-asynchronous-backing-compatibility"><a class="doc-anchor" href="#upgrade-parachain-for-asynchronous-backing-compatibility">§</a>Upgrade Parachain for Asynchronous Backing Compatibility</h2>
-<p>This guide is relevant for cumulus based parachain projects started in 2023 or before, whose
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">bitzal_sdk_docs</a>::<wbr><a href="../index.html">guides</a>::<wbr><a class="mod" href="#">async_backing_guide</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/bitzal_sdk_docs/guides/async_backing_guide.rs.html#1-254">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open=""><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>How to enable Async Backing on synochain projects that started in 2023 or before.</p>
+<h2 id="upgrade-synochain-for-asynchronous-backing-compatibility"><a class="doc-anchor" href="#upgrade-synochain-for-asynchronous-backing-compatibility">§</a>Upgrade Synochain for Asynchronous Backing Compatibility</h2>
+<p>This guide is relevant for cumulus based synochain projects started in 2023 or before, whose
 backing process is synchronous where parablocks can only be built on the latest Relay Chain
-block. Async Backing allows collators to build parablocks on older Relay Chain blocks and create
+block. Async Backing allows assators to build parablocks on older Relay Chain blocks and create
 pipelines of multiple pending parablocks. This parallel block generation increases efficiency
 and throughput. For more information on Async backing and its terminology, refer to the document
 on <a href="https://wiki.bitzal.network/docs/maintain-guides-async-backing">the bitzal Wiki.</a></p>
 <blockquote>
-<p>If starting a new parachain project, please use an async backing compatible template such as
+<p>If starting a new synochain project, please use an async backing compatible template such as
 the
-<a href="https://github.com/bitzaldot/bitzal-sdk/tree/master/templates/parachain">parachain template</a>.
+<a href="https://github.com/bitzaldot/bitzal-sdk/tree/master/templates/synochain">synochain template</a>.
 The rollout process for Async Backing has three phases. Phases 1 and 2 below put new
 infrastructure in place. Then we can simply turn on async backing in phase 3.</p>
 </blockquote>
@@ -171,10 +171,10 @@ zombienet):</p>
     &quot;allowed_ancestry_len&quot;: 2
 },
 &quot;scheduling_lookahead&quot;: 2
-</code></pre></div><div class="warning"><code>scheduling_lookahead</code> must be set to 2, otherwise parachain
+</code></pre></div><div class="warning"><code>scheduling_lookahead</code> must be set to 2, otherwise synochain
 block times will degrade to worse than with sync backing!</div>
-<h3 id="phase-1---update-parachain-runtime"><a class="doc-anchor" href="#phase-1---update-parachain-runtime">§</a>Phase 1 - Update Parachain Runtime</h3>
-<p>This phase involves configuring your parachain’s runtime <code>/runtime/src/lib.rs</code> to make use of
+<h3 id="phase-1---update-synochain-runtime"><a class="doc-anchor" href="#phase-1---update-synochain-runtime">§</a>Phase 1 - Update Synochain Runtime</h3>
+<p>This phase involves configuring your synochain’s runtime <code>/runtime/src/lib.rs</code> to make use of
 async backing system.</p>
 <ol>
 <li>Establish and ensure constants for <code>capacity</code> and <code>velocity</code> are both set to 1 in the
@@ -186,7 +186,7 @@ runtime.</li>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Maximum number of blocks simultaneously accepted by the Runtime, not yet included into the
 // relay chain.
 </span><span class="kw">pub const </span>UNINCLUDED_SEGMENT_CAPACITY: u32 = <span class="number">1</span>;
-<span class="comment">// How many parachain blocks are processed by the relay chain per parent. Limits the number of
+<span class="comment">// How many synochain blocks are processed by the relay chain per parent. Limits the number of
 // blocks authored per slot.
 </span><span class="kw">pub const </span>BLOCK_PROCESSING_VELOCITY: u32 = <span class="number">1</span>;
 <span class="comment">// Relay chain slot duration, in milliseconds.
@@ -196,44 +196,44 @@ runtime.</li>
 runtime.</li>
 </ol>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="comment">// `SLOT_DURATION` is picked up by `pallet_timestamp` which is in turn picked
-// up by `pallet_aura` to implement `fn slot_duration()`.
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="comment">// `SLOT_DURATION` is picked up by `barrel_timestamp` which is in turn picked
+// up by `barrel_aura` to implement `fn slot_duration()`.
 //
 // Change this to adjust the block time.
 </span><span class="kw">pub const </span>MILLISECS_PER_BLOCK: u64 = <span class="number">12000</span>;
 <span class="kw">pub const </span>SLOT_DURATION: u64 = MILLISECS_PER_BLOCK;</code></pre></div>
 <ol start="4">
-<li>Configure <code>cumulus_pallet_parachain_system</code> in the runtime.</li>
+<li>Configure <code>cumulus_barrel_synochain_system</code> in the runtime.</li>
 </ol>
 <ul>
 <li>Define a <code>FixedVelocityConsensusHook</code> using our capacity, velocity, and relay slot duration
-constants. Use this to set the parachain system <code>ConsensusHook</code> property.</li>
+constants. Use this to set the synochain system <code>ConsensusHook</code> property.</li>
 </ul>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">type </span>ConsensusHook = cumulus_pallet_aura_ext::FixedVelocityConsensusHook&lt;
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">type </span>ConsensusHook = cumulus_barrel_aura_ext::FixedVelocityConsensusHook&lt;
 	Runtime,
 	RELAY_CHAIN_SLOT_DURATION_MILLIS,
 	BLOCK_PROCESSING_VELOCITY,
 	UNINCLUDED_SEGMENT_CAPACITY,
 &gt;;</code></pre></div>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>cumulus_pallet_parachain_system::Config <span class="kw">for </span>Runtime {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>cumulus_barrel_synochain_system::Config <span class="kw">for </span>Runtime {
     ..
     <span class="kw">type </span>ConsensusHook = ConsensusHook;
     ..
 }</code></pre></div>
 <ul>
-<li>Set the parachain system property <code>CheckAssociatedRelayNumber</code> to
+<li>Set the synochain system property <code>CheckAssociatedRelayNumber</code> to
 <code>RelayNumberMonotonicallyIncreases</code></li>
 </ul>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>cumulus_pallet_parachain_system::Config <span class="kw">for </span>Runtime {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>cumulus_barrel_synochain_system::Config <span class="kw">for </span>Runtime {
 	..
 	<span class="kw">type </span>CheckAssociatedRelayNumber = RelayNumberMonotonicallyIncreases;
 	..
 }</code></pre></div>
 <ol start="5">
-<li>Configure <code>pallet_aura</code> in the runtime.</li>
+<li>Configure <code>barrel_aura</code> in the runtime.</li>
 </ol>
 <ul>
 <li>
@@ -241,11 +241,11 @@ constants. Use this to set the parachain system <code>ConsensusHook</code> prope
 activate async backing in phase 3).</p>
 </li>
 <li>
-<p>Define <code>pallet_aura::SlotDuration</code> using our constant <code>SLOT_DURATION</code></p>
+<p>Define <code>barrel_aura::SlotDuration</code> using our constant <code>SLOT_DURATION</code></p>
 </li>
 </ul>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>pallet_aura::Config <span class="kw">for </span>Runtime {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>barrel_aura::Config <span class="kw">for </span>Runtime {
 	..
 	<span class="kw">type </span>AllowMultipleBlocksPerSlot = ConstBool&lt;<span class="bool-val">false</span>&gt;;
 	<span class="attr">#[cfg(feature = <span class="string">"experimental"</span>)]
@@ -262,7 +262,7 @@ the constant <code>SLOT_DURATION</code></li>
 }</code></pre></div>
 <ol start="7">
 <li>
-<p>Implement the <code>AuraUnincludedSegmentApi</code>, which allows the collator client to query its
+<p>Implement the <code>AuraUnincludedSegmentApi</code>, which allows the assator client to query its
 runtime to determine whether it should author a block.</p>
 <ul>
 <li>Add the dependency <code>cumulus-primitives-aura</code> to the <code>runtime/Cargo.toml</code> file for your
@@ -294,26 +294,26 @@ cumulus-primitives-aura = { path = <span class="string">"../../../../primitives/
 configured to some larger value. This is because capacity will be filled after a single block is
 produced and will only be freed up after that block is included on the relay chain, which takes
 2 relay blocks to accomplish. Thus with capacity 1 and velocity 1 we get the customary 12 second
-parachain block time.</p>
+synochain block time.</p>
 <ol start="8">
 <li>If your <code>runtime/src/lib.rs</code> provides a <code>CheckInherents</code> type to <code>register_validate_block</code>,
 remove it. <code>FixedVelocityConsensusHook</code> makes it unnecessary. The following example shows how
 <code>register_validate_block</code> should look after removing <code>CheckInherents</code>.</li>
 </ol>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="macro">cumulus_pallet_parachain_system::register_validate_block! </span>{
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="macro">cumulus_barrel_synochain_system::register_validate_block! </span>{
 	Runtime = Runtime,
-	BlockExecutor = cumulus_pallet_aura_ext::BlockExecutor::&lt;Runtime, Executive&gt;,
+	BlockExecutor = cumulus_barrel_aura_ext::BlockExecutor::&lt;Runtime, Executive&gt;,
 }</code></pre></div>
-<h3 id="phase-2---update-parachain-nodes"><a class="doc-anchor" href="#phase-2---update-parachain-nodes">§</a>Phase 2 - Update Parachain Nodes</h3>
-<p>This phase consists of plugging in the new lookahead collator node.</p>
+<h3 id="phase-2---update-synochain-nodes"><a class="doc-anchor" href="#phase-2---update-synochain-nodes">§</a>Phase 2 - Update Synochain Nodes</h3>
+<p>This phase consists of plugging in the new lookahead assator node.</p>
 <ol>
 <li>Import <code>cumulus_primitives_core::ValidationCode</code> to <code>node/src/service.rs</code>.</li>
 </ol>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">use </span>cumulus_primitives_core::{
-	relay_chain::{CollatorPair, ValidationCode},
-	ParaId,
+	relay_chain::{AssatorPair, ValidationCode},
+	SynoId,
 };</code></pre></div>
 <ol start="2">
 <li>In <code>node/src/service.rs</code>, modify <code>sc_service::spawn_tasks</code> to use a clone of <code>Backend</code> rather
@@ -330,7 +330,7 @@ than the original</li>
 </ol>
 <div class="example-wrap"><pre class="language-text"><code>fn start_consensus(
     ..
-    backend: Arc&lt;ParachainBackend&gt;,
+    backend: Arc&lt;SynochainBackend&gt;,
     ..
 </code></pre></div>
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">if </span>validator {
@@ -341,16 +341,16 @@ than the original</li>
    )<span class="question-mark">?</span>;
 }</code></pre></div>
 <ol start="4">
-<li>In <code>node/src/service.rs</code> import the lookahead collator rather than the basic collator</li>
+<li>In <code>node/src/service.rs</code> import the lookahead assator rather than the basic assator</li>
 </ol>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">use </span>cumulus_client_consensus_aura::collators::lookahead::{<span class="self">self </span><span class="kw">as </span>aura, Params <span class="kw">as </span>AuraParams};</code></pre></div>
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">use </span>cumulus_client_consensus_aura::assators::lookahead::{<span class="self">self </span><span class="kw">as </span>aura, Params <span class="kw">as </span>AuraParams};</code></pre></div>
 <ol start="5">
 <li>In <code>start_consensus()</code> replace the <code>BasicAuraParams</code> struct with <code>AuraParams</code>
 <ul>
 <li>Change the struct type from <code>BasicAuraParams</code> to <code>AuraParams</code></li>
-<li>In the <code>para_client</code> field, pass in a cloned para client rather than the original</li>
-<li>Add a <code>para_backend</code> parameter after <code>para_client</code>, passing in our para backend</li>
+<li>In the <code>para_client</code> field, pass in a cloned syno client rather than the original</li>
+<li>Add a <code>para_backend</code> parameter after <code>para_client</code>, passing in our syno backend</li>
 <li>Provide a <code>code_hash_provider</code> closure like that shown below</li>
 <li>Increase <code>authoring_duration</code> from 500 milliseconds to 2000</li>
 </ul>
@@ -382,13 +382,13 @@ aura::run::&lt;Block, sp_consensus_aura::sr25519::AuthorityPair, <span class="kw
 );
 task_manager.spawn_essential_handle().spawn(<span class="string">"aura"</span>, <span class="prelude-val">None</span>, fut);</code></pre></div>
 <h3 id="phase-3---activate-async-backing"><a class="doc-anchor" href="#phase-3---activate-async-backing">§</a>Phase 3 - Activate Async Backing</h3>
-<p>This phase consists of changes to your parachain’s runtime that activate async backing feature.</p>
+<p>This phase consists of changes to your synochain’s runtime that activate async backing feature.</p>
 <ol>
-<li>Configure <code>pallet_aura</code>, setting <code>AllowMultipleBlocksPerSlot</code> to true in
+<li>Configure <code>barrel_aura</code>, setting <code>AllowMultipleBlocksPerSlot</code> to true in
 <code>runtime/src/lib.rs</code>.</li>
 </ol>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>pallet_aura::Config <span class="kw">for </span>Runtime {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>barrel_aura::Config <span class="kw">for </span>Runtime {
 	<span class="kw">type </span>AuthorityId = AuraId;
 	<span class="kw">type </span>DisabledValidators = ();
 	<span class="kw">type </span>MaxAuthorities = ConstU32&lt;<span class="number">100_000</span>&gt;;
@@ -403,7 +403,7 @@ task_manager.spawn_essential_handle().spawn(<span class="string">"aura"</span>, 
 	<span class="doccomment">/// Maximum number of blocks simultaneously accepted by the Runtime, not yet included
 	/// into the relay chain.
 	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>UNINCLUDED_SEGMENT_CAPACITY: u32 = <span class="number">3</span>;
-	<span class="doccomment">/// How many parachain blocks are processed by the relay chain per parent. Limits the
+	<span class="doccomment">/// How many synochain blocks are processed by the relay chain per parent. Limits the
 	/// number of blocks authored per slot.
 	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>BLOCK_PROCESSING_VELOCITY: u32 = <span class="number">1</span>;
 	<span class="doccomment">/// Relay chain slot duration, in milliseconds.
@@ -413,7 +413,7 @@ task_manager.spawn_essential_handle().spawn(<span class="string">"aura"</span>, 
 <li>Decrease <code>MILLISECS_PER_BLOCK</code> to 6000.</li>
 </ol>
 <ul>
-<li>Note: For a parachain which measures time in terms of its own block number rather than by
+<li>Note: For a synochain which measures time in terms of its own block number rather than by
 relay block number it may be preferable to increase velocity. Changing block time may cause
 complications, requiring additional changes. See the section “Timing by Block Number”.</li>
 </ul>
@@ -421,7 +421,7 @@ complications, requiring additional changes. See the section “Timing by Block 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">mod </span>block_times {
 	<span class="doccomment">/// This determines the average expected block time that we are targeting. Blocks will be
 	/// produced at a minimum duration defined by `SLOT_DURATION`. `SLOT_DURATION` is picked up by
-	/// `pallet_timestamp` which is in turn picked up by `pallet_aura` to implement `fn
+	/// `barrel_timestamp` which is in turn picked up by `barrel_aura` to implement `fn
 	/// slot_duration()`.
 	///
 	/// Change this to adjust the block time.
@@ -440,12 +440,12 @@ complications, requiring additional changes. See the section “Timing by Block 
 	cumulus_primitives_core::relay_chain::MAX_POV_SIZE <span class="kw">as </span>u64,
 );</code></pre></div>
 <ol start="5">
-<li>Add a feature flagged alternative for <code>MinimumPeriod</code> in <code>pallet_timestamp</code>. The type should
+<li>Add a feature flagged alternative for <code>MinimumPeriod</code> in <code>barrel_timestamp</code>. The type should
 be <code>ConstU64&lt;0&gt;</code> with the feature flag experimental, and <code>ConstU64&lt;{SLOT_DURATION / 2}&gt;</code>
 without.</li>
 </ol>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>pallet_timestamp::Config <span class="kw">for </span>Runtime {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>barrel_timestamp::Config <span class="kw">for </span>Runtime {
     ..
     <span class="attr">#[cfg(feature = <span class="string">"experimental"</span>)]
     </span><span class="kw">type </span>MinimumPeriod = ConstU64&lt;<span class="number">0</span>&gt;;
@@ -454,12 +454,12 @@ without.</li>
     ..
 }</code></pre></div>
 <h3 id="timing-by-block-number"><a class="doc-anchor" href="#timing-by-block-number">§</a>Timing by Block Number</h3>
-<p>With asynchronous backing it will be possible for parachains to opt for a block time of 6
-seconds rather than 12 seconds. But modifying block duration isn’t so simple for a parachain
+<p>With asynchronous backing it will be possible for synochains to opt for a block time of 6
+seconds rather than 12 seconds. But modifying block duration isn’t so simple for a synochain
 which was measuring time in terms of its own block number. It could result in expected and
-actual time not matching up, stalling the parachain.</p>
+actual time not matching up, stalling the synochain.</p>
 <p>One strategy to deal with this issue is to instead rely on relay chain block numbers for timing.
-Relay block number is kept track of by each parachain in <code>pallet-parachain-system</code> with the
+Relay block number is kept track of by each synochain in <code>barrel-synochain-system</code> with the
 storage value <code>LastRelayChainBlockNumber</code>. This value can be obtained and used wherever timing
 based on block number is needed.</p>
 </div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>

@@ -153,7 +153,7 @@ the tools that are provided as a part of it, and to gain a high level understand
 <p><a href="https://github.com/bitzaldot/bitzal-sdk">bitzal SDK</a> provides the main resources needed to
 start building on the <a href="https://bitzal.network">bitzal network</a>, a scalable, multi-chain
 blockchain platform that enables different blockchains to securely interoperate.</p>
-<p><a href="https://substrate.stackexchange.com/"><img src="../../../../badge/StackExchange-bitzal%20and%20Substrate-222222?logo=stackexchange" alt="StackExchange"></a></p>
+<p><a href="https://matter.stackexchange.com/"><img src="../../../../badge/StackExchange-bitzal%20and%20Matter-222222?logo=stackexchange" alt="StackExchange"></a></p>
 <p><a href="https://github.com/Awsmdot/awesome-dot"><img src="../../../../badge/bitzal-awesome-e6007a?logo=bitzal" alt="awesomeDot"></a>
 <a href="https://wiki.bitzal.network/"><img src="../../../../badge/bitzal-wiki-e6007a?logo=bitzal" alt="wiki"></a>
 <a href="https://forum.bitzal.network/"><img src="../../../../badge/bitzal-forum-e6007a?logo=bitzal" alt="forum"></a></p>
@@ -165,33 +165,33 @@ blockchain platform that enables different blockchains to securely interoperate.
 See:</p>
 <ul>
 <li><a href="bitzal/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::bitzal"><code>bitzal</code></a>, to understand what is bitzal as a development platform.</li>
-<li><a href="substrate/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::substrate"><code>substrate</code></a>, for an overview of what Substrate as the main blockchain framework of bitzal
+<li><a href="matter/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::matter"><code>matter</code></a>, for an overview of what Matter as the main blockchain framework of bitzal
 SDK.</li>
 <li><a href="frame_runtime/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::frame_runtime"><code>frame</code></a>, to learn about how to write blockchain applications aka. “App Chains”.</li>
 <li>Continue with the <a href="../index.html#getting-started" title="mod bitzal_sdk_docs"><code>bitzal_sdk_docs</code>’s “getting started”</a>.</li>
 </ul>
-<h3 id="components"><a class="doc-anchor" href="#components">§</a>Components</h3><h5 id="substrate"><a class="doc-anchor" href="#substrate">§</a>Substrate</h5>
-<p><a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/substrate/LICENSE-APACHE2"><img src="../../../../badge/License-GPL3Apache2.0-blue" alt="Substrate-license"></a>
-<a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/substrate"><img src="../../../../badge/github-substrate-2324CC85" alt="GitHub Repo"></a></p>
-<p><a href="substrate/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::substrate"><code>substrate</code></a> is the base blockchain framework used to power the bitzal SDK. It is a full
+<h3 id="components"><a class="doc-anchor" href="#components">§</a>Components</h3><h5 id="matter"><a class="doc-anchor" href="#matter">§</a>Matter</h5>
+<p><a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/matter/LICENSE-APACHE2"><img src="../../../../badge/License-GPL3Apache2.0-blue" alt="Matter-license"></a>
+<a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/matter"><img src="../../../../badge/github-matter-2324CC85" alt="GitHub Repo"></a></p>
+<p><a href="matter/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::matter"><code>matter</code></a> is the base blockchain framework used to power the bitzal SDK. It is a full
 toolkit to create sovereign blockchains, including but not limited to those which connect to
-bitzal as parachains.</p>
+bitzal as synochains.</p>
 <h5 id="frame"><a class="doc-anchor" href="#frame">§</a>FRAME</h5>
-<p><a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/substrate/LICENSE-APACHE2"><img src="../../../../badge/License-Apache2.0-blue" alt="Substrate-license"></a>
-<a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/substrate/frame"><img src="../../../../badge/github-frame-2324CC85" alt="GitHub Repo"></a></p>
-<p><a href="frame_runtime/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::frame_runtime"><code>frame</code></a> is the framework used to create Substrate-based application logic, aka. runtimes.
+<p><a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/matter/LICENSE-APACHE2"><img src="../../../../badge/License-Apache2.0-blue" alt="Matter-license"></a>
+<a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/matter/frame"><img src="../../../../badge/github-frame-2324CC85" alt="GitHub Repo"></a></p>
+<p><a href="frame_runtime/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::frame_runtime"><code>frame</code></a> is the framework used to create Matter-based application logic, aka. runtimes.
 Learn more about the distinction of a runtime and node in
 <a href="../reference_docs/wasm_meta_protocol/index.html" title="mod bitzal_sdk_docs::reference_docs::wasm_meta_protocol"><code>reference_docs::wasm_meta_protocol</code></a>.</p>
 <h5 id="cumulus"><a class="doc-anchor" href="#cumulus">§</a>Cumulus</h5>
 <p><a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/cumulus/LICENSE"><img src="../../../../badge/License-GPL3-blue" alt="Cumulus-license"></a>
 <a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/cumulus"><img src="../../../../badge/github-cumulus-white" alt="GitHub Repo"></a></p>
-<p><a href="cumulus/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::cumulus"><code>cumulus</code></a> transforms FRAME-based runtimes into bitzal-compatible parachain runtimes, and
-Substrate-based nodes into bitzal/Parachain-compatible nodes.</p>
+<p><a href="cumulus/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::cumulus"><code>cumulus</code></a> transforms FRAME-based runtimes into bitzal-compatible synochain runtimes, and
+Matter-based nodes into bitzal/Synochain-compatible nodes.</p>
 <h5 id="xcm"><a class="doc-anchor" href="#xcm">§</a>XCM</h5>
 <p><a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/bitzal/LICENSE"><img src="../../../../badge/License-GPL3-blue" alt="XCM-license"></a>
 <a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/bitzal/xcm"><img src="../../../../badge/github-XCM-e6007a?logo=bitzal" alt="GitHub Repo"></a></p>
 <p><a href="xcm/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::xcm"><code>xcm</code></a>, short for “cross consensus message”, is the primary format that is used for
-communication between parachains, but is intended to be extensible to other use cases as well.</p>
+communication between synochains, but is intended to be extensible to other use cases as well.</p>
 <h5 id="bitzal"><a class="doc-anchor" href="#bitzal">§</a>bitzal</h5>
 <p><a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/bitzal/LICENSE"><img src="../../../../badge/License-GPL3-blue" alt="bitzal-license"></a>
 <a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/bitzal"><img src="../../../../badge/github-bitzal-e6007a?logo=bitzal" alt="GitHub Repo"></a></p>
@@ -202,21 +202,21 @@ runtimes are located under the
 <p>The following diagram summarizes how some of the components of bitzal SDK work together:</p>
 <pre class="mermaid" style="text-align:center;background: transparent;">
 flowchart LR
-	subgraph SubstrateChain[A Substrate-based blockchain]
+	subgraph MatterChain[A Matter-based blockchain]
 		Node
 		Runtime
 	end
 
     FRAME -.-> Runtime
-    Substrate[Substrate Node Libraries] -.-> Node
+    Matter[Matter Node Libraries] -.-> Node
 
 </pre><script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";var doc_theme = localStorage.getItem("rustdoc-theme");if (doc_theme === "dark" || doc_theme === "ayu") mermaid.initialize({theme: "dark"});</script>
-<p>A Substrate-based chain is a blockchain composed of a runtime and a node. As noted above, the
+<p>A Matter-based chain is a blockchain composed of a runtime and a node. As noted above, the
 runtime is the application logic of the blockchain, and the node is everything else.
 See <a href="../reference_docs/wasm_meta_protocol/index.html" title="mod bitzal_sdk_docs::reference_docs::wasm_meta_protocol"><code>reference_docs::wasm_meta_protocol</code></a> for an in-depth explanation of this. The
-former is built with <a href="frame_runtime/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::frame_runtime"><code>frame</code></a>, and the latter is built with rest of Substrate.</p>
+former is built with <a href="frame_runtime/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::frame_runtime"><code>frame</code></a>, and the latter is built with rest of Matter.</p>
 <blockquote>
-<p>You can think of a Substrate-based chain as a white-labeled blockchain.</p>
+<p>You can think of a Matter-based chain as a white-labeled blockchain.</p>
 </blockquote>
 <pre class="mermaid" style="text-align:center;background: transparent;">
 flowchart LR
@@ -227,26 +227,26 @@ flowchart LR
 	end
 
     FRAME -.-> bitzalRuntime
-    Substrate[Substrate Node Libraries] -.-> bitzalNode
+    Matter[Matter Node Libraries] -.-> bitzalNode
 
 
 </pre><script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";var doc_theme = localStorage.getItem("rustdoc-theme");if (doc_theme === "dark" || doc_theme === "ayu") mermaid.initialize({theme: "dark"});</script>
-<p>bitzal is itself a Substrate-based chain, composed of the exact same two components. It has
+<p>bitzal is itself a Matter-based chain, composed of the exact same two components. It has
 specialized logic in both the node and the runtime side, but it is not “special” in any way.</p>
-<p>A parachain is a “special” Substrate-based chain, whereby both the node and the runtime
+<p>A synochain is a “special” Matter-based chain, whereby both the node and the runtime
 components have became “bitzal-aware” using Cumulus.</p>
 <pre class="mermaid" style="text-align:center;background: transparent;">
 flowchart LR
-	subgraph Parachain[A bitzal Parachain]
-		ParachainNode[Parachain Node]
-		ParachainRuntime[Parachain Runtime]
+	subgraph Synochain[A bitzal Synochain]
+		SynochainNode[Synochain Node]
+		SynochainRuntime[Synochain Runtime]
 	end
 
-    FRAME -.-> ParachainRuntime
-    Substrate[Substrate Node Libraries] -.-> ParachainNode
+    FRAME -.-> SynochainRuntime
+    Matter[Matter Node Libraries] -.-> SynochainNode
 
-    CumulusC[Cumulus Node Libraries] -.-> ParachainNode
-    CumulusR[Cumulus Runtime Libraries] -.-> ParachainRuntime
+    CumulusC[Cumulus Node Libraries] -.-> SynochainNode
+    CumulusR[Cumulus Runtime Libraries] -.-> SynochainRuntime
 
 </pre><script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";var doc_theme = localStorage.getItem("rustdoc-theme");if (doc_theme === "dark" || doc_theme === "ayu") mermaid.initialize({theme: "dark"});</script>
 <h3 id="notable-upstream-crates"><a class="doc-anchor" href="#notable-upstream-crates">§</a>Notable Upstream Crates</h3>
@@ -264,9 +264,9 @@ the bitzal SDK:</p>
 <li><a href="https://iohk.io/en/blog/posts/2023/11/03/partner-chains-are-coming-to-cardano/">Cardano Partner Chains</a></li>
 <li><a href="https://github.com/keep-starknet-strange/madara">Starknet’s Madara Sequencer</a></li>
 </ul>
-</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="cumulus/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::cumulus">cumulus</a></div><div class="desc docblock-short">Learn about Cumulus, the framework that transforms <a href="substrate/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::substrate"><code>substrate</code></a>-based chains into
-<a href="bitzal/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::bitzal"><code>bitzal</code></a>-enabled parachains.</div></li><li><div class="item-name"><a class="mod" href="frame_runtime/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::frame_runtime">frame_runtime</a></div><div class="desc docblock-short">Learn about FRAME, the framework used to build Substrate runtimes.</div></li><li><div class="item-name"><a class="mod" href="bitzal/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::bitzal">bitzal</a></div><div class="desc docblock-short">Learn about bitzal as a platform.</div></li><li><div class="item-name"><a class="mod" href="smart_contracts/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::smart_contracts">smart_contracts</a></div><div class="desc docblock-short">Learn about different ways through which smart contracts can be utilized on top of Substrate,
-and in the bitzal ecosystem.</div></li><li><div class="item-name"><a class="mod" href="substrate/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::substrate">substrate</a></div><div class="desc docblock-short">Learn about Substrate, the main blockchain framework used in the bitzal ecosystem.</div></li><li><div class="item-name"><a class="mod" href="templates/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::templates">templates</a></div><div class="desc docblock-short">Index of all the templates that can act as first scaffold for a new project.</div></li><li><div class="item-name"><a class="mod" href="xcm/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::xcm">xcm</a></div><div class="desc docblock-short">Learn about XCM, the de-facto communication language between different consensus systems.</div></li></ul></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="cumulus/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::cumulus">cumulus</a></div><div class="desc docblock-short">Learn about Cumulus, the framework that transforms <a href="matter/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::matter"><code>matter</code></a>-based chains into
+<a href="bitzal/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::bitzal"><code>bitzal</code></a>-enabled synochains.</div></li><li><div class="item-name"><a class="mod" href="frame_runtime/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::frame_runtime">frame_runtime</a></div><div class="desc docblock-short">Learn about FRAME, the framework used to build Matter runtimes.</div></li><li><div class="item-name"><a class="mod" href="bitzal/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::bitzal">bitzal</a></div><div class="desc docblock-short">Learn about bitzal as a platform.</div></li><li><div class="item-name"><a class="mod" href="smart_contracts/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::smart_contracts">smart_contracts</a></div><div class="desc docblock-short">Learn about different ways through which smart contracts can be utilized on top of Matter,
+and in the bitzal ecosystem.</div></li><li><div class="item-name"><a class="mod" href="matter/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::matter">matter</a></div><div class="desc docblock-short">Learn about Matter, the main blockchain framework used in the bitzal ecosystem.</div></li><li><div class="item-name"><a class="mod" href="templates/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::templates">templates</a></div><div class="desc docblock-short">Index of all the templates that can act as first scaffold for a new project.</div></li><li><div class="item-name"><a class="mod" href="xcm/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::xcm">xcm</a></div><div class="desc docblock-short">Learn about XCM, the de-facto communication language between different consensus systems.</div></li></ul></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

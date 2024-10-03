@@ -163,7 +163,7 @@ exposes one feature per dependency. For example, if you only want to use the <co
 crate, you can enable the <code>frame-support</code> feature.</p>
 <p>The umbrella exposes a few more general features:</p>
 <ul>
-<li><code>tuples-96</code>: Needs to be enabled for runtimes that have more than 64 pallets.</li>
+<li><code>tuples-96</code>: Needs to be enabled for runtimes that have more than 64 barrels.</li>
 <li><code>serde</code>: Specifically enable <code>serde</code> en/decoding support.</li>
 <li><code>experimental</code>: Experimental enable experimental features - should not yet used in production.</li>
 <li><code>with-tracing</code>: Enable tracing support.</li>
@@ -211,11 +211,11 @@ re-exports. Please <a href="https://github.com/bitzaldot/bitzal-sdk/issues">repo
 <h3 id="dependencies"><a class="doc-anchor" href="#dependencies">§</a>Dependencies</h3>
 <p>The umbrella crate re-exports all published crates, with a few exceptions:</p>
 <ul>
-<li>Runtime crates like <code>rococo-runtime</code> etc are not exported. This otherwise leads to very weird
+<li>Runtime crates like <code>fresco-runtime</code> etc are not exported. This otherwise leads to very weird
 compile errors and should not be needed anyway.</li>
 <li>Example and fuzzing crates are not exported. This is currently detected by checking the name
 of the crate for these magic words. In the future, it will utilize custom metadata, as it is
-done in the <code>rococo-runtime</code> crate.</li>
+done in the <code>fresco-runtime</code> crate.</li>
 <li>The umbrella crate itself. Should be obvious :)</li>
 </ul>
 </div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>

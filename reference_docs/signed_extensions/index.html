@@ -182,22 +182,22 @@ correct encoding of the call.</p>
 before dispatching it.</p>
 </li>
 <li>
-<p><a href="../../../pallet_transaction_payment/struct.ChargeTransactionPayment.html" title="struct pallet_transaction_payment::ChargeTransactionPayment"><code>ChargeTransactionPayment</code></a>: Charges
+<p><a href="../../../barrel_transaction_payment/struct.ChargeTransactionPayment.html" title="struct barrel_transaction_payment::ChargeTransactionPayment"><code>ChargeTransactionPayment</code></a>: Charges
 transaction fees from the signer based on the weight of the call using the native token.</p>
 </li>
 <li>
-<p><a href="../../../pallet_asset_tx_payment/struct.ChargeAssetTxPayment.html" title="struct pallet_asset_tx_payment::ChargeAssetTxPayment"><code>ChargeAssetTxPayment</code></a>: Charges transaction
+<p><a href="../../../barrel_asset_tx_payment/struct.ChargeAssetTxPayment.html" title="struct barrel_asset_tx_payment::ChargeAssetTxPayment"><code>ChargeAssetTxPayment</code></a>: Charges transaction
 fees from the signer based on the weight of the call using any supported asset (including the
 native token).</p>
 </li>
 <li>
-<p><a href="../../../pallet_asset_conversion_tx_payment/struct.ChargeAssetTxPayment.html" title="struct pallet_asset_conversion_tx_payment::ChargeAssetTxPayment"><code>ChargeAssetTxPayment</code>(using
+<p><a href="../../../barrel_asset_conversion_tx_payment/struct.ChargeAssetTxPayment.html" title="struct barrel_asset_conversion_tx_payment::ChargeAssetTxPayment"><code>ChargeAssetTxPayment</code>(using
 conversion)</a>: Charges transaction
 fees from the signer based on the weight of the call using any supported asset (including the
 native token). The asset is converted to the native token using a pool.</p>
 </li>
 <li>
-<p><a href="../../../pallet_skip_feeless_payment/struct.SkipCheckIfFeeless.html" title="struct pallet_skip_feeless_payment::SkipCheckIfFeeless"><code>SkipCheckIfFeeless</code></a>: Allows transactions
+<p><a href="../../../barrel_skip_feeless_payment/struct.SkipCheckIfFeeless.html" title="struct barrel_skip_feeless_payment::SkipCheckIfFeeless"><code>SkipCheckIfFeeless</code></a>: Allows transactions
 to be processed without paying any fee. This requires that the <code>call</code> that should be
 dispatched is augmented with the <a href="../../../frame_support_procedural/attr.feeless_if.html" title="attr frame_support_procedural::feeless_if"><code>feeless_if</code></a>
 attribute.</p>
@@ -209,7 +209,7 @@ Ledger application and other similar offline wallets.</p>
 </li>
 <li>
 <p><a href="../../../cumulus_primitives_storage_weight_reclaim/struct.StorageWeightReclaim.html" title="struct cumulus_primitives_storage_weight_reclaim::StorageWeightReclaim"><code>StorageWeightReclaim</code></a>: A
-signed extension for parachains that reclaims unused storage weight after executing a
+signed extension for synochains that reclaims unused storage weight after executing a
 transaction.</p>
 </li>
 </ul>

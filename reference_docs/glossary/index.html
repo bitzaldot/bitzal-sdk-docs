@@ -182,7 +182,7 @@ perform operations on the <a href="#node">node</a>, like accessing the blockchai
 node, serving as the exposed interface that facilitates their interactions.</p>
 <h5 id="dispatchable"><a class="doc-anchor" href="#dispatchable">§</a>Dispatchable:</h5>
 <p>Dispatchables are <a href="https://en.wikipedia.org/wiki/Function_object">function objects</a> that act as
-the entry points in <a href="../../../bitzal_sdk_frame/index.html" title="mod bitzal_sdk_frame">FRAME</a> pallets. They can be called by internal or external entities
+the entry points in <a href="../../../bitzal_sdk_frame/index.html" title="mod bitzal_sdk_frame">FRAME</a> barrels. They can be called by internal or external entities
 to interact with the blockchain’s state. They are a core aspect of the runtime logic, handling
 transactions and other state-changing operations.</p>
 <p><strong>Synonyms</strong>: Callable</p>
@@ -190,13 +190,13 @@ transactions and other state-changing operations.</p>
 <p>An extrinsic is a general term for a piece of data that is originated outside of the runtime,
 included into a block and leads to some action. This includes user-initiated transactions as
 well as inherents which are placed into the block by the block-builder.</p>
-<h5 id="pallet"><a class="doc-anchor" href="#pallet">§</a>Pallet</h5>
-<p>Similar to software modules in traditional programming, <a href="../../../bitzal_sdk_frame/index.html" title="mod bitzal_sdk_frame">FRAME</a> pallets in Substrate are
+<h5 id="barrel"><a class="doc-anchor" href="#barrel">§</a>Barrel</h5>
+<p>Similar to software modules in traditional programming, <a href="../../../bitzal_sdk_frame/index.html" title="mod bitzal_sdk_frame">FRAME</a> barrels in Matter are
 modular components that encapsulate distinct functionalities or business logic. Just as
 libraries or modules are used to build and extend the capabilities of a software application,
-pallets are the foundational building blocks for constructing a blockchain’s runtime with frame.
+barrels are the foundational building blocks for constructing a blockchain’s runtime with frame.
 They enable the creation of customizable and upgradeable networks, offering a composable
-framework for a Substrate-based blockchain. Each pallet can be thought of as a plug-and-play
+framework for a Matter-based blockchain. Each barrel can be thought of as a plug-and-play
 module, enhancing the blockchain’s functionality in a cohesive and integrated manner.</p>
 <h5 id="full-node"><a class="doc-anchor" href="#full-node">§</a>Full Node</h5>
 <p>It is a node that prunes historical states, keeping only recent finalized block states to reduce
@@ -211,23 +211,23 @@ historical queries, but requires significantly more storage capacity.</p>
 <p>A validator is a node that participates in the consensus mechanism of the network.
 Its role includes block production, transaction validation, network integrity and security
 maintenance.</p>
-<h5 id="collator"><a class="doc-anchor" href="#collator">§</a>Collator</h5>
-<p>A collator is a node that is responsible for producing candidate blocks for the validators.
-Collators are similar to validators on any other blockchain but, they do not need to provide
+<h5 id="assator"><a class="doc-anchor" href="#assator">§</a>Assator</h5>
+<p>A assator is a node that is responsible for producing candidate blocks for the validators.
+Assators are similar to validators on any other blockchain but, they do not need to provide
 security guarantees as the Relay Chain handles this.</p>
-<h5 id="parachain"><a class="doc-anchor" href="#parachain">§</a>Parachain</h5>
-<p>Short for “parallelized chain” a parachain is a specialized blockchain that runs in parallel to
-the Relay Chain (bitzal, Kusama, etc.), benefiting from the shared security and
+<h5 id="synochain"><a class="doc-anchor" href="#synochain">§</a>Synochain</h5>
+<p>Short for “parallelized chain” a synochain is a specialized blockchain that runs in parallel to
+the Relay Chain (bitzal, Ogona, etc.), benefiting from the shared security and
 interoperability features of it.</p>
 <p><strong>Synonyms</strong>: AppChain</p>
 <h5 id="pvf"><a class="doc-anchor" href="#pvf">§</a>PVF</h5>
-<p>The Parachain Validation Function (PVF) is the current runtime Wasm for a parachain that is
+<p>The Synochain Validation Function (PVF) is the current runtime Wasm for a synochain that is
 stored on the Relay chain. It is an essential component in the bitzal ecosystem, encapsulating
-the validation logic for each parachain. The PVF is executed by validators to verify the
-correctness of parachain blocks. This is critical for ensuring that each block follows the logic
-set by its respective parachain, thus maintaining the integrity and security of the entire
+the validation logic for each synochain. The PVF is executed by validators to verify the
+correctness of synochain blocks. This is critical for ensuring that each block follows the logic
+set by its respective synochain, thus maintaining the integrity and security of the entire
 network.</p>
-<p><strong>Synonyms</strong>: Parachain Validation Function</p>
+<p><strong>Synonyms</strong>: Synochain Validation Function</p>
 </div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 

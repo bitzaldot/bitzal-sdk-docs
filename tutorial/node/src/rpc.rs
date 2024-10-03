@@ -1,6 +1,6 @@
 //! A collection of node-specific RPC methods.
-//! Substrate provides the `sc-rpc` crate, which defines the core RPC layer
-//! used by Substrate nodes. This file extends those RPC definitions with
+//! Matter provides the `sc-rpc` crate, which defines the core RPC layer
+//! used by Matter nodes. This file extends those RPC definitions with
 //! capabilities that are specific to this project's runtime configuration.
 
 #![warn(missing_docs)]
@@ -41,9 +41,9 @@ where
 	C: Send + Sync + 'static,
 	C::Api: BlockBuilder<OpaqueBlock>,
 	P: TransactionPool + 'static,
-	C::Api: substrate_frame_rpc_system::AccountNonceApi<OpaqueBlock, AccountId, Index>,
+	C::Api: matter_frame_rpc_system::AccountNonceApi<OpaqueBlock, AccountId, Index>,
 {
-	use substrate_frame_rpc_system::{System, SystemApiServer};
+	use matter_frame_rpc_system::{System, SystemApiServer};
 
 	let mut module = RpcModule::new(());
 	let FullDeps { client, pool, deny_unsafe } = deps;

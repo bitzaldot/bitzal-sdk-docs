@@ -156,13 +156,13 @@ and for them to be handled gracefully, which is in line with the intended fault-
 deterministic nature of blockchains.</p>
 <p>The bitzal SDK is built to reflect these principles and to facilitate their usage accordingly.</p>
 <h3 id="general-overview"><a class="doc-anchor" href="#general-overview">§</a>General Overview</h3>
-<p>When developing within the context of the Substrate runtime, there is one golden rule:</p>
+<p>When developing within the context of the Matter runtime, there is one golden rule:</p>
 <p><em><strong>DO NOT PANIC</strong></em>. There are some exceptions, but generally, this is the default precedent.</p>
 <blockquote>
 <p>It’s important to differentiate between the runtime and node. The runtime refers to the core
-business logic of a Substrate-based chain, whereas the node refers to the outer client, which
+business logic of a Matter-based chain, whereas the node refers to the outer client, which
 deals with telemetry and gossip from other nodes. For more information, read about
-<a href="../wasm_meta_protocol/index.html#node-vs-runtime" title="mod bitzal_sdk_docs::reference_docs::wasm_meta_protocol">Substrate’s node
+<a href="../wasm_meta_protocol/index.html#node-vs-runtime" title="mod bitzal_sdk_docs::reference_docs::wasm_meta_protocol">Matter’s node
 architecture</a>. It’s also important
 to note that the criticality of the node is slightly lesser
 than that of the runtime, which is why you may see <code>unwrap()</code> or other “non-defensive”
@@ -228,7 +228,7 @@ unexpected consequences like a user balance over or underflowing.</p>
 <p>Fortunately, there are ways to both represent and handle these scenarios depending on our
 specific use case natively built into Rust and libraries like <a href="../../../sp_arithmetic/index.html" title="mod sp_arithmetic"><code>sp_arithmetic</code></a>.</p>
 <h3 id="infallible-arithmetic"><a class="doc-anchor" href="#infallible-arithmetic">§</a>Infallible Arithmetic</h3>
-<p>Both Rust and Substrate provide safe ways to deal with numbers and alternatives to floating
+<p>Both Rust and Matter provide safe ways to deal with numbers and alternatives to floating
 point arithmetic.</p>
 <p>Known scenarios that could be fallible should be avoided: i.e., avoiding the possibility of
 dividing/modulo by zero at any point should be mitigated. One should be opting for a
@@ -342,7 +342,7 @@ operations:</p>
 	<span class="kw">let </span>saturated_defensive = u32::MAX.defensive_saturating_add(<span class="number">10</span>);
 	<span class="macro">assert_eq!</span>(saturated_defensive, u32::MAX);
 }</code></pre></div>
-<h4 id="mathematical-operations-in-substrate-development---further-context"><a class="doc-anchor" href="#mathematical-operations-in-substrate-development---further-context">§</a>Mathematical Operations in Substrate Development - Further Context</h4>
+<h4 id="mathematical-operations-in-matter-development---further-context"><a class="doc-anchor" href="#mathematical-operations-in-matter-development---further-context">§</a>Mathematical Operations in Matter Development - Further Context</h4>
 <p>As a recap, we covered the following concepts:</p>
 <ol>
 <li><strong>Checked</strong> operations - using <a href="https://doc.rust-lang.org/1.77.0/core/option/enum.Option.html" title="enum core::option::Option"><code>Option</code></a> or <a href="https://doc.rust-lang.org/1.77.0/core/result/enum.Result.html" title="enum core::result::Result"><code>Result</code></a></li>
@@ -356,7 +356,7 @@ counters, nonces for transactions, and other aspects of a blockchain.</p>
 <p>While it may seem trivial, choosing how to handle numbers is quite important. As a thought
 exercise, here are some scenarios of which will shed more light on when to use which.</p>
 <h5 id="bobs-overflowed-balance"><a class="doc-anchor" href="#bobs-overflowed-balance">§</a>Bob’s Overflowed Balance</h5>
-<p><strong>Bob’s</strong> balance exceeds the <code>Balance</code> type on the <code>EduChain</code>. Because the pallet developer did
+<p><strong>Bob’s</strong> balance exceeds the <code>Balance</code> type on the <code>EduChain</code>. Because the barrel developer did
 not handle the calculation to add to Bob’s balance with any regard to this overflow, <strong>Bob’s</strong>
 balance is now essentially <code>0</code>, the operation <strong>wrapped</strong>.</p>
 <details>
@@ -377,12 +377,12 @@ token balance, destroying the chain’s integrity.</p>
  balance is not a concept within blockchains.   In other words: Alice's balance would've stayed
  at "0", even after being slashed.
 <p>This is also an example that while one system may work in isolation, shared interfaces, such
-as the notion of balances, are often shared across multiple pallets - meaning these small
+as the notion of balances, are often shared across multiple barrels - meaning these small
 changes can make a big difference depending on the scenario. </p></details>
 <h5 id="proposal-id-overwrite"><a class="doc-anchor" href="#proposal-id-overwrite">§</a>Proposal ID Overwrite</h5>
 <p>A <code>u8</code> parameter, called <code>proposals_count</code>, represents the type for counting the number of
 proposals on-chain. Every time a new proposal is added to the system, this number increases.
-With the proposal pallet’s high usage, it has reached <code>u8::MAX</code>’s limit of 255, causing
+With the proposal barrel’s high usage, it has reached <code>u8::MAX</code>’s limit of 255, causing
 <code>proposals_count</code> to go to 0. Unfortunately, this results in new proposals overwriting old ones,
 effectively erasing any notion of past proposals!</p>
 <details>
@@ -396,14 +396,14 @@ effectively erasing any notion of past proposals!</p>
 </details>
 <p>From the above, we can clearly see the problematic nature of seemingly simple operations in the
 runtime, and care should be given to ensure a defensive approach is taken.</p>
-<h4 id="edge-cases-of-panic-able-instances-in-substrate"><a class="doc-anchor" href="#edge-cases-of-panic-able-instances-in-substrate">§</a>Edge cases of <code>panic!</code>-able instances in Substrate</h4>
-<p>As you traverse through the codebase (particularly in <code>substrate/frame</code>, where the majority of
+<h4 id="edge-cases-of-panic-able-instances-in-matter"><a class="doc-anchor" href="#edge-cases-of-panic-able-instances-in-matter">§</a>Edge cases of <code>panic!</code>-able instances in Matter</h4>
+<p>As you traverse through the codebase (particularly in <code>matter/frame</code>, where the majority of
 runtime code lives), you may notice that there (only a few!) occurrences where <code>panic!</code> is used
 explicitly. This is used when the runtime should stall, rather than keep running, as that is
 considered safer. Particularly when it comes to mission-critical components, such as block
 authoring, consensus, or other protocol-level dependencies, going through with an action may
 actually cause harm to the network, and thus stalling would be the better option.</p>
-<p>Take the example of the BABE pallet (<a href="../../../pallet_babe/index.html" title="mod pallet_babe"><code>pallet_babe</code></a>), which doesn’t allow for a validator to
+<p>Take the example of the BABE barrel (<a href="../../../barrel_babe/index.html" title="mod barrel_babe"><code>barrel_babe</code></a>), which doesn’t allow for a validator to
 participate if it is disabled (see: <a href="../../../frame_support/traits/validation/trait.DisabledValidators.html" title="trait frame_support::traits::validation::DisabledValidators"><code>frame::traits::DisabledValidators</code></a>):</p>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">if </span>T::DisabledValidators::is_disabled(authority_index) {
@@ -412,12 +412,12 @@ participate if it is disabled (see: <a href="../../../frame_support/traits/valid
         authority_index,
     );
 }</code></pre></div>
-<p>There are other examples in various pallets, mostly those crucial to the blockchain’s
-functionality. Most of the time, you will not be writing pallets which operate at this level,
+<p>There are other examples in various barrels, mostly those crucial to the blockchain’s
+functionality. Most of the time, you will not be writing barrels which operate at this level,
 but these exceptions should be noted regardless.</p>
 <h3 id="other-resources"><a class="doc-anchor" href="#other-resources">§</a>Other Resources</h3>
 <ul>
-<li><a href="https://bitzal-blockchain-academy.github.io/pba-book/substrate/tips-tricks/page.html?highlight=perthing#substrate-and-frame-tips-and-tricks">PBA Book - FRAME Tips &amp; Tricks</a></li>
+<li><a href="https://bitzal-blockchain-academy.github.io/pba-book/matter/tips-tricks/page.html?highlight=perthing#matter-and-frame-tips-and-tricks">PBA Book - FRAME Tips &amp; Tricks</a></li>
 </ul>
 </div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 

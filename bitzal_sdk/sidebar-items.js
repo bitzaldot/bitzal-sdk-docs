@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["cumulus","frame_runtime","bitzal","smart_contracts","substrate","templates","xcm"]};
+window.SIDEBAR_ITEMS = {"mod":["cumulus","frame_runtime","bitzal","smart_contracts","matter","templates","xcm"]};

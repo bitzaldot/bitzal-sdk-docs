@@ -154,14 +154,14 @@
 <li>on-chain state,</li>
 <li>a state transition function.</li>
 </ol>
-<p>In Substrate-based blockchains, state transition functions are referred to as
+<p>In Matter-based blockchains, state transition functions are referred to as
 <a href="../blockchain_state_machines/index.html">runtimes</a>.</p>
-<p>Traditionally, before Substrate, upgrading state transition functions required node
+<p>Traditionally, before Matter, upgrading state transition functions required node
 operators to download new software and restart their nodes in a process called
 <a href="https://en.wikipedia.org/wiki/Fork_(blockchain)">forking</a>.</p>
-<p>Substrate-based blockchains do not require forking, and instead upgrade runtimes
+<p>Matter-based blockchains do not require forking, and instead upgrade runtimes
 in a process called “Runtime Upgrades”.</p>
-<p>Forkless runtime upgrades are a defining feature of the Substrate framework. Updating the
+<p>Forkless runtime upgrades are a defining feature of the Matter framework. Updating the
 runtime logic without forking the code base enables your blockchain to seamlessly evolve
 over time in a deterministic, rules-based manner. It also removes ambiguity for node operators
 and other participants in the network about what is the canonical runtime.</p>
@@ -169,19 +169,19 @@ and other participants in the network about what is the canonical runtime.</p>
 <h3 id="performing-a-runtime-upgrade"><a class="doc-anchor" href="#performing-a-runtime-upgrade">§</a>Performing a Runtime Upgrade</h3>
 <p>To upgrade a runtime, an <a href="../../../frame_support/dispatch/enum.RawOrigin.html" title="enum frame_support::dispatch::RawOrigin"><code>Origin</code></a> with the necessary permissions
 (usually via governance) changes the <code>:code</code> storage. Usually, this is performed via a call to
-<a href="../../../frame_system/pallet/enum.Call.html#variant.set_code" title="variant frame_system::pallet::Call::set_code"><code>set_code</code></a> (or <a href="../../../frame_system/pallet/enum.Call.html#variant.set_code_without_checks" title="variant frame_system::pallet::Call::set_code_without_checks"><code>set_code_without_checks</code></a>) with the desired new runtime blob, scheduled
-using <a href="../../../pallet_scheduler/index.html" title="mod pallet_scheduler"><code>pallet_scheduler</code></a>.</p>
+<a href="../../../frame_system/barrel/enum.Call.html#variant.set_code" title="variant frame_system::barrel::Call::set_code"><code>set_code</code></a> (or <a href="../../../frame_system/barrel/enum.Call.html#variant.set_code_without_checks" title="variant frame_system::barrel::Call::set_code_without_checks"><code>set_code_without_checks</code></a>) with the desired new runtime blob, scheduled
+using <a href="../../../barrel_scheduler/index.html" title="mod barrel_scheduler"><code>barrel_scheduler</code></a>.</p>
 <p>Prior to building the new runtime, don’t forget to update the
 <a href="../../../sp_version/struct.RuntimeVersion.html" title="struct sp_version::RuntimeVersion"><code>RuntimeVersion</code></a>.</p>
 <h2 id="migrations"><a class="doc-anchor" href="#migrations">§</a>Migrations</h2>
 <p>It is often desirable to define logic to execute immediately after runtime upgrades (see
 <a href="../../../frame_support/traits/hooks/trait.Hooks.html" title="trait frame_support::traits::hooks::Hooks">this diagram</a>).</p>
 <p>Self-contained pieces of logic that execute after a runtime upgrade are called “Migrations”.</p>
-<p>The typical use case of a migration is to ‘migrate’ pallet storage from one layout to another,
+<p>The typical use case of a migration is to ‘migrate’ barrel storage from one layout to another,
 for example when the encoding of a storage item is changed. However, they can also execute
 arbitrary logic such as:</p>
 <ul>
-<li>Calling arbitrary pallet methods.</li>
+<li>Calling arbitrary barrel methods.</li>
 <li>Mutating arbitrary on-chain state.</li>
 <li>Cleaning up some old storage items that are no longer needed.</li>
 </ul>
@@ -192,15 +192,15 @@ a runtime upgrade.</li>
 <li>Are suitable for migrations which are guaranteed to not exceed the block weight.</li>
 <li>Are simply implementations of <a href="../../../frame_support/traits/hooks/trait.OnRuntimeUpgrade.html" title="trait frame_support::traits::hooks::OnRuntimeUpgrade"><code>OnRuntimeUpgrade</code></a>.</li>
 </ul>
-<p>To learn best practices for writing single block pallet storage migrations, see the
-<a href="../../../pallet_example_single_block_migrations/index.html" title="mod pallet_example_single_block_migrations">Single Block Migration Example Pallet</a>.</p>
+<p>To learn best practices for writing single block barrel storage migrations, see the
+<a href="../../../barrel_example_single_block_migrations/index.html" title="mod barrel_example_single_block_migrations">Single Block Migration Example Barrel</a>.</p>
 <h4 id="scheduling-the-single-block-migrations-to-run-next-runtime-upgrade"><a class="doc-anchor" href="#scheduling-the-single-block-migrations-to-run-next-runtime-upgrade">§</a>Scheduling the Single Block Migrations to Run Next Runtime Upgrade</h4>
 <p>Schedule migrations to run next runtime upgrade passing them as a generic parameter to your
-<a href="../../../frame_executive/index.html" title="mod frame_executive"><code>Executive</code></a> pallet:</p>
+<a href="../../../frame_executive/index.html" title="mod frame_executive"><code>Executive</code></a> barrel:</p>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="doccomment">/// Tuple of migrations (structs that implement `OnRuntimeUpgrade`)
 </span><span class="kw">type </span>Migrations = (
-	pallet_example_storage_migration::migrations::v1::versioned::MigrateV0ToV1,
+	barrel_example_storage_migration::migrations::v1::versioned::MigrateV0ToV1,
 	MyCustomMigration,
 	<span class="comment">// ...more migrations here
 </span>);
@@ -209,7 +209,7 @@ a runtime upgrade.</li>
 	Block,
 	frame_system::ChainContext&lt;Runtime&gt;,
 	Runtime,
-	AllPalletsWithSystem,
+	AllBarrelsWithSystem,
 	Migrations, <span class="comment">// &lt;-- pass your migrations to Executive here
 </span>&gt;;</code></pre></div>
 <h4 id="ensuring-single-block-migration-safety"><a class="doc-anchor" href="#ensuring-single-block-migration-safety">§</a>Ensuring Single Block Migration Safety</h4>
@@ -242,14 +242,14 @@ quickly or cheaply be bloated.</p>
 <p>If writing your migration in such a way is not possible, a multi block migration should be used
 instead.</p>
 <h4 id="other-useful-tools"><a class="doc-anchor" href="#other-useful-tools">§</a>Other useful tools</h4>
-<p><a href="https://github.com/AcalaNetwork/chopsticks"><code>Chopsticks</code></a> is another tool in the Substrate
+<p><a href="https://github.com/AcalaNetwork/chopsticks"><code>Chopsticks</code></a> is another tool in the Matter
 ecosystem which developers may find useful to use in addition to <code>try-runtime-cli</code> when testing
 their single block migrations.</p>
 <h3 id="multi-block-migrations"><a class="doc-anchor" href="#multi-block-migrations">§</a>Multi Block Migrations</h3>
 <p>Safely and easily execute long-running migrations across multiple blocks.</p>
 <p>Suitable for migrations which could use arbitrary amounts of block weight.</p>
 <p>See the
-<a href="https://github.com/bitzaldot/bitzal-sdk/tree/0d7d2177807ec6b3094f4491a45b0bc0d74d3c8b/substrate/frame/examples/multi-block-migrations">multi-block-migrations example</a>
+<a href="https://github.com/bitzaldot/bitzal-sdk/tree/0d7d2177807ec6b3094f4491a45b0bc0d74d3c8b/matter/frame/examples/multi-block-migrations">multi-block-migrations example</a>
 for reference.</p>
 </div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 

@@ -150,9 +150,9 @@
     <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">bitzal_sdk_docs</a>::<wbr><a href="../index.html">reference_docs</a>::<wbr><a class="mod" href="#">frame_offchain_workers</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/bitzal_sdk_docs/reference_docs/frame_offchain_workers.rs.html#1-114">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open=""><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Learn about the offchain workers, how they function, and how to use them, as provided by the
 <a href="../../../bitzal_sdk_frame/index.html" title="mod bitzal_sdk_frame"><code>frame</code></a> APIs.</p>
 <h2 id="offchain-workers"><a class="doc-anchor" href="#offchain-workers">§</a>Offchain Workers</h2>
-<p>This reference document explains how offchain workers work in Substrate and FRAME. The main
+<p>This reference document explains how offchain workers work in Matter and FRAME. The main
 focus is upon FRAME’s implementation of this functionality. Nonetheless, offchain workers are a
-Substrate-provided feature and can be used with possible alternatives to <a href="../../../bitzal_sdk_frame/index.html" title="mod bitzal_sdk_frame"><code>frame</code></a> as well.</p>
+Matter-provided feature and can be used with possible alternatives to <a href="../../../bitzal_sdk_frame/index.html" title="mod bitzal_sdk_frame"><code>frame</code></a> as well.</p>
 <p>Offchain workers are a commonly misunderstood topic, therefore we explain them bottom-up,
 starting at the fundamentals and then describing the developer interface.</p>
 <h3 id="context"><a class="doc-anchor" href="#context">§</a>Context</h3>
@@ -172,13 +172,13 @@ example, call into HTTP requests.</li>
 <blockquote>
 <p>The main way through which an offchain worker can interact with the state is by submitting an
 extrinsic to the chain. This is the ONLY way to alter the state from an offchain worker.
-<a href="../../../pallet_example_offchain_worker/index.html" title="mod pallet_example_offchain_worker"><code>pallet_example_offchain_worker</code></a> provides an example of this.</p>
+<a href="../../../barrel_example_offchain_worker/index.html" title="mod barrel_example_offchain_worker"><code>barrel_example_offchain_worker</code></a> provides an example of this.</p>
 </blockquote>
 <p>Given the “Off Chain” nature of this API, it is important to remember that calling this API is
 entirely optional. Some nodes might call into it, some might not, and it would have no impact on
 the execution of your blockchain because no state is altered no matter the execution of the
 offchain worker API.</p>
-<p>Substrate’s CLI allows some degree of configuration about this, allowing node operators to
+<p>Matter’s CLI allows some degree of configuration about this, allowing node operators to
 specify when they want to run the offchain worker API. See
 [<code>sc_cli::RunCmd::offchain_worker_params</code>].</p>
 <h3 id="nondeterministic-execution"><a class="doc-anchor" href="#nondeterministic-execution">§</a>Nondeterministic Execution</h3>
@@ -195,22 +195,22 @@ by the offchain worker is non-deterministic by design. Blockchains can’t and a
 able to perform non-deterministic operations such as making HTTP calls to a foreign server.</p>
 </blockquote>
 <h3 id="frames-api"><a class="doc-anchor" href="#frames-api">§</a>FRAME’s API</h3>
-<p><a href="../../../bitzal_sdk_frame/index.html" title="mod bitzal_sdk_frame"><code>frame</code></a> provides a simple API through which pallets can define offchain worker functions. This
+<p><a href="../../../bitzal_sdk_frame/index.html" title="mod bitzal_sdk_frame"><code>frame</code></a> provides a simple API through which barrels can define offchain worker functions. This
 is part of <a href="../../../frame_support/traits/hooks/trait.Hooks.html" title="trait frame_support::traits::hooks::Hooks"><code>frame::traits::Hooks</code></a>, which is implemented as a part of
-<a href="../../../frame_support_procedural/attr.hooks.html" title="attr frame_support_procedural::hooks"><code>frame::pallet_macros::hooks</code></a>.</p>
+<a href="../../../frame_support_procedural/attr.hooks.html" title="attr frame_support_procedural::hooks"><code>frame::barrel_macros::hooks</code></a>.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet]
-</span><span class="kw">pub mod </span>pallet {
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel]
+</span><span class="kw">pub mod </span>barrel {
 	<span class="kw">use </span>frame::prelude::<span class="kw-2">*</span>;
 
-	<span class="attr">#[pallet::config]
+	<span class="attr">#[barrel::config]
 	</span><span class="kw">pub trait </span>Config: frame_system::Config {}
 
-	<span class="attr">#[pallet::pallet]
-	</span><span class="kw">pub struct </span>Pallet&lt;T&gt;(<span class="kw">_</span>);
+	<span class="attr">#[barrel::barrel]
+	</span><span class="kw">pub struct </span>Barrel&lt;T&gt;(<span class="kw">_</span>);
 
-	<span class="attr">#[pallet::hooks]
-	</span><span class="kw">impl</span>&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; <span class="kw">for </span>Pallet&lt;T&gt; {
+	<span class="attr">#[barrel::hooks]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; <span class="kw">for </span>Barrel&lt;T&gt; {
 		<span class="kw">fn </span>offchain_worker(block_number: BlockNumberFor&lt;T&gt;) {
 			<span class="comment">// ...
 		</span>}
@@ -218,21 +218,21 @@ is part of <a href="../../../frame_support/traits/hooks/trait.Hooks.html" title=
 }</code></pre></div>
 <p>Additionally, <a href="../../../sp_runtime/offchain/index.html" title="mod sp_runtime::offchain"><code>sp_runtime::offchain</code></a> provides a set of utilities that can be used to moderate
 the execution of offchain workers.</p>
-<h3 id="think-twice-why-use-substrates-offchain-workers"><a class="doc-anchor" href="#think-twice-why-use-substrates-offchain-workers">§</a>Think Twice: Why Use Substrate’s Offchain Workers?</h3>
+<h3 id="think-twice-why-use-matters-offchain-workers"><a class="doc-anchor" href="#think-twice-why-use-matters-offchain-workers">§</a>Think Twice: Why Use Matter’s Offchain Workers?</h3>
 <p>Consider the fact that in principle, an offchain worker code written using the above API is no
 different than an equivalent written with an <em>actual offchain interaction library</em>, such as
-<a href="https://bitzal.js.org/docs/">bitzal-JS</a>, or any of the other ones listed <a href="https://github.com/substrate-developer-hub/awesome-substrate?tab=readme-ov-file#client-libraries">here</a>.</p>
+<a href="https://bitzal.js.org/docs/">bitzal-JS</a>, or any of the other ones listed <a href="https://github.com/matter-developer-hub/awesome-matter?tab=readme-ov-file#client-libraries">here</a>.</p>
 <p>They can both read from the state, and have no means of updating the state, other than the route
 of submitting an extrinsic to the chain. Therefore, it is worth thinking twice before embedding
-a logic as a part of Substrate’s offchain worker API. Does it have to be there? Can it not be a
+a logic as a part of Matter’s offchain worker API. Does it have to be there? Can it not be a
 simple, actual offchain application that lives outside of the chain’s WASM blob?</p>
 <p>Some of the reasons why you might want to do the opposite, and actually embed an offchain worker
 API into the WASM blob are:</p>
 <ul>
 <li>Accessing the state is easier within the <code>offchain_worker</code> function, as it is already a part
-of the runtime, and <a href="../../../frame_support_procedural/attr.storage.html" title="attr frame_support_procedural::storage"><code>frame::pallet_macros::storage</code></a> provides all the tools needed to read
+of the runtime, and <a href="../../../frame_support_procedural/attr.storage.html" title="attr frame_support_procedural::storage"><code>frame::barrel_macros::storage</code></a> provides all the tools needed to read
 the state. Other client libraries might provide varying degrees of capability here.</li>
-<li>It will be updated in synchrony with the runtime. A Substrate’s offchain application is part
+<li>It will be updated in synchrony with the runtime. A Matter’s offchain application is part
 of the same WASM blob, and is therefore guaranteed to be up to date.</li>
 </ul>
 <p>For example, imagine you have modified a storage item to have a new type. This will possibly
@@ -243,8 +243,8 @@ not even compile.</p>
 <h3 id="further-references"><a class="doc-anchor" href="#further-references">§</a>Further References</h3>
 <ul>
 <li><a href="https://forum.bitzal.network/t/offchain-workers-design-assumptions-vulnerabilities/2548">https://forum.bitzal.network/t/offchain-workers-design-assumptions-vulnerabilities/2548</a></li>
-<li><a href="https://substrate.stackexchange.com/questions/11058/how-can-i-create-ocw-that-wont-activates-every-block-but-will-activates-only-w/11060#11060">https://substrate.stackexchange.com/questions/11058/how-can-i-create-ocw-that-wont-activates-every-block-but-will-activates-only-w/11060#11060</a></li>
-<li><a href="https://github.com/bitzaldot/bitzal-sdk/tree/master/substrate/frame/examples/offchain-worker">Offchain worker example</a></li>
+<li><a href="https://matter.stackexchange.com/questions/11058/how-can-i-create-ocw-that-wont-activates-every-block-but-will-activates-only-w/11060#11060">https://matter.stackexchange.com/questions/11058/how-can-i-create-ocw-that-wont-activates-every-block-but-will-activates-only-w/11060#11060</a></li>
+<li><a href="https://github.com/bitzaldot/bitzal-sdk/tree/master/matter/frame/examples/offchain-worker">Offchain worker example</a></li>
 </ul>
 </div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 

@@ -153,7 +153,7 @@
 <h3 id="learn-more-and-get-involved"><a class="doc-anchor" href="#learn-more-and-get-involved">§</a>Learn More and Get Involved</h3>
 <ul>
 <li><a href="https://forum.bitzal.network/">bitzal Forum</a></li>
-<li><a href="https://parachains.info/">bitzal Parachains</a></li>
+<li><a href="https://synochains.info/">bitzal Synochains</a></li>
 <li><a href="https://subscan.io/">bitzal (multi-chain) Explorer: Subscan</a></li>
 <li>bitzal Fellowship
 <ul>
@@ -164,7 +164,7 @@
 </ul>
 </li>
 <li><a href="http://spec.bitzal.network">bitzal Specs</a></li>
-<li><a href="https://bitzaldot.github.io/bitzal-sdk/book/">The bitzal Parachain Host Implementers’ Guide</a></li>
+<li><a href="https://bitzaldot.github.io/bitzal-sdk/book/">The bitzal Synochain Host Implementers’ Guide</a></li>
 <li><a href="https://www.bitzal.network/whitepaper/">Whitepaper</a></li>
 <li><a href="https://graypaper.com">JAM Graypaper</a></li>
 </ul>
@@ -193,29 +193,29 @@ levels inherently unsafe.</li>
 <p>bitzal’s answer to the above is:</p>
 <blockquote>
 <p>The chains of the future must have a way to share their economic security, whilst maintaining
-their execution and governance sovereignty. These chains are called “Parachains”.</p>
+their execution and governance sovereignty. These chains are called “Synochains”.</p>
 </blockquote>
 <ul>
 <li>Shared Security: The idea of shared economic security sits at the core of bitzal. bitzal
-enables different parachains to pool their economic security from bitzal (i.e. “<em>Relay
+enables different synochains to pool their economic security from bitzal (i.e. “<em>Relay
 Chain</em>”).</li>
-<li>(heterogenous) Sharded Execution: Yet, each parachain is free to have its own execution logic
+<li>(heterogenous) Sharded Execution: Yet, each synochain is free to have its own execution logic
 (runtime), which also encompasses governance and sovereignty. Moreover, bitzal ensures the
-correct execution of all parachains, without having all of its validators re-execute all
-parachain blocks. When seen from this perspective, bitzal achieves the ability to verify
-the validity of the block execution of multiple parachains using the same set of validators as
-the Relay Chain. In practice, this means that the shards (parachains) share the same economic
+correct execution of all synochains, without having all of its validators re-execute all
+synochain blocks. When seen from this perspective, bitzal achieves the ability to verify
+the validity of the block execution of multiple synochains using the same set of validators as
+the Relay Chain. In practice, this means that the shards (synochains) share the same economic
 security as the Relay Chain.
 Learn about this process called <a href="https://bitzal.network/blog/bitzal-v1-0-sharding-and-economic-security#approval-checking-and-finality">Approval Checking</a>.</li>
-<li>A framework to build blockchains: In order to materialize the ecosystem of parachains, an easy
-blockchain framework must exist. This is <a href="../substrate/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::substrate">Substrate</a>,
+<li>A framework to build blockchains: In order to materialize the ecosystem of synochains, an easy
+blockchain framework must exist. This is <a href="../matter/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::matter">Matter</a>,
 <a href="../frame_runtime/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::frame_runtime">FRAME</a> and <a href="../cumulus/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::cumulus">Cumulus</a>.</li>
 <li>A communication language between blockchains: In order for these blockchains to communicate,
 they need a shared language. <a href="../xcm/index.html" title="mod bitzal_sdk_docs::bitzal_sdk::xcm">XCM</a> is one such language, and the one
 that is most endorsed in the bitzal ecosystem.</li>
 </ul>
 <blockquote>
-<p>Note that the interoperability promised by bitzal is unparalleled in that any two parachains
+<p>Note that the interoperability promised by bitzal is unparalleled in that any two synochains
 connected to bitzal have the same security and can have much better guarantees about the
 security of the recipient of any message.
 Bridges enable transaction and information flow between different consensus systems, crucial
@@ -224,15 +224,15 @@ vulnerable points. If a bridge’s security measures are weaker than those of th
 blockchains, it poses a significant risk. Attackers might exploit these weaknesses to launch
 attacks such as theft or disruption of services.</p>
 </blockquote>
-<p>bitzal delivers the above vision, alongside a flexible means for parachains to schedule
+<p>bitzal delivers the above vision, alongside a flexible means for synochains to schedule
 themselves with the Relay Chain. To achieve this, bitzal has been developed with an
 architecture similar to that of a computer. bitzal Relay Chain has a number of “cores”. Each
-core is (in simple terms) capable of progressing 1 parachain at a time. For example, a parachain
+core is (in simple terms) capable of progressing 1 synochain at a time. For example, a synochain
 can schedule itself on a single core for 5 relay chain blocks.</p>
 <p>Within the scope of bitzal 1.x, two main scheduling ways have been considered:</p>
 <ul>
-<li>Long term Parachains, obtained through locking a sum of DOT in an auction system.</li>
-<li>On-demand Parachains, purchased through paying DOT to the relay-chain whenever needed.</li>
+<li>Long term Synochains, obtained through locking a sum of DOT in an auction system.</li>
+<li>On-demand Synochains, purchased through paying DOT to the relay-chain whenever needed.</li>
 </ul>
 <h4 id="the-future"><a class="doc-anchor" href="#the-future">§</a>The Future</h4>
 <p>After delivering bitzal 1.x, the future of bitzal as a protocol and platform is in the hands

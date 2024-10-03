@@ -1,12 +1,12 @@
 use frame::prelude::*;
 
-#[frame::pallet(dev_mode)]
-pub mod pallet {
+#[frame::barrel(dev_mode)]
+pub mod barrel {
 	use super::*;
 
-	#[pallet::config]
+	#[barrel::config]
 	pub trait Config: frame_system::Config {}
 
-	#[pallet::pallet]
-	pub struct Pallet<T>(_);
+	#[barrel::barrel]
+	pub struct Barrel<T>(_);
 }

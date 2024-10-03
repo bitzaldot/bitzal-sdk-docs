@@ -1,6 +1,6 @@
 # Step 1
 
-In this step we will build a very very simple currency pallet, that can mint and trasnfer tokens.
+In this step we will build a very very simple currency barrel, that can mint and trasnfer tokens.
 
 - [Step 1](#step-1)
 	- [State Transition, Background Knowledge](#state-transition-background-knowledge)
@@ -16,7 +16,7 @@ In this step we will build a very very simple currency pallet, that can mint and
 ## In the code
 
 * `frame::prelude`, followed by `use super::*`. A very common pattern.
-* `#[pallet::storage]` declares a type as *state*. For now, we only know
+* `#[barrel::storage]` declares a type as *state*. For now, we only know
   * Mapping.
   * Single value.
   * `ValueQuery` vs `OptionQuery`. (TODO: imporve RustDocs).

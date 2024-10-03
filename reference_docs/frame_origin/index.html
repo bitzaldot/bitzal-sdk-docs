@@ -166,18 +166,18 @@ that has signed a statement can pass</em>”.</p>
 example:</p>
 <ul>
 <li>If the majority of token holders agreed upon this. This is more or less what the
-<a href="../../../pallet_democracy/index.html" title="mod pallet_democracy"><code>pallet_democracy</code></a> does under the hood (<a href="https://github.com/bitzaldot/bitzal-sdk/blob/edd95b3749754d2ed0c5738588e872c87be91624/substrate/frame/democracy/src/lib.rs#L1603-L1633">reference</a>).</li>
-<li>If a specific ratio of an instance of <a href="../../../pallet_collective/index.html" title="mod pallet_collective"><code>pallet_collective</code></a>/DAO agrees upon this.</li>
-<li>If another consensus system, for example a bridged network or a parachain, agrees upon this.</li>
+<a href="../../../barrel_democracy/index.html" title="mod barrel_democracy"><code>barrel_democracy</code></a> does under the hood (<a href="https://github.com/bitzaldot/bitzal-sdk/blob/edd95b3749754d2ed0c5738588e872c87be91624/matter/frame/democracy/src/lib.rs#L1603-L1633">reference</a>).</li>
+<li>If a specific ratio of an instance of <a href="../../../barrel_collective/index.html" title="mod barrel_collective"><code>barrel_collective</code></a>/DAO agrees upon this.</li>
+<li>If another consensus system, for example a bridged network or a synochain, agrees upon this.</li>
 <li>If the majority of validator/authority set agrees upon this<sup id="fnref1"><a href="#fn1">1</a></sup>.</li>
 <li>If caller holds a particular NFT.</li>
 </ul>
 <p>and many more.</p>
 <h3 id="context"><a class="doc-anchor" href="#context">§</a>Context</h3>
-<p>First, let’s look at where the <code>origin</code> type is encountered in a typical pallet. The <code>origin: OriginFor&lt;T&gt;</code> has to be the first argument of any given callable extrinsic in FRAME:</p>
+<p>First, let’s look at where the <code>origin</code> type is encountered in a typical barrel. The <code>origin: OriginFor&lt;T&gt;</code> has to be the first argument of any given callable extrinsic in FRAME:</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::call]
-</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[barrel::call]
+</span><span class="kw">impl</span>&lt;T: Config&gt; Barrel&lt;T&gt; {
 	<span class="kw">pub fn </span>do_something(_origin: OriginFor&lt;T&gt;) -&gt; DispatchResult {
 		<span class="comment">//              ^^^^^^^^^^^^^^^^^^^^^
 		</span><span class="macro">todo!</span>();
@@ -185,17 +185,17 @@ example:</p>
 }</code></pre></div>
 <p>Typically, the code of an extrinsic starts with an origin check, such as
 <a href="../../../frame_system/fn.ensure_signed.html" title="fn frame_system::ensure_signed"><code>frame_system::ensure_signed</code></a>.</p>
-<p>Note that <a href="../../../frame_system/pallet_prelude/type.OriginFor.html" title="type frame_system::pallet_prelude::OriginFor"><code>OriginFor</code></a> is merely a shorthand for
-<a href="../../../frame_system/pallet/trait.Config.html#associatedtype.RuntimeOrigin" title="associated type frame_system::pallet::Config::RuntimeOrigin"><code>frame_system::Config::RuntimeOrigin</code></a>. Given the name prefix <code>Runtime</code>, we can learn that
+<p>Note that <a href="../../../frame_system/barrel_prelude/type.OriginFor.html" title="type frame_system::barrel_prelude::OriginFor"><code>OriginFor</code></a> is merely a shorthand for
+<a href="../../../frame_system/barrel/trait.Config.html#associatedtype.RuntimeOrigin" title="associated type frame_system::barrel::Config::RuntimeOrigin"><code>frame_system::Config::RuntimeOrigin</code></a>. Given the name prefix <code>Runtime</code>, we can learn that
 <code>RuntimeOrigin</code> is similar to <code>RuntimeCall</code> and others, a runtime composite enum that is
 amalgamated at the runtime level. Read <a href="../frame_runtime_types/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types"><code>crate::reference_docs::frame_runtime_types</code></a> to
 familiarize yourself with these types.</p>
-<p>To understand this better, we will next create a pallet with a custom origin, which will add a
+<p>To understand this better, we will next create a barrel with a custom origin, which will add a
 new variant to <code>RuntimeOrigin</code>.</p>
-<h3 id="adding-custom-pallet-origin-to-the-runtime"><a class="doc-anchor" href="#adding-custom-pallet-origin-to-the-runtime">§</a>Adding Custom Pallet Origin to the Runtime</h3>
-<p>For example, given a pallet that defines the following custom origin:</p>
+<h3 id="adding-custom-barrel-origin-to-the-runtime"><a class="doc-anchor" href="#adding-custom-barrel-origin-to-the-runtime">§</a>Adding Custom Barrel Origin to the Runtime</h3>
+<p>For example, given a barrel that defines the following custom origin:</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::origin]
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[barrel::origin]
 #[derive(PartialEq, Eq, Clone, RuntimeDebug, Encode, Decode, TypeInfo, MaxEncodedLen)]
 </span><span class="kw">pub enum </span>Origin {
 	<span class="doccomment">/// If all holders of a particular NFT have agreed upon this.
@@ -203,17 +203,17 @@ new variant to <code>RuntimeOrigin</code>.</p>
 	<span class="doccomment">/// If all validators have agreed upon this.
 	</span>ValidatorSet,
 }</code></pre></div>
-<p>And a runtime with the following pallets:</p>
+<p>And a runtime with the following barrels:</p>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="macro">construct_runtime!</span>(
 	<span class="kw">pub struct </span>Runtime {
 		System: frame_system,
-		PalletWithCustomOrigin: pallet_with_custom_origin,
+		BarrelWithCustomOrigin: barrel_with_custom_origin,
 	}
 );</code></pre></div>
 <p>The type <a href="runtime_for_origin/struct.RuntimeOrigin.html" title="struct bitzal_sdk_docs::reference_docs::frame_origin::runtime_for_origin::RuntimeOrigin"><code>crate::reference_docs::frame_origin::runtime_for_origin::RuntimeOrigin</code></a> is expanded.
 This <code>RuntimeOrigin</code> contains a variant for the <a href="../../../frame_support/dispatch/enum.RawOrigin.html" title="enum frame_support::dispatch::RawOrigin"><code>frame_system::RawOrigin</code></a> and the custom
-origin of the pallet.</p>
+origin of the barrel.</p>
 <blockquote>
 <p>Notice how the <a href="../../../frame_system/fn.ensure_signed.html" title="fn frame_system::ensure_signed"><code>frame_system::ensure_signed</code></a> is nothing more than a <code>match</code> statement. If
 you want to know where the actual origin of an extrinsic is set (and the signature
@@ -222,27 +222,27 @@ verification happens, if any), see
 <a href="../../../sp_runtime/traits/trait.Applyable.html" title="trait sp_runtime::traits::Applyable"><code>sp_runtime::traits::Applyable</code></a>’s implementation.</p>
 </blockquote>
 <h3 id="asserting-on-a-custom-internal-origin"><a class="doc-anchor" href="#asserting-on-a-custom-internal-origin">§</a>Asserting on a Custom Internal Origin</h3>
-<p>In order to assert on a custom origin that is defined within your pallet, we need a way to first
+<p>In order to assert on a custom origin that is defined within your barrel, we need a way to first
 convert the <code>&lt;T as frame_system::Config&gt;::RuntimeOrigin</code> into the local <code>enum Origin</code> of the
-current pallet. This is a common process that is explained in
+current barrel. This is a common process that is explained in
 <a href="../frame_runtime_types/index.html#%20adding-further-constraints-to-runtime-composite-enums" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types"><code>crate::reference_docs::frame_runtime_types</code></a>.</p>
 <p>We use the same process here to express that <code>RuntimeOrigin</code> has a number of additional bounds,
 as follows.</p>
 <ol>
-<li>Defining a custom <code>RuntimeOrigin</code> with further bounds in the pallet.</li>
+<li>Defining a custom <code>RuntimeOrigin</code> with further bounds in the barrel.</li>
 </ol>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::config]
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[barrel::config]
 </span><span class="kw">pub trait </span>Config: frame_system::Config {
 	<span class="kw">type </span>RuntimeOrigin: From&lt;&lt;<span class="self">Self </span><span class="kw">as </span>frame_system::Config&gt;::RuntimeOrigin&gt;
 		+ Into&lt;<span class="prelude-ty">Result</span>&lt;Origin, &lt;<span class="self">Self </span><span class="kw">as </span>Config&gt;::RuntimeOrigin&gt;&gt;;
 }</code></pre></div>
 <ol start="2">
-<li>Using it in the pallet.</li>
+<li>Using it in the barrel.</li>
 </ol>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::call]
-</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[barrel::call]
+</span><span class="kw">impl</span>&lt;T: Config&gt; Barrel&lt;T&gt; {
 	<span class="kw">pub fn </span>only_validators(origin: OriginFor&lt;T&gt;) -&gt; DispatchResult {
 		<span class="comment">// first, we convert from `&lt;T as frame_system::Config&gt;::RuntimeOrigin` to `&lt;T as
 		// Config&gt;::RuntimeOrigin`
@@ -257,19 +257,19 @@ as follows.</p>
 	}
 }</code></pre></div>
 <h3 id="asserting-on-a-custom-external-origin"><a class="doc-anchor" href="#asserting-on-a-custom-external-origin">§</a>Asserting on a Custom External Origin</h3>
-<p>Very often, a pallet wants to have a parameterized origin that is <strong>NOT</strong> defined within the
-pallet. In other words, a pallet wants to delegate an origin check to something that is
+<p>Very often, a barrel wants to have a parameterized origin that is <strong>NOT</strong> defined within the
+barrel. In other words, a barrel wants to delegate an origin check to something that is
 specified later at the runtime level. Like many other parameterizations in FRAME, this implies
 adding a new associated type to <code>trait Config</code>.</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::config]
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[barrel::config]
 </span><span class="kw">pub trait </span>Config: frame_system::Config {
 	<span class="kw">type </span>ExternalOrigin: EnsureOrigin&lt;<span class="self">Self</span>::RuntimeOrigin&gt;;
 }</code></pre></div>
-<p>Then, within the pallet, we can simply use this “unknown” origin check type:</p>
+<p>Then, within the barrel, we can simply use this “unknown” origin check type:</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::call]
-</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[barrel::call]
+</span><span class="kw">impl</span>&lt;T: Config&gt; Barrel&lt;T&gt; {
 	<span class="kw">pub fn </span>externally_checked_ext(origin: OriginFor&lt;T&gt;) -&gt; DispatchResult {
 		<span class="kw">let _ </span>= T::ExternalOrigin::ensure_origin(origin)<span class="question-mark">?</span>;
 		<span class="macro">todo!</span>();
@@ -277,22 +277,22 @@ adding a new associated type to <code>trait Config</code>.</p>
 }</code></pre></div>
 <p>Finally, at the runtime, any implementation of <a href="../../../frame_support/traits/dispatch/trait.EnsureOrigin.html" title="trait frame_support::traits::dispatch::EnsureOrigin"><code>frame::traits::EnsureOrigin</code></a> can be passed.</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>pallet_with_external_origin::Config <span class="kw">for </span>Runtime {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>barrel_with_external_origin::Config <span class="kw">for </span>Runtime {
 	<span class="kw">type </span>ExternalOrigin = EnsureSigned&lt;&lt;<span class="self">Self </span><span class="kw">as </span>frame_system::Config&gt;::AccountId&gt;;
 }</code></pre></div>
 <p>Indeed, some of these implementations of <a href="../../../frame_support/traits/dispatch/trait.EnsureOrigin.html" title="trait frame_support::traits::dispatch::EnsureOrigin"><code>frame::traits::EnsureOrigin</code></a> are similar to the ones
 that we know about: <a href="../../../frame_system/struct.EnsureSigned.html" title="struct frame_system::EnsureSigned"><code>frame::runtime::prelude::EnsureSigned</code></a>,
 <a href="../../../frame_system/struct.EnsureSignedBy.html" title="struct frame_system::EnsureSignedBy"><code>frame::runtime::prelude::EnsureSignedBy</code></a>, <a href="../../../frame_system/struct.EnsureRoot.html" title="struct frame_system::EnsureRoot"><code>frame::runtime::prelude::EnsureRoot</code></a>,
 <a href="../../../frame_system/struct.EnsureNone.html" title="struct frame_system::EnsureNone"><code>frame::runtime::prelude::EnsureNone</code></a>, etc. But, there are also many more that are not known
-to us, and are defined in other pallets.</p>
-<p>For example, <a href="../../../pallet_collective/index.html" title="mod pallet_collective"><code>pallet_collective</code></a> defines <a href="../../../pallet_collective/struct.EnsureMember.html" title="struct pallet_collective::EnsureMember"><code>pallet_collective::EnsureMember</code></a> and
-<a href="../../../pallet_collective/struct.EnsureProportionMoreThan.html" title="struct pallet_collective::EnsureProportionMoreThan"><code>pallet_collective::EnsureProportionMoreThan</code></a> and many more, which is exactly what we alluded
+to us, and are defined in other barrels.</p>
+<p>For example, <a href="../../../barrel_collective/index.html" title="mod barrel_collective"><code>barrel_collective</code></a> defines <a href="../../../barrel_collective/struct.EnsureMember.html" title="struct barrel_collective::EnsureMember"><code>barrel_collective::EnsureMember</code></a> and
+<a href="../../../barrel_collective/struct.EnsureProportionMoreThan.html" title="struct barrel_collective::EnsureProportionMoreThan"><code>barrel_collective::EnsureProportionMoreThan</code></a> and many more, which is exactly what we alluded
 to earlier in this document.</p>
 <p>Make sure to check the full list of <a href="../../../frame_support/traits/dispatch/trait.EnsureOrigin.html#implementors" title="trait frame_support::traits::dispatch::EnsureOrigin">implementors of
 <code>EnsureOrigin</code></a> for more inspiration.</p>
 <h3 id="obtaining-abstract-origins"><a class="doc-anchor" href="#obtaining-abstract-origins">§</a>Obtaining Abstract Origins</h3>
-<p>So far we have learned that FRAME pallets can assert on custom and abstract origin types,
-whether they are defined within the pallet or not. But how can we obtain these abstract origins?</p>
+<p>So far we have learned that FRAME barrels can assert on custom and abstract origin types,
+whether they are defined within the barrel or not. But how can we obtain these abstract origins?</p>
 <blockquote>
 <p>All extrinsics that come from the outer world can generally only be obtained as either
 <code>signed</code> or <code>none</code> origin.</p>
@@ -302,13 +302,13 @@ dispatched within the runtime.</p>
 <h3 id="further-references"><a class="doc-anchor" href="#further-references">§</a>Further References</h3>
 <ul>
 <li><a href="https://youtu.be/j7b8Upipmeg?si=83_XUgYuJxMwWX4g&t=195">Gavin Wood’s speech about FRAME features at Protocol Berg 2023.</a></li>
-<li><a href="https://substrate.stackexchange.com/questions/10992/how-do-you-find-the-public-key-for-the-medium-spender-track-origin">A related StackExchange question.</a></li>
+<li><a href="https://matter.stackexchange.com/questions/10992/how-do-you-find-the-public-key-for-the-medium-spender-track-origin">A related StackExchange question.</a></li>
 </ul>
 <div class="footnotes"><hr><ol><li id="fn1"><p>Inherents are essentially unsigned extrinsics that need an <a href="../../../frame_system/fn.ensure_none.html" title="fn frame_system::ensure_none"><code>frame_system::ensure_none</code></a>
-origin check, and through the virtue of being an inherent, are agreed upon by all validators.&nbsp;<a href="#fnref1">↩</a></p></li></ol></div></div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="pallet_for_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin::pallet_for_origin">pallet_for_origin</a></div><div class="desc docblock-short">The <code>pallet</code> module in each FRAME pallet hosts the most important items needed
-to construct this pallet.</div></li><li><div class="item-name"><a class="mod" href="pallet_with_custom_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin::pallet_with_custom_origin">pallet_with_custom_origin</a></div><div class="desc docblock-short">The <code>pallet</code> module in each FRAME pallet hosts the most important items needed
-to construct this pallet.</div></li><li><div class="item-name"><a class="mod" href="pallet_with_external_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin::pallet_with_external_origin">pallet_with_external_origin</a></div><div class="desc docblock-short">The <code>pallet</code> module in each FRAME pallet hosts the most important items needed
-to construct this pallet.</div></li><li><div class="item-name"><a class="mod" href="runtime_for_external_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin::runtime_for_external_origin">runtime_for_external_origin</a></div></li><li><div class="item-name"><a class="mod" href="runtime_for_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin::runtime_for_origin">runtime_for_origin</a></div></li></ul></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+origin check, and through the virtue of being an inherent, are agreed upon by all validators.&nbsp;<a href="#fnref1">↩</a></p></li></ol></div></div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="barrel_for_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin::barrel_for_origin">barrel_for_origin</a></div><div class="desc docblock-short">The <code>barrel</code> module in each FRAME barrel hosts the most important items needed
+to construct this barrel.</div></li><li><div class="item-name"><a class="mod" href="barrel_with_custom_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin::barrel_with_custom_origin">barrel_with_custom_origin</a></div><div class="desc docblock-short">The <code>barrel</code> module in each FRAME barrel hosts the most important items needed
+to construct this barrel.</div></li><li><div class="item-name"><a class="mod" href="barrel_with_external_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin::barrel_with_external_origin">barrel_with_external_origin</a></div><div class="desc docblock-short">The <code>barrel</code> module in each FRAME barrel hosts the most important items needed
+to construct this barrel.</div></li><li><div class="item-name"><a class="mod" href="runtime_for_external_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin::runtime_for_external_origin">runtime_for_external_origin</a></div></li><li><div class="item-name"><a class="mod" href="runtime_for_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin::runtime_for_origin">runtime_for_origin</a></div></li></ul></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

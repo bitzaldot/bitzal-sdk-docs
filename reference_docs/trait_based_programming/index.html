@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Learn how Substrate and FRAME use traits and associated types to make modules generic in a type-safe manner."><title>bitzal_sdk_docs::reference_docs::trait_based_programming - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><script id="default-settings" data-theme="ayu" data-use_system_theme="false"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bitzal_sdk_docs" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.0 (aedd173a2 2024-03-17)" data-channel="1.77.0" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js"><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer="" src="../sidebar-items.js"></script><script defer="" src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="icon" href="../../../../../favicon.ico"><script>
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Learn how Matter and FRAME use traits and associated types to make modules generic in a type-safe manner."><title>bitzal_sdk_docs::reference_docs::trait_based_programming - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><script id="default-settings" data-theme="ayu" data-use_system_theme="false"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bitzal_sdk_docs" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.0 (aedd173a2 2024-03-17)" data-channel="1.77.0" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js"><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer="" src="../sidebar-items.js"></script><script defer="" src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="icon" href="../../../../../favicon.ico"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -147,7 +147,7 @@
 </style>
 
 <script async="" defer="" src="../../../../../latest.js"></script><noscript><img src="../../../../../latest.js" alt="" referrerpolicy="no-referrer-when-downgrade"></noscript></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button><a class="logo-container" href="../../index.html"><img src="../../../static.files/logos.PNG" alt=""></a></nav><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../index.html"><img src="../../../static.files/logos.PNG" alt="logo"></a><h2><a href="../../index.html">bitzal_sdk_docs</a><span class="version">0.0.1</span></h2></div><h2 class="location"><a href="#">Module trait_based_programming</a></h2><div class="sidebar-elems"><h2><a href="../index.html">In bitzal_sdk_docs::reference_docs</a></h2></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">bitzal_sdk_docs</a>::<wbr><a href="../index.html">reference_docs</a>::<wbr><a class="mod" href="#">trait_based_programming</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/bitzal_sdk_docs/reference_docs/trait_based_programming.rs.html#1-229">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open=""><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Learn how Substrate and FRAME use traits and associated types to make modules generic in a
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">bitzal_sdk_docs</a>::<wbr><a href="../index.html">reference_docs</a>::<wbr><a class="mod" href="#">trait_based_programming</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/bitzal_sdk_docs/reference_docs/trait_based_programming.rs.html#1-229">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open=""><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Learn how Matter and FRAME use traits and associated types to make modules generic in a
 type-safe manner.</p>
 <h2 id="trait-based-programming"><a class="doc-anchor" href="#trait-based-programming">§</a>Trait-based Programming</h2>
 <p>This document walks you over a peculiar way of using Rust’s <code>trait</code> items. This pattern is
@@ -157,36 +157,36 @@ into it.</p>
 <a href="https://doc.rust-lang.org/book/ch19-03-advanced-traits.html">Rust book’s Advanced Traits</a>
 section.
 Moreover, we use the [<code>frame::traits::Get</code>].</p>
-<p>First, imagine we are writing a FRAME pallet. We represent this pallet with a <code>struct Pallet</code>,
-and this pallet wants to implement the functionalities of that pallet, for example a simple
+<p>First, imagine we are writing a FRAME barrel. We represent this barrel with a <code>struct Barrel</code>,
+and this barrel wants to implement the functionalities of that barrel, for example a simple
 <code>transfer</code> function. For the sake of education, we are interested in having a <code>MinTransfer</code>
 amount, expressed as a [<code>frame::traits::Get</code>], which will dictate what is the minimum amount
 that can be transferred.</p>
 <p>We can foremost write this as simple as the following snippet:</p>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">mod </span>basic {
-	<span class="kw">struct </span>Pallet;
+	<span class="kw">struct </span>Barrel;
 
 	<span class="kw">type </span>AccountId = frame::deps::sp_runtime::AccountId32;
 	<span class="kw">type </span>Balance = u128;
 	<span class="kw">type </span>MinTransfer = frame::traits::ConstU128&lt;<span class="number">10</span>&gt;;
 
-	<span class="kw">impl </span>Pallet {
+	<span class="kw">impl </span>Barrel {
 		<span class="kw">fn </span>transfer(_from: AccountId, _to: AccountId, _amount: Balance) {
 			<span class="macro">todo!</span>()
 		}
 	}
 }</code></pre></div>
 <p>In this example, we use arbitrary choices for <code>AccountId</code>, <code>Balance</code> and the <code>MinTransfer</code> type.
-This works great for <strong>one team’s purposes</strong> but we have to remember that Substrate and FRAME
+This works great for <strong>one team’s purposes</strong> but we have to remember that Matter and FRAME
 are written as generic frameworks, intended to be highly configurable.</p>
 <p>In a broad sense, there are two avenues in exposing configurability:</p>
 <ol>
 <li>For <em>values</em> that need to be generic, for example <code>MinTransfer</code>, we attach them to the
-<code>Pallet</code> struct as fields:</li>
+<code>Barrel</code> struct as fields:</li>
 </ol>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">struct </span>Pallet {
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">struct </span>Barrel {
 	min_transfer: u128,
 }</code></pre></div>
 <ol start="2">
@@ -194,23 +194,23 @@ are written as generic frameworks, intended to be highly configurable.</p>
 as:</li>
 </ol>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">struct </span>Pallet&lt;AccountId&gt; {
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">struct </span>Barrel&lt;AccountId&gt; {
 	min_transfer: u128,
     _marker: std::marker::PhantomData&lt;AccountId&gt;,
 }</code></pre></div>
-<p>Substrate and FRAME, for various reasons (performance, correctness, type safety) has opted to
+<p>Matter and FRAME, for various reasons (performance, correctness, type safety) has opted to
 use <em>types</em> to declare both <em>values</em> and <em>types</em> as generic. This is the essence of why the
 <code>Get</code> trait exists.</p>
-<p>This would bring us to the second iteration of the pallet, which would look like:</p>
+<p>This would bring us to the second iteration of the barrel, which would look like:</p>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">mod </span>generic {
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-	<span class="kw">struct </span>Pallet&lt;AccountId, Balance, MinTransfer&gt; {
+	<span class="kw">struct </span>Barrel&lt;AccountId, Balance, MinTransfer&gt; {
 		_marker: std::marker::PhantomData&lt;(AccountId, Balance, MinTransfer)&gt;,
 	}
 
-	<span class="kw">impl</span>&lt;AccountId, Balance, MinTransfer&gt; Pallet&lt;AccountId, Balance, MinTransfer&gt;
+	<span class="kw">impl</span>&lt;AccountId, Balance, MinTransfer&gt; Barrel&lt;AccountId, Balance, MinTransfer&gt;
 	<span class="kw">where
 		</span>Balance: frame::traits::AtLeast32BitUnsigned,
 		MinTransfer: frame::traits::Get&lt;Balance&gt;,
@@ -225,13 +225,13 @@ use <em>types</em> to declare both <em>values</em> and <em>types</em> as generic
 <p>In this example, we managed to make all 3 of our types generic. Taking the example of the
 <code>AccountId</code>, one should read the above as following:</p>
 <blockquote>
-<p>The <code>Pallet</code> does not know what type <code>AccountId</code> concretely is, but it knows that it is
+<p>The <code>Barrel</code> does not know what type <code>AccountId</code> concretely is, but it knows that it is
 something that adheres to being <code>From&lt;[u8; 32]&gt;</code>.</p>
 </blockquote>
 <p>This method would work, but it suffers from two downsides:</p>
 <ol>
 <li>It is verbose, each <code>impl</code> block would have to reiterate all of the trait bounds.</li>
-<li>It cannot easily share/inherit generic types. Imagine multiple pallets wanting to be generic
+<li>It cannot easily share/inherit generic types. Imagine multiple barrels wanting to be generic
 over a single <code>AccountId</code>. There is no easy way to express that in this model.</li>
 </ol>
 <p>Finally, this brings us to using traits and associated types on traits to express the above.
@@ -244,7 +244,7 @@ Trait associated types have the benefit of:</p>
 <blockquote>
 <p>Interestingly, one downside of associated types is that declaring defaults on them is not
 stable yet. In the meantime, we have built our own custom mechanics around declaring defaults
-for associated types, see <a href="../../../pallet_default_config_example/index.html" title="mod pallet_default_config_example"><code>pallet_default_config_example</code></a>.</p>
+for associated types, see <a href="../../../barrel_default_config_example/index.html" title="mod barrel_default_config_example"><code>barrel_default_config_example</code></a>.</p>
 </blockquote>
 <p>The last iteration of our code would look like this:</p>
 
@@ -257,8 +257,8 @@ for associated types, see <a href="../../../pallet_default_config_example/index.
 		<span class="kw">type </span>MinTransfer: frame::traits::Get&lt;<span class="self">Self</span>::Balance&gt;;
 	}
 
-	<span class="kw">struct </span>Pallet&lt;T: Config&gt;(std::marker::PhantomData&lt;T&gt;);
-	<span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+	<span class="kw">struct </span>Barrel&lt;T: Config&gt;(std::marker::PhantomData&lt;T&gt;);
+	<span class="kw">impl</span>&lt;T: Config&gt; Barrel&lt;T&gt; {
 		<span class="kw">fn </span>transfer(_from: T::AccountId, _to: T::AccountId, amount: T::Balance) {
 			<span class="macro">assert!</span>(amount &gt;= T::MinTransfer::get());
 			<span class="macro">unimplemented!</span>();
@@ -266,7 +266,7 @@ for associated types, see <a href="../../../pallet_default_config_example/index.
 	}
 }</code></pre></div>
 <p>Notice how instead of having multiple generics, everything is generic over a single <code>&lt;T: Config&gt;</code>, and all types are fetched through <code>T</code>, for example <code>T::AccountId</code>, <code>T::MinTransfer</code>.</p>
-<p>Finally, imagine all pallets wanting to be generic over <code>AccountId</code>. This can be achieved by
+<p>Finally, imagine all barrels wanting to be generic over <code>AccountId</code>. This can be achieved by
 having individual <code>trait Configs</code> declare a shared <code>trait SystemConfig</code> as their
 <a href="https://doc.rust-lang.org/rust-by-example/trait/supertraits.html">supertrait</a>.</p>
 
@@ -282,8 +282,8 @@ having individual <code>trait Configs</code> declare a shared <code>trait System
 		<span class="kw">type </span>MinTransfer: frame::traits::Get&lt;<span class="self">Self</span>::Balance&gt;;
 	}
 
-	<span class="kw">pub struct </span>Pallet&lt;T: Config&gt;(std::marker::PhantomData&lt;T&gt;);
-	<span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+	<span class="kw">pub struct </span>Barrel&lt;T: Config&gt;(std::marker::PhantomData&lt;T&gt;);
+	<span class="kw">impl</span>&lt;T: Config&gt; Barrel&lt;T&gt; {
 		<span class="kw">fn </span>transfer(_from: T::AccountId, _to: T::AccountId, amount: T::Balance) {
 			<span class="macro">assert!</span>(amount &gt;= T::MinTransfer::get());
 			<span class="macro">unimplemented!</span>();
@@ -319,8 +319,8 @@ Consider the following example, in which we fetch the <code>type Balance</code> 
 		<span class="kw">type </span>Currency: CurrencyTrait;
 	}
 
-	<span class="kw">struct </span>Pallet&lt;T: Config&gt;(std::marker::PhantomData&lt;T&gt;);
-	<span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+	<span class="kw">struct </span>Barrel&lt;T: Config&gt;(std::marker::PhantomData&lt;T&gt;);
+	<span class="kw">impl</span>&lt;T: Config&gt; Barrel&lt;T&gt; {
 		<span class="kw">fn </span>transfer(
 			_from: T::AccountId,
 			_to: T::AccountId,
@@ -341,9 +341,9 @@ length of fully qualified syntax is a common pattern in FRAME.</p>
 	&lt;&lt;T <span class="kw">as </span>Config&gt;::Currency <span class="kw">as </span>Currency&lt;&lt;T <span class="kw">as </span>frame_system::Config&gt;::AccountId&gt;&gt;::Balance;</code></pre></div>
 <h3 id="additional-resources"><a class="doc-anchor" href="#additional-resources">§</a>Additional Resources</h3>
 <ul>
-<li><a href="https://github.com/bitzaldot/substrate/issues/13836">https://github.com/bitzaldot/substrate/issues/13836</a></li>
-<li><a href="https://www.youtube.com/watch?v=6cp10jVWNl4">Substrate Seminar - Traits and Generic Types</a></li>
-<li><a href="https://substrate.stackexchange.com/questions/2228/type-casting-to-trait-t-as-config">https://substrate.stackexchange.com/questions/2228/type-casting-to-trait-t-as-config</a></li>
+<li><a href="https://github.com/bitzaldot/matter/issues/13836">https://github.com/bitzaldot/matter/issues/13836</a></li>
+<li><a href="https://www.youtube.com/watch?v=6cp10jVWNl4">Matter Seminar - Traits and Generic Types</a></li>
+<li><a href="https://matter.stackexchange.com/questions/2228/type-casting-to-trait-t-as-config">https://matter.stackexchange.com/questions/2228/type-casting-to-trait-t-as-config</a></li>
 </ul>
 </div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 

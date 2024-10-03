@@ -157,10 +157,10 @@ conciseness.</p>
 </blockquote>
 <p>Let’s begin by starting to store a <code>NewType</code> in a storage item:</p>
 
-<div class="example-wrap compile_fail"><a href="#" class="tooltip" title="This example deliberately fails to compile">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet]
-</span><span class="kw">pub mod </span>pallet {
+<div class="example-wrap compile_fail"><a href="#" class="tooltip" title="This example deliberately fails to compile">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel]
+</span><span class="kw">pub mod </span>barrel {
 	<span class="kw">pub struct </span>NewType(u32);
-	<span class="attr">#[pallet::storage]
+	<span class="attr">#[barrel::storage]
 	</span><span class="kw">pub type </span>Something&lt;T&gt; = StorageValue&lt;<span class="kw">_</span>, NewType&gt;;
 }</code></pre></div>
 <p>This raises a number of compiler errors, like:</p>
@@ -171,29 +171,29 @@ StorageInfoTrait`
 <p>This implies the following set of traits that need to be derived for a type to be stored in
 <code>frame</code> storage:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet]
-</span><span class="kw">pub mod </span>pallet {
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel]
+</span><span class="kw">pub mod </span>barrel {
 	<span class="attr">#[derive(codec::Encode, codec::Decode, codec::MaxEncodedLen, scale_info::TypeInfo)]
 	</span><span class="kw">pub struct </span>NewType(u32);
 
-	<span class="attr">#[pallet::storage]
+	<span class="attr">#[barrel::storage]
 	</span><span class="kw">pub type </span>Something&lt;T&gt; = StorageValue&lt;<span class="kw">_</span>, NewType&gt;;
 }</code></pre></div>
 <p>Next, let’s look at how this will differ if we are to store a type that is derived from <code>T</code> in
-storage, such as <a href="../../../frame_system/pallet_prelude/type.BlockNumberFor.html" title="type frame_system::pallet_prelude::BlockNumberFor"><code>frame::prelude::BlockNumberFor</code></a>:</p>
+storage, such as <a href="../../../frame_system/barrel_prelude/type.BlockNumberFor.html" title="type frame_system::barrel_prelude::BlockNumberFor"><code>frame::prelude::BlockNumberFor</code></a>:</p>
 
-<div class="example-wrap compile_fail"><a href="#" class="tooltip" title="This example deliberately fails to compile">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet]
-</span><span class="kw">pub mod </span>pallet {
+<div class="example-wrap compile_fail"><a href="#" class="tooltip" title="This example deliberately fails to compile">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel]
+</span><span class="kw">pub mod </span>barrel {
 	<span class="attr">#[derive(codec::Encode, codec::Decode, codec::MaxEncodedLen, scale_info::TypeInfo)]
 	</span><span class="kw">pub struct </span>NewType&lt;T: Config&gt;(BlockNumberFor&lt;T&gt;);
 
-	<span class="attr">#[pallet::storage]
+	<span class="attr">#[barrel::storage]
 	</span><span class="kw">pub type </span>Something&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, NewType&lt;T&gt;&gt;;
 }</code></pre></div>
 <p>Surprisingly, this will also raise a number of errors, like:</p>
 <div class="example-wrap"><pre class="language-text"><code>the trait `TypeInfo` is not implemented for `T`, which is required
-by`frame_support::pallet_prelude::StorageValue&lt;pallet_2::_GeneratedPrefixForStorageSomething&lt;T&gt;,
-pallet_2::NewType&lt;T&gt;&gt;:StorageEntryMetadataBuilder
+by`frame_support::barrel_prelude::StorageValue&lt;barrel_2::_GeneratedPrefixForStorageSomething&lt;T&gt;,
+barrel_2::NewType&lt;T&gt;&gt;:StorageEntryMetadataBuilder
 </code></pre></div>
 <p>Why is that? The underlying reason is that the <code>TypeInfo</code> <code>derive</code> macro will only work for
 <code>NewType</code> if all of <code>NewType</code>’s generics also implement <code>TypeInfo</code>. This is not the case for <code>T</code>
@@ -205,26 +205,26 @@ in the example above.</p>
 attribute to <code>NewType</code>. This additional macro will instruct the <code>derive</code> to skip the bound on
 <code>T</code>.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet]
-</span><span class="kw">pub mod </span>pallet {
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel]
+</span><span class="kw">pub mod </span>barrel {
 	<span class="attr">#[derive(codec::Encode, codec::Decode, codec::MaxEncodedLen, scale_info::TypeInfo)]
 	#[scale_info(skip_type_params(T))]
 	</span><span class="kw">pub struct </span>NewType&lt;T: Config&gt;(BlockNumberFor&lt;T&gt;);
 
-	<span class="attr">#[pallet::storage]
+	<span class="attr">#[barrel::storage]
 	</span><span class="kw">pub type </span>Something&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, NewType&lt;T&gt;&gt;;
 }</code></pre></div>
 <p>Next, let’s say we wish to store <code>NewType</code> as <a href="../../../frame_support/storage/types/struct.ValueQuery.html" title="struct frame_support::storage::types::ValueQuery"><code>frame::prelude::ValueQuery</code></a>, which means it
 must also implement <code>Default</code>. This should be as simple as adding <code>derive(Default)</code> to it,
 right?</p>
 
-<div class="example-wrap compile_fail"><a href="#" class="tooltip" title="This example deliberately fails to compile">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet]
-</span><span class="kw">pub mod </span>pallet {
+<div class="example-wrap compile_fail"><a href="#" class="tooltip" title="This example deliberately fails to compile">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel]
+</span><span class="kw">pub mod </span>barrel {
 	<span class="attr">#[derive(codec::Encode, codec::Decode, codec::MaxEncodedLen, scale_info::TypeInfo, Default)]
 	#[scale_info(skip_type_params(T))]
 	</span><span class="kw">pub struct </span>NewType&lt;T: Config&gt;(BlockNumberFor&lt;T&gt;);
 
-	<span class="attr">#[pallet::storage]
+	<span class="attr">#[barrel::storage]
 	</span><span class="kw">pub type </span>Something&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, NewType&lt;T&gt;, ValueQuery&gt;;
 }</code></pre></div>
 <p>Under the hood, the expansion of the <code>derive(Default)</code> will suffer from the same restriction as
@@ -247,8 +247,8 @@ work nicely on top of structs that are generic over <code>T: Config</code>. Thes
 or clone it.</p>
 <p>We can fix the following example by using <a href="../../../frame_support_procedural/derive.DefaultNoBound.html" title="derive frame_support_procedural::DefaultNoBound"><code>frame::prelude::DefaultNoBound</code></a>.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet]
-</span><span class="kw">pub mod </span>pallet {
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel]
+</span><span class="kw">pub mod </span>barrel {
 	<span class="attr">#[derive(
 		codec::Encode,
 		codec::Decode,
@@ -259,30 +259,30 @@ or clone it.</p>
 	#[scale_info(skip_type_params(T))]
 	</span><span class="kw">pub struct </span>NewType&lt;T:Config&gt;(BlockNumberFor&lt;T&gt;);
 
-	<span class="attr">#[pallet::storage]
+	<span class="attr">#[barrel::storage]
 	</span><span class="kw">pub type </span>Something&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, NewType&lt;T&gt;, ValueQuery&gt;;
 }</code></pre></div>
 <p>Finally, if a custom type that is provided through <code>Config</code> is to be stored in the storage, it
 is subject to the same trait requirements. The following does not work:</p>
 
-<div class="example-wrap compile_fail"><a href="#" class="tooltip" title="This example deliberately fails to compile">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet]
-</span><span class="kw">pub mod </span>pallet {
+<div class="example-wrap compile_fail"><a href="#" class="tooltip" title="This example deliberately fails to compile">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel]
+</span><span class="kw">pub mod </span>barrel {
 	<span class="kw">use </span>frame::prelude::<span class="kw-2">*</span>;
-	<span class="attr">#[pallet::config]
+	<span class="attr">#[barrel::config]
 	</span><span class="kw">pub trait </span>Config: frame_system::Config {
 		<span class="kw">type </span>CustomType;
 	}
-	<span class="attr">#[pallet::pallet]
-	</span><span class="kw">pub struct </span>Pallet&lt;T&gt;(<span class="kw">_</span>);
-	<span class="attr">#[pallet::storage]
+	<span class="attr">#[barrel::barrel]
+	</span><span class="kw">pub struct </span>Barrel&lt;T&gt;(<span class="kw">_</span>);
+	<span class="attr">#[barrel::storage]
 	</span><span class="kw">pub type </span>Something&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, T::CustomType&gt;;
 }</code></pre></div>
 <p>But adding the right trait bounds will fix it.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet]
-</span><span class="kw">pub mod </span>pallet {
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel]
+</span><span class="kw">pub mod </span>barrel {
 	<span class="kw">use </span>frame::prelude::<span class="kw-2">*</span>;
-	<span class="attr">#[pallet::config]
+	<span class="attr">#[barrel::config]
 	</span><span class="kw">pub trait </span>Config: frame_system::Config {
 		<span class="kw">type </span>CustomType: codec::FullCodec
 			+ codec::MaxEncodedLen
@@ -290,9 +290,9 @@ is subject to the same trait requirements. The following does not work:</p>
 			+ Debug
 			+ Default;
 	}
-	<span class="attr">#[pallet::pallet]
-	</span><span class="kw">pub struct </span>Pallet&lt;T&gt;(<span class="kw">_</span>);
-	<span class="attr">#[pallet::storage]
+	<span class="attr">#[barrel::barrel]
+	</span><span class="kw">pub struct </span>Barrel&lt;T&gt;(<span class="kw">_</span>);
+	<span class="attr">#[barrel::storage]
 	</span><span class="kw">pub type </span>Something&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, T::CustomType&gt;;
 }</code></pre></div>
 </div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>

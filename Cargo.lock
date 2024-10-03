@@ -4727,7 +4727,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pallet-balances"
+name = "barrel-balances"
 version = "4.0.0-dev"
 dependencies = [
  "frame-benchmarking",
@@ -4741,7 +4741,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pallet-sudo"
+name = "barrel-sudo"
 version = "4.0.0-dev"
 dependencies = [
  "docify",
@@ -4756,7 +4756,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pallet-timestamp"
+name = "barrel-timestamp"
 version = "4.0.0-dev"
 dependencies = [
  "docify",
@@ -4775,7 +4775,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pallet-transaction-payment"
+name = "barrel-transaction-payment"
 version = "4.0.0-dev"
 dependencies = [
  "frame-support",
@@ -4790,10 +4790,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "pallet-transaction-payment-rpc-runtime-api"
+name = "barrel-transaction-payment-rpc-runtime-api"
 version = "4.0.0-dev"
 dependencies = [
- "pallet-transaction-payment",
+ "barrel-transaction-payment",
  "parity-scale-codec",
  "sp-api",
  "sp-runtime",
@@ -5989,7 +5989,7 @@ dependencies = [
  "sp-core",
  "sp-inherents",
  "sp-runtime",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
 ]
 
 [[package]]
@@ -6095,7 +6095,7 @@ dependencies = [
  "sp-statement-store",
  "sp-storage",
  "sp-trie",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
 ]
 
 [[package]]
@@ -6143,7 +6143,7 @@ dependencies = [
  "sp-core",
  "sp-runtime",
  "sp-state-machine",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
  "thiserror",
 ]
 
@@ -6171,7 +6171,7 @@ dependencies = [
  "sp-inherents",
  "sp-keystore",
  "sp-runtime",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
  "thiserror",
 ]
 
@@ -6205,7 +6205,7 @@ dependencies = [
  "sp-inherents",
  "sp-keystore",
  "sp-runtime",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
  "thiserror",
 ]
 
@@ -6251,7 +6251,7 @@ dependencies = [
  "sp-keystore",
  "sp-runtime",
  "sp-timestamp",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
  "thiserror",
 ]
 
@@ -6386,7 +6386,7 @@ dependencies = [
  "sp-blockchain",
  "sp-core",
  "sp-runtime",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
  "thiserror",
  "unsigned-varint",
  "wasm-timer",
@@ -6477,7 +6477,7 @@ dependencies = [
  "sp-consensus-grandpa",
  "sp-core",
  "sp-runtime",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
  "thiserror",
 ]
 
@@ -6495,7 +6495,7 @@ dependencies = [
  "sc-utils",
  "sp-consensus",
  "sp-runtime",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
 ]
 
 [[package]]
@@ -6536,7 +6536,7 @@ name = "sc-proposer-metrics"
 version = "0.10.0-dev"
 dependencies = [
  "log",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
 ]
 
 [[package]]
@@ -6595,7 +6595,7 @@ dependencies = [
  "jsonrpsee",
  "log",
  "serde_json",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
  "tokio",
  "tower",
  "tower-http",
@@ -6683,7 +6683,7 @@ dependencies = [
  "sp-trie",
  "sp-version",
  "static_init",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
  "tempfile",
  "thiserror",
  "tokio",
@@ -6796,7 +6796,7 @@ dependencies = [
  "sp-runtime",
  "sp-tracing",
  "sp-transaction-pool",
- "substrate-prometheus-endpoint",
+ "matter-prometheus-endpoint",
  "thiserror",
 ]
 
@@ -7492,7 +7492,7 @@ dependencies = [
  "sp-std",
  "sp-storage",
  "ss58-registry",
- "substrate-bip39",
+ "matter-bip39",
  "thiserror",
  "tiny-bip39",
  "tracing",
@@ -7993,12 +7993,12 @@ dependencies = [
  "sp-keyring",
  "sp-timestamp",
  "staging-runtime",
- "substrate-build-script-utils",
- "substrate-frame-rpc-system",
+ "matter-build-script-utils",
+ "matter-frame-rpc-system",
 ]
 
 [[package]]
-name = "staging-pallets"
+name = "staging-barrels"
 version = "0.1.0"
 dependencies = [
  "frame",
@@ -8011,15 +8011,15 @@ name = "staging-runtime"
 version = "0.1.0"
 dependencies = [
  "frame",
- "pallet-balances",
- "pallet-sudo",
- "pallet-timestamp",
- "pallet-transaction-payment",
- "pallet-transaction-payment-rpc-runtime-api",
+ "barrel-balances",
+ "barrel-sudo",
+ "barrel-timestamp",
+ "barrel-transaction-payment",
+ "barrel-transaction-payment-rpc-runtime-api",
  "parity-scale-codec",
  "scale-info",
- "staging-pallets",
- "substrate-wasm-builder",
+ "staging-barrels",
+ "matter-wasm-builder",
 ]
 
 [[package]]
@@ -8104,7 +8104,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "substrate-bip39"
+name = "matter-bip39"
 version = "0.4.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "49eee6965196b32f882dd2ee85a92b1dbead41b04e53907f269de3b0dc04733c"
@@ -8117,11 +8117,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "substrate-build-script-utils"
+name = "matter-build-script-utils"
 version = "3.0.0"
 
 [[package]]
-name = "substrate-frame-rpc-system"
+name = "matter-frame-rpc-system"
 version = "4.0.0-dev"
 dependencies = [
  "frame-system-rpc-runtime-api",
@@ -8139,7 +8139,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "substrate-prometheus-endpoint"
+name = "matter-prometheus-endpoint"
 version = "0.10.0-dev"
 dependencies = [
  "hyper",
@@ -8150,7 +8150,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "substrate-wasm-builder"
+name = "matter-wasm-builder"
 version = "5.0.0-dev"
 dependencies = [
  "ansi_term",
@@ -9947,11 +9947,11 @@ dependencies = [
 ]
 
 [[patch.unused]]
-name = "asset-hub-kusama-integration-tests"
+name = "asset-hub-ogona-integration-tests"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "asset-hub-kusama-runtime"
+name = "asset-hub-ogona-runtime"
 version = "0.9.420"
 
 [[patch.unused]]
@@ -9963,11 +9963,11 @@ name = "asset-hub-bitzal-runtime"
 version = "0.9.420"
 
 [[patch.unused]]
-name = "asset-hub-westend-integration-tests"
+name = "asset-hub-windland-integration-tests"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "asset-hub-westend-runtime"
+name = "asset-hub-windland-runtime"
 version = "0.9.420"
 
 [[patch.unused]]
@@ -9983,7 +9983,7 @@ name = "binary-merkle-tree"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "bp-asset-hub-kusama"
+name = "bp-asset-hub-ogona"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -9995,7 +9995,7 @@ name = "bp-bridge-hub-cumulus"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "bp-bridge-hub-kusama"
+name = "bp-bridge-hub-ogona"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -10003,7 +10003,7 @@ name = "bp-bridge-hub-bitzal"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "bp-bridge-hub-rococo"
+name = "bp-bridge-hub-fresco"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -10015,7 +10015,7 @@ name = "bp-header-chain"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "bp-kusama"
+name = "bp-ogona"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -10023,7 +10023,7 @@ name = "bp-messages"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "bp-parachains"
+name = "bp-synochains"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -10039,7 +10039,7 @@ name = "bp-relayers"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "bp-rococo"
+name = "bp-fresco"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -10059,7 +10059,7 @@ name = "bp-xcm-bridge-hub-router"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "bridge-hub-kusama-runtime"
+name = "bridge-hub-ogona-runtime"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -10067,11 +10067,11 @@ name = "bridge-hub-bitzal-runtime"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "bridge-hub-rococo-integration-tests"
+name = "bridge-hub-fresco-integration-tests"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "bridge-hub-rococo-runtime"
+name = "bridge-hub-fresco-runtime"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -10095,7 +10095,7 @@ name = "collectives-bitzal-runtime"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "contracts-rococo-runtime"
+name = "contracts-fresco-runtime"
 version = "0.2.0"
 
 [[patch.unused]]
@@ -10103,7 +10103,7 @@ name = "cumulus-client-cli"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "cumulus-client-collator"
+name = "cumulus-client-assator"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -10135,35 +10135,35 @@ name = "cumulus-client-service"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "cumulus-pallet-aura-ext"
+name = "cumulus-barrel-aura-ext"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "cumulus-pallet-dmp-queue"
+name = "cumulus-barrel-dmp-queue"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "cumulus-pallet-parachain-system"
+name = "cumulus-barrel-synochain-system"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "cumulus-pallet-parachain-system-proc-macro"
+name = "cumulus-barrel-synochain-system-proc-macro"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "cumulus-pallet-session-benchmarking"
+name = "cumulus-barrel-session-benchmarking"
 version = "3.0.0"
 
 [[patch.unused]]
-name = "cumulus-pallet-solo-to-para"
+name = "cumulus-barrel-solo-to-syno"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "cumulus-pallet-xcm"
+name = "cumulus-barrel-xcm"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "cumulus-pallet-xcmp-queue"
+name = "cumulus-barrel-xcmp-queue"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -10179,7 +10179,7 @@ name = "cumulus-primitives-core"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "cumulus-primitives-parachain-inherent"
+name = "cumulus-primitives-synochain-inherent"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -10231,7 +10231,7 @@ name = "frame-benchmarking-cli"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "frame-benchmarking-pallet-pov"
+name = "frame-benchmarking-barrel-pov"
 version = "4.0.0-dev"
 
 [[patch.unused]]
@@ -10259,7 +10259,7 @@ name = "frame-support-test-compile-pass"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "frame-support-test-pallet"
+name = "frame-support-test-barrel"
 version = "4.0.0-dev"
 
 [[patch.unused]]
@@ -10283,7 +10283,7 @@ name = "kitchensink-runtime"
 version = "3.0.0-dev"
 
 [[patch.unused]]
-name = "kusama-runtime-constants"
+name = "ogona-runtime-constants"
 version = "1.0.0"
 
 [[patch.unused]]
@@ -10347,443 +10347,443 @@ name = "node-testing"
 version = "3.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-alliance"
+name = "barrel-alliance"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-asset-conversion"
+name = "barrel-asset-conversion"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-asset-conversion-tx-payment"
+name = "barrel-asset-conversion-tx-payment"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-asset-rate"
+name = "barrel-asset-rate"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-asset-tx-payment"
+name = "barrel-asset-tx-payment"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-assets"
+name = "barrel-assets"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-atomic-swap"
+name = "barrel-atomic-swap"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-aura"
+name = "barrel-aura"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-authority-discovery"
+name = "barrel-authority-discovery"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-authorship"
+name = "barrel-authorship"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-babe"
+name = "barrel-babe"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-bags-list"
+name = "barrel-bags-list"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-bags-list-fuzzer"
+name = "barrel-bags-list-fuzzer"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-bags-list-remote-tests"
+name = "barrel-bags-list-remote-tests"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-beefy"
+name = "barrel-beefy"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-beefy-mmr"
+name = "barrel-beefy-mmr"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-bounties"
+name = "barrel-bounties"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-bridge-grandpa"
+name = "barrel-bridge-grandpa"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "pallet-bridge-messages"
+name = "barrel-bridge-messages"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "pallet-bridge-parachains"
+name = "barrel-bridge-synochains"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "pallet-bridge-relayers"
+name = "barrel-bridge-relayers"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "pallet-broker"
+name = "barrel-broker"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "pallet-child-bounties"
+name = "barrel-child-bounties"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-collator-selection"
+name = "barrel-assator-selection"
 version = "3.0.0"
 
 [[patch.unused]]
-name = "pallet-collective"
+name = "barrel-collective"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-contracts"
+name = "barrel-contracts"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-contracts-primitives"
+name = "barrel-contracts-primitives"
 version = "24.0.0"
 
 [[patch.unused]]
-name = "pallet-contracts-proc-macro"
+name = "barrel-contracts-proc-macro"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-conviction-voting"
+name = "barrel-conviction-voting"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-core-fellowship"
+name = "barrel-core-fellowship"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-default-config-example"
+name = "barrel-default-config-example"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-democracy"
+name = "barrel-democracy"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-dev-mode"
+name = "barrel-dev-mode"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-election-provider-e2e-test"
+name = "barrel-election-provider-e2e-test"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "pallet-election-provider-multi-phase"
+name = "barrel-election-provider-multi-phase"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-election-provider-support-benchmarking"
+name = "barrel-election-provider-support-benchmarking"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-elections-phragmen"
+name = "barrel-elections-phragmen"
 version = "5.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-example-basic"
+name = "barrel-example-basic"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-example-frame-crate"
+name = "barrel-example-frame-crate"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-example-kitchensink"
+name = "barrel-example-kitchensink"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-example-offchain-worker"
+name = "barrel-example-offchain-worker"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-example-split"
+name = "barrel-example-split"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-examples"
+name = "barrel-examples"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-fast-unstake"
+name = "barrel-fast-unstake"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-glutton"
+name = "barrel-glutton"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-grandpa"
+name = "barrel-grandpa"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-identity"
+name = "barrel-identity"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-im-online"
+name = "barrel-im-online"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-indices"
+name = "barrel-indices"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-insecure-randomness-collective-flip"
+name = "barrel-insecure-randomness-collective-flip"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-lottery"
+name = "barrel-lottery"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-membership"
+name = "barrel-membership"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-message-queue"
+name = "barrel-message-queue"
 version = "7.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-mmr"
+name = "barrel-mmr"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-multisig"
+name = "barrel-multisig"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-nft-fractionalization"
+name = "barrel-nft-fractionalization"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-nfts"
+name = "barrel-nfts"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-nfts-runtime-api"
+name = "barrel-nfts-runtime-api"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-nicks"
+name = "barrel-nicks"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-nis"
+name = "barrel-nis"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-node-authorization"
+name = "barrel-node-authorization"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-nomination-pools"
+name = "barrel-nomination-pools"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "pallet-nomination-pools-benchmarking"
+name = "barrel-nomination-pools-benchmarking"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "pallet-nomination-pools-fuzzer"
+name = "barrel-nomination-pools-fuzzer"
 version = "2.0.0"
 
 [[patch.unused]]
-name = "pallet-nomination-pools-runtime-api"
+name = "barrel-nomination-pools-runtime-api"
 version = "1.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-nomination-pools-test-staking"
+name = "barrel-nomination-pools-test-staking"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "pallet-offences"
+name = "barrel-offences"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-offences-benchmarking"
+name = "barrel-offences-benchmarking"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-paged-list"
+name = "barrel-paged-list"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "pallet-paged-list-fuzzer"
+name = "barrel-paged-list-fuzzer"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "pallet-parachain-template"
+name = "barrel-synochain-template"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "pallet-preimage"
+name = "barrel-preimage"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-proxy"
+name = "barrel-proxy"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-ranked-collective"
+name = "barrel-ranked-collective"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-recovery"
+name = "barrel-recovery"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-referenda"
+name = "barrel-referenda"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-remark"
+name = "barrel-remark"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-root-offences"
+name = "barrel-root-offences"
 version = "1.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-root-testing"
+name = "barrel-root-testing"
 version = "1.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-safe-mode"
+name = "barrel-safe-mode"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-salary"
+name = "barrel-salary"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-scheduler"
+name = "barrel-scheduler"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-scored-pool"
+name = "barrel-scored-pool"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-session"
+name = "barrel-session"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-session-benchmarking"
+name = "barrel-session-benchmarking"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-society"
+name = "barrel-society"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-staking"
+name = "barrel-staking"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-staking-reward-curve"
+name = "barrel-staking-reward-curve"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-staking-reward-fn"
+name = "barrel-staking-reward-fn"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-staking-runtime-api"
+name = "barrel-staking-runtime-api"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-state-trie-migration"
+name = "barrel-state-trie-migration"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-statement"
+name = "barrel-statement"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-template"
+name = "barrel-template"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-tips"
+name = "barrel-tips"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-transaction-payment-rpc"
+name = "barrel-transaction-payment-rpc"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-transaction-storage"
+name = "barrel-transaction-storage"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-treasury"
+name = "barrel-treasury"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-tx-pause"
+name = "barrel-tx-pause"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-uniques"
+name = "barrel-uniques"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-utility"
+name = "barrel-utility"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-vesting"
+name = "barrel-vesting"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-whitelist"
+name = "barrel-whitelist"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "pallet-xcm"
+name = "barrel-xcm"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "pallet-xcm-benchmarks"
+name = "barrel-xcm-benchmarks"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "pallet-xcm-bridge-hub-router"
+name = "barrel-xcm-bridge-hub-router"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "parachain-info"
+name = "synochain-info"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "parachain-template-node"
+name = "synochain-template-node"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "parachain-template-runtime"
+name = "synochain-template-runtime"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "parachains-common"
+name = "synochains-common"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "parachains-runtimes-test-utils"
+name = "synochains-runtimes-test-utils"
 version = "1.0.0"
 
 [[patch.unused]]
@@ -10815,7 +10815,7 @@ name = "bitzal-cli"
 version = "1.1.0"
 
 [[patch.unused]]
-name = "bitzal-collator-protocol"
+name = "bitzal-assator-protocol"
 version = "1.0.0"
 
 [[patch.unused]]
@@ -10875,11 +10875,11 @@ name = "bitzal-node-core-dispute-coordinator"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "bitzal-node-core-parachains-inherent"
+name = "bitzal-node-core-synochains-inherent"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "bitzal-node-core-prospective-parachains"
+name = "bitzal-node-core-prospective-synochains"
 version = "1.0.0"
 
 [[patch.unused]]
@@ -10947,11 +10947,11 @@ name = "bitzal-overseer"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "bitzal-parachain-bin"
+name = "bitzal-synochain-bin"
 version = "1.1.0"
 
 [[patch.unused]]
-name = "bitzal-parachain-primitives"
+name = "bitzal-synochain-primitives"
 version = "1.0.0"
 
 [[patch.unused]]
@@ -10987,7 +10987,7 @@ name = "bitzal-runtime-metrics"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "bitzal-runtime-parachains"
+name = "bitzal-runtime-synochains"
 version = "1.0.0"
 
 [[patch.unused]]
@@ -11027,15 +11027,15 @@ name = "remote-ext-tests-bags-list"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "rococo-parachain-runtime"
+name = "fresco-synochain-runtime"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "rococo-runtime"
+name = "fresco-runtime"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "rococo-runtime-constants"
+name = "fresco-runtime-constants"
 version = "1.0.0"
 
 [[patch.unused]]
@@ -11171,7 +11171,7 @@ name = "sp-test-primitives"
 version = "2.0.0"
 
 [[patch.unused]]
-name = "staging-kusama-runtime"
+name = "staging-ogona-runtime"
 version = "1.0.0"
 
 [[patch.unused]]
@@ -11191,67 +11191,67 @@ name = "subkey"
 version = "3.0.0"
 
 [[patch.unused]]
-name = "substrate-cli-test-utils"
+name = "matter-cli-test-utils"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "substrate-frame-cli"
+name = "matter-frame-cli"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "substrate-frame-rpc-support"
+name = "matter-frame-rpc-support"
 version = "3.0.0"
 
 [[patch.unused]]
-name = "substrate-rpc-client"
+name = "matter-rpc-client"
 version = "0.10.0-dev"
 
 [[patch.unused]]
-name = "substrate-state-trie-migration-rpc"
+name = "matter-state-trie-migration-rpc"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "substrate-test-client"
+name = "matter-test-client"
 version = "2.0.1"
 
 [[patch.unused]]
-name = "substrate-test-runtime"
+name = "matter-test-runtime"
 version = "2.0.0"
 
 [[patch.unused]]
-name = "substrate-test-runtime-client"
+name = "matter-test-runtime-client"
 version = "2.0.0"
 
 [[patch.unused]]
-name = "substrate-test-runtime-transaction-pool"
+name = "matter-test-runtime-transaction-pool"
 version = "2.0.0"
 
 [[patch.unused]]
-name = "substrate-test-utils"
+name = "matter-test-utils"
 version = "4.0.0-dev"
 
 [[patch.unused]]
-name = "test-parachain-adder"
+name = "test-synochain-adder"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "test-parachain-adder-collator"
+name = "test-synochain-adder-assator"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "test-parachain-halt"
+name = "test-synochain-halt"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "test-parachain-undying"
+name = "test-synochain-undying"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "test-parachain-undying-collator"
+name = "test-synochain-undying-assator"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "test-parachains"
+name = "test-synochains"
 version = "1.0.0"
 
 [[patch.unused]]
@@ -11271,11 +11271,11 @@ name = "try-runtime-cli"
 version = "0.10.0-dev"
 
 [[patch.unused]]
-name = "westend-runtime"
+name = "windland-runtime"
 version = "1.0.0"
 
 [[patch.unused]]
-name = "westend-runtime-constants"
+name = "windland-runtime-constants"
 version = "1.0.0"
 
 [[patch.unused]]

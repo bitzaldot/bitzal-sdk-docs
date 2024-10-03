@@ -218,16 +218,16 @@ what topics are already covered in this crate, and how you can build on top of t
 that they already pose, rather than repeating yourself</strong>.</p>
 </blockquote>
 <p>For more details see the <a href="https://github.com/bitzaldot/bitzal-sdk/blob/master/docs/contributor/DOCUMENTATION_GUIDELINES.md">latest documenting guidelines</a>.</p>
-<h5 id="example-explaining-palletcall"><a class="doc-anchor" href="#example-explaining-palletcall">§</a>Example: Explaining <code>#[pallet::call]</code></h5><details>
+<h5 id="example-explaining-barrelcall"><a class="doc-anchor" href="#example-explaining-barrelcall">§</a>Example: Explaining <code>#[barrel::call]</code></h5><details>
 <summary>
 Let's consider the seemingly simple example of explaining to someone dead-simple code of a FRAME
 call and see how we can use the above principles.
 </summary>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::pallet(dev_mode)]
-</span><span class="kw">pub mod </span>pallet {
-    <span class="attr">#[pallet::call]
-    </span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[frame::barrel(dev_mode)]
+</span><span class="kw">pub mod </span>barrel {
+    <span class="attr">#[barrel::call]
+    </span><span class="kw">impl</span>&lt;T: Config&gt; Barrel&lt;T&gt; {
         <span class="kw">pub fn </span>a_simple_call(origin: OriginFor&lt;T&gt;, data: u32) -&gt; DispatchResult {
             <span class="macro">ensure!</span>(data &gt; <span class="number">10</span>, <span class="string">"SomeStaticString"</span>);
             <span class="macro">todo!</span>();
@@ -237,7 +237,7 @@ call and see how we can use the above principles.
 <ul>
 <li>Before even getting started, what is with all of this <code>&lt;T: Config&gt;</code>? We link to
 <a href="../reference_docs/trait_based_programming/index.html" title="mod bitzal_sdk_docs::reference_docs::trait_based_programming"><code>crate::reference_docs::trait_based_programming</code></a>.</li>
-<li>First, the name. Why is this called <code>pallet::call</code>? This goes back to <code>enum Call</code>, which is
+<li>First, the name. Why is this called <code>barrel::call</code>? This goes back to <code>enum Call</code>, which is
 explained in <a href="../reference_docs/frame_runtime_types/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_runtime_types"><code>crate::reference_docs::frame_runtime_types</code></a>. Build on top of this!</li>
 <li>Then, what is <code>origin</code>? Just an account id? <a href="../reference_docs/frame_origin/index.html" title="mod bitzal_sdk_docs::reference_docs::frame_origin"><code>crate::reference_docs::frame_origin</code></a>.</li>
 <li>Then, what is <code>DispatchResult</code>? Why is this called <em>dispatch</em>? Probably something that can be
@@ -253,8 +253,8 @@ see <a href="../../sp_runtime/enum.DispatchError.html#impl-From%3C%26'static+str
 <p>Of course, all of this is not set in stone as a either/or rule. Sometimes, it is necessary to
 rephrase a concept in a new context.</p>
 </details>
-<h3 id="docssubstrateio"><a class="doc-anchor" href="#docssubstrateio">§</a><code>docs.substrate.io</code></h3>
-<p>This crate is meant to gradually replace <code>docs.substrate.io</code>. As any content is added here, the
+<h3 id="docsmatterio"><a class="doc-anchor" href="#docsmatterio">§</a><code>docs.matter.io</code></h3>
+<p>This crate is meant to gradually replace <code>docs.matter.io</code>. As any content is added here, the
 corresponding counter-part should be marked as deprecated, as described
 <a href="https://github.com/bitzaldot/bitzal-sdk-docs/issues/26">here</a>.</p>
 <h3 id="cratesio-and-publishing"><a class="doc-anchor" href="#cratesio-and-publishing">§</a><code>crates.io</code> and Publishing</h3>
@@ -270,7 +270,7 @@ RUSTDOCFLAGS=&quot;--html-in-header $(pwd)/docs/sdk/assets/header.html --extend-
 cargo doc -p bitzal-sdk-docs --no-deps --open
 </code></pre></div>
 <p>If even faster build time for docs is needed, you can temporarily remove most of the
-substrate/cumulus dependencies that are only used for linking purposes.</p>
+matter/cumulus dependencies that are only used for linking purposes.</p>
 <p>For more on local development, see <a href="../reference_docs/development_environment_advice/index.html" title="mod bitzal_sdk_docs::reference_docs::development_environment_advice"><code>crate::reference_docs::development_environment_advice</code></a>.</p>
 </div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 

@@ -197,7 +197,7 @@ list of signed extension:</p>
 	frame_system::CheckEra&lt;Runtime&gt;,
 	frame_system::CheckNonce&lt;Runtime&gt;,
 	frame_system::CheckWeight&lt;Runtime&gt;,
-	pallet_transaction_payment::ChargeTransactionPayment&lt;Runtime&gt;,
+	barrel_transaction_payment::ChargeTransactionPayment&lt;Runtime&gt;,
 	cumulus_primitives_storage_weight_reclaim::StorageWeightReclaim&lt;Runtime&gt;,
 	frame_metadata_hash_extension::CheckMetadataHash&lt;Runtime&gt;,
 );</code></pre></div>
@@ -219,17 +219,17 @@ not set, any transaction that requires the metadata hash is rejected with the er
 </div>
 <h4 id="enable-metadata-hash-generation"><a class="doc-anchor" href="#enable-metadata-hash-generation">§</a>Enable metadata hash generation</h4>
 <p>The metadata hash generation needs to be enabled when building the wasm binary. The
-<code>substrate-wasm-builder</code> supports this out of the box:</p>
+<code>matter-wasm-builder</code> supports this out of the box:</p>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[cfg(all(feature = <span class="string">"std"</span>, feature = <span class="string">"metadata-hash"</span>))]
 </span><span class="kw">fn </span>main() {
-	substrate_wasm_builder::WasmBuilder::init_with_defaults()
+	matter_wasm_builder::WasmBuilder::init_with_defaults()
 		.enable_metadata_hash(<span class="string">"UNIT"</span>, <span class="number">12</span>)
 		.build();
 }</code></pre></div>
 <blockquote>
 <p><strong>Note:</strong></p>
-<p>The <code>metadata-hash</code> feature needs to be enabled for the <code>substrate-wasm-builder</code> to enable the
+<p>The <code>metadata-hash</code> feature needs to be enabled for the <code>matter-wasm-builder</code> to enable the
 code for being able to generate the metadata hash. It is also recommended to put the metadata
 hash generation behind a feature in the runtime as shown above. The reason behind is that it
 adds a lot of code which increases the compile time and the generation itself also increases

@@ -4,31 +4,31 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-frame = { git = "https://github.com/bitzaldot/substrate.git", branch = "kiz-frame-api", default-features = false, features = ["runtime"] }
-pallets = { package = "step-4-pallets", path = "../pallets", default-features = false }
+frame = { git = "https://github.com/bitzaldot/matter.git", branch = "kiz-frame-api", default-features = false, features = ["runtime"] }
+barrels = { package = "step-4-barrels", path = "../barrels", default-features = false }
 
-# TODO: https://github.com/bitzaldot/substrate/issues/14145
-sp-api = { git = "https://github.com/bitzaldot/substrate.git", branch = "kiz-frame-api", default-features = false }
+# TODO: https://github.com/bitzaldot/matter/issues/14145
+sp-api = { git = "https://github.com/bitzaldot/matter.git", branch = "kiz-frame-api", default-features = false }
 
-# TODO: https://github.com/bitzaldot/substrate/issues/14127
+# TODO: https://github.com/bitzaldot/matter/issues/14127
 parity-scale-codec = { version = "3.0.0", default-features = false }
 scale-info = { version = "2.6.0", default-features = false }
 
 [build-dependencies]
-substrate-wasm-builder = { git = "https://github.com/bitzaldot/substrate.git", branch = "kiz-frame-api", optional = true }
+matter-wasm-builder = { git = "https://github.com/bitzaldot/matter.git", branch = "kiz-frame-api", optional = true }
 
 [features]
 default = ["std"]
 std = [
 	"frame/std",
-	"pallets/std",
+	"barrels/std",
 
 	"sp-api/std",
 
 	"parity-scale-codec/std",
 	"scale-info/std",
 
-	"substrate-wasm-builder",
+	"matter-wasm-builder",
 ]
 
 

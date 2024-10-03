@@ -1,25 +1,25 @@
 use frame::prelude::*;
 
-#[frame::pallet(dev_mode)]
-pub mod pallet {
+#[frame::barrel(dev_mode)]
+pub mod barrel {
 	use super::*;
 
 	pub type Balance = u128;
 
-	#[pallet::config]
+	#[barrel::config]
 	pub trait Config: frame_system::Config {}
 
-	#[pallet::storage]
+	#[barrel::storage]
 	pub type Balances<T: Config> = StorageMap<_, _, T::AccountId, Balance>;
 
-	#[pallet::storage]
+	#[barrel::storage]
 	pub type TotalIssuance<T: Config> = StorageValue<_, Balance, ValueQuery>;
 
-	#[pallet::pallet]
-	pub struct Pallet<T>(_);
+	#[barrel::barrel]
+	pub struct Barrel<T>(_);
 
-	#[pallet::call]
-	impl<T: Config> Pallet<T> {
+	#[barrel::call]
+	impl<T: Config> Barrel<T> {
 		pub fn mint(origin: OriginFor<T>, to: T::AccountId, amount: Balance) -> DispatchResult {
 			let _anyone = ensure_signed(origin)?;
 
@@ -47,7 +47,7 @@ pub mod pallet {
 
 	#[cfg(test)]
 	mod tests {
-		use super::{pallet as pallet_currency, *};
+		use super::{barrel as barrel_currency, *};
 		use frame::testing_prelude::*;
 
 		type Extrinsic = MockUncheckedExtrinsic<Runtime>;
@@ -61,7 +61,7 @@ pub mod pallet {
 				UncheckedExtrinsic = Extrinsic,
 			{
 				System: frame_system,
-				Currency: pallet_currency,
+				Currency: barrel_currency,
 			}
 		);
 
@@ -70,12 +70,12 @@ pub mod pallet {
 			type RuntimeOrigin = RuntimeOrigin;
 			type RuntimeCall = RuntimeCall;
 			type RuntimeEvent = RuntimeEvent;
-			type PalletInfo = PalletInfo;
+			type BarrelInfo = BarrelInfo;
 			type BaseCallFilter = frame::traits::Everything;
 			type OnSetCode = ();
 		}
 
-		impl pallet::Config for Runtime {}
+		impl barrel::Config for Runtime {}
 
 		const ALICE: <Runtime as frame_system::Config>::AccountId = 1;
 		const BOB: <Runtime as frame_system::Config>::AccountId = 2;
@@ -84,9 +84,9 @@ pub mod pallet {
 		fn test_state() -> TestState {
 			let mut state = TestState::new_empty();
 			state.execute_with(|| {
-				pallet::Balances::<Runtime>::insert(&ALICE, 100);
-				pallet::Balances::<Runtime>::insert(&BOB, 100);
-				pallet::TotalIssuance::<Runtime>::put(200);
+				barrel::Balances::<Runtime>::insert(&ALICE, 100);
+				barrel::Balances::<Runtime>::insert(&BOB, 100);
+				barrel::TotalIssuance::<Runtime>::put(200);
 			});
 
 			state
@@ -95,28 +95,28 @@ pub mod pallet {
 		#[test]
 		fn initial_state_works() {
 			test_state().execute_with(|| {
-				assert_eq!(pallet::Balances::<Runtime>::get(&ALICE), Some(100));
-				assert_eq!(pallet::Balances::<Runtime>::get(&BOB), Some(100));
-				assert_eq!(pallet::Balances::<Runtime>::get(&EVE), None);
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 200);
+				assert_eq!(barrel::Balances::<Runtime>::get(&ALICE), Some(100));
+				assert_eq!(barrel::Balances::<Runtime>::get(&BOB), Some(100));
+				assert_eq!(barrel::Balances::<Runtime>::get(&EVE), None);
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 200);
 			});
 		}
 		#[test]
 		fn test_mint() {
 			test_state().execute_with(|| {
 				// given the initial state, when:
-				assert_ok!(pallet::Pallet::<Runtime>::mint(RuntimeOrigin::signed(ALICE), BOB, 100));
+				assert_ok!(barrel::Barrel::<Runtime>::mint(RuntimeOrigin::signed(ALICE), BOB, 100));
 
 				// then:
-				assert_eq!(pallet::Balances::<Runtime>::get(&BOB), Some(200));
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 300);
+				assert_eq!(barrel::Balances::<Runtime>::get(&BOB), Some(200));
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 300);
 
 				// given:
-				assert_ok!(pallet::Pallet::<Runtime>::mint(RuntimeOrigin::signed(ALICE), EVE, 100));
+				assert_ok!(barrel::Barrel::<Runtime>::mint(RuntimeOrigin::signed(ALICE), EVE, 100));
 
 				// then:
-				assert_eq!(pallet::Balances::<Runtime>::get(&EVE), Some(100));
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 400);
+				assert_eq!(barrel::Balances::<Runtime>::get(&EVE), Some(100));
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 400);
 			});
 		}
 
@@ -124,28 +124,28 @@ pub mod pallet {
 		fn transfer_works() {
 			test_state().execute_with(|| {
 				// given the the initial state, when:
-				assert_ok!(pallet::Pallet::<Runtime>::transfer(
+				assert_ok!(barrel::Barrel::<Runtime>::transfer(
 					RuntimeOrigin::signed(ALICE),
 					BOB,
 					50
 				));
 
 				// then:
-				assert_eq!(pallet::Balances::<Runtime>::get(&ALICE), Some(50));
-				assert_eq!(pallet::Balances::<Runtime>::get(&BOB), Some(150));
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 200);
+				assert_eq!(barrel::Balances::<Runtime>::get(&ALICE), Some(50));
+				assert_eq!(barrel::Balances::<Runtime>::get(&BOB), Some(150));
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 200);
 
 				// when:
-				assert_ok!(pallet::Pallet::<Runtime>::transfer(
+				assert_ok!(barrel::Barrel::<Runtime>::transfer(
 					RuntimeOrigin::signed(BOB),
 					ALICE,
 					50
 				));
 
 				// then:
-				assert_eq!(pallet::Balances::<Runtime>::get(&ALICE), Some(100));
-				assert_eq!(pallet::Balances::<Runtime>::get(&BOB), Some(100));
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 200);
+				assert_eq!(barrel::Balances::<Runtime>::get(&ALICE), Some(100));
+				assert_eq!(barrel::Balances::<Runtime>::get(&BOB), Some(100));
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 200);
 			});
 		}
 
@@ -154,20 +154,20 @@ pub mod pallet {
 			test_state().execute_with(|| {
 				// given the the initial state, when:
 				assert_err!(
-					pallet::Pallet::<Runtime>::transfer(RuntimeOrigin::signed(EVE), ALICE, 10),
+					barrel::Barrel::<Runtime>::transfer(RuntimeOrigin::signed(EVE), ALICE, 10),
 					"NonExistentAccount"
 				);
 
 				// then nothing has changed.
-				assert_eq!(pallet::Balances::<Runtime>::get(&ALICE), Some(100));
-				assert_eq!(pallet::Balances::<Runtime>::get(&BOB), Some(100));
-				assert_eq!(pallet::Balances::<Runtime>::get(&EVE), None);
-				assert_eq!(pallet::TotalIssuance::<Runtime>::get(), 200);
+				assert_eq!(barrel::Balances::<Runtime>::get(&ALICE), Some(100));
+				assert_eq!(barrel::Balances::<Runtime>::get(&BOB), Some(100));
+				assert_eq!(barrel::Balances::<Runtime>::get(&EVE), None);
+				assert_eq!(barrel::TotalIssuance::<Runtime>::get(), 200);
 
 				// in fact, this frame-helper ensures that nothing in the state has been updated
 				// prior and after execution:
 				assert_noop!(
-					pallet::Pallet::<Runtime>::transfer(RuntimeOrigin::signed(EVE), ALICE, 10),
+					barrel::Barrel::<Runtime>::transfer(RuntimeOrigin::signed(EVE), ALICE, 10),
 					"NonExistentAccount"
 				);
 			});

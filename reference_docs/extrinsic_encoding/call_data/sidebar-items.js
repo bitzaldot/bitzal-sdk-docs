@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["Call","PalletACall","PalletBCall"]};
+window.SIDEBAR_ITEMS = {"enum":["Call","BarrelACall","BarrelBCall"]};

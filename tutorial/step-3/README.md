@@ -1,6 +1,6 @@
 # Step 3
 
-In this step, we will expand our pallet to live in a basic runtime. We will do this one step at a
+In this step, we will expand our barrel to live in a basic runtime. We will do this one step at a
 time, and initially our runtime is not compiling to wasm.
 
 - [Step 3](#step-3)
@@ -24,7 +24,7 @@ time, and initially our runtime is not compiling to wasm.
   - Most items are the same as before.
   - We use a real `RuntimeVersion`. See its docs for more info.
   - we use a real account id type given to us by `runtime_types_common`.
-- we bring in our sibling `frame-pallets` crate that contain the currency pallet we wrote.
+- we bring in our sibling `frame-barrels` crate that contain the currency barrel we wrote.
   - implement its config as well for runtime.
 - to create an `Executive`, we need primitive types like `Block` and such to be defined. Again,
   `runtime_types_common` gives us one examples set of these that are reasonable be use. You would be

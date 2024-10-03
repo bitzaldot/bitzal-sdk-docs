@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["pallet","runtime"]};
+window.SIDEBAR_ITEMS = {"mod":["barrel","runtime"]};

@@ -8,17 +8,17 @@ parity-scale-codec = { version = "3.0.0", default-features = false }
 scale-info = { version = "2.6.0", default-features = false }
 
 frame = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false, features = ["runtime"] }
-staging-pallets = { path = "../pallets", default-features = false }
+staging-barrels = { path = "../barrels", default-features = false }
 
-# Pallets that we want to use
-pallet-balances = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false, features = ["insecure_zero_ed"] }
-pallet-sudo = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
-pallet-timestamp = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
-pallet-transaction-payment = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
-pallet-transaction-payment-rpc-runtime-api = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
+# Barrels that we want to use
+barrel-balances = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false, features = ["insecure_zero_ed"] }
+barrel-sudo = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
+barrel-timestamp = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
+barrel-transaction-payment = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
+barrel-transaction-payment-rpc-runtime-api = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", default-features = false }
 
 [build-dependencies]
-substrate-wasm-builder = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", optional = true }
+matter-wasm-builder = { git = "https://github.com/bitzaldot/bitzal-sdk.git", branch = "kiz-frame-api", optional = true }
 
 [features]
 default = ["std"]
@@ -27,15 +27,15 @@ std = [
 	"scale-info/std",
 
 	"frame/std",
-	"staging-pallets/std",
+	"staging-barrels/std",
 
-	"pallet-balances/std",
-	"pallet-sudo/std",
-	"pallet-timestamp/std",
-	"pallet-transaction-payment/std",
-	"pallet-transaction-payment-rpc-runtime-api/std",
+	"barrel-balances/std",
+	"barrel-sudo/std",
+	"barrel-timestamp/std",
+	"barrel-transaction-payment/std",
+	"barrel-transaction-payment-rpc-runtime-api/std",
 
-	"substrate-wasm-builder",
+	"matter-wasm-builder",
 ]
 
 

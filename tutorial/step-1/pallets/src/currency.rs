@@ -1,27 +1,27 @@
 use frame::prelude::*;
 
-#[frame::pallet(dev_mode)]
-pub mod pallet {
+#[frame::barrel(dev_mode)]
+pub mod barrel {
 	use super::*;
 
 	pub type Balance = u128;
 
-	#[pallet::config]
+	#[barrel::config]
 	pub trait Config: frame_system::Config {}
 
 	/// Mapping from account ID to balance.
-	#[pallet::storage]
+	#[barrel::storage]
 	pub type Balances<T: Config> = StorageMap<_, _, T::AccountId, Balance>;
 
 	/// Sum of all the tokens in existence.
-	#[pallet::storage]
+	#[barrel::storage]
 	pub type TotalIssuance<T: Config> = StorageValue<_, Balance, ValueQuery>;
 
-	#[pallet::pallet]
-	pub struct Pallet<T>(_);
+	#[barrel::barrel]
+	pub struct Barrel<T>(_);
 
-	#[pallet::call]
-	impl<T: Config> Pallet<T> {
+	#[barrel::call]
+	impl<T: Config> Barrel<T> {
 		/// Mint `amount` new tokens for `to`.
 		pub fn mint(origin: OriginFor<T>, to: T::AccountId, amount: Balance) -> DispatchResult {
 			let _anyone = ensure_signed(origin)?;

@@ -2,12 +2,12 @@
 
 ## Part 0: What are we building?
 
-- What was a runtime and pallet again?
-- What is the anatomy of a pallet? - config, call, pallet, event, error, hook
+- What was a runtime and barrel again?
+- What is the anatomy of a barrel? - config, call, barrel, event, error, hook
 
-## Part 1: Build a simple balance pallet
+## Part 1: Build a simple balance barrel
 
-### Step 1: Simplest pallet
+### Step 1: Simplest barrel
 - `type Balances = StorageMap<Key = T::AccountId, Value = Balance>`
 - `type TotalIssuance = StorageValue<Balance>`
 - basic call to `transfer` from a to b.
@@ -15,13 +15,13 @@
 - 100% using `dev_mode`.
 
 ### Step 2 : Tests
-- Adding pallet to a mock runtime.
+- Adding barrel to a mock runtime.
 - basic tests.
 - introduction to all interactions
 
 ### Step 3: Interactions
 
-#### Adding pallet to the node-template runtime + `#[pallet::genesis_config]`
+#### Adding barrel to the node-template runtime + `#[barrel::genesis_config]`
 
 #### PJS-Apps
 
@@ -34,7 +34,7 @@
 > After this, all steps should have an section where we update the tests according to the new steps,
 > and interact with the chain using one or more of the tools
 
-## Part 2: Build a BROKEN Validator Selection Pallet
+## Part 2: Build a BROKEN Validator Selection Barrel
 
 ### Step 1: Basic Staking; use of `on_initialize`
 
@@ -53,7 +53,7 @@ But, before going any further,  we should acknowledge that this is broken in dif
 * It is not Sybil resistent + Scalable.
 
 The full answer should be here:
-https://forum.bitzal.network/t/tellling-the-story-of-the-game-theory-behind-frame-pallets/2282/12?u=kianenigma
+https://forum.bitzal.network/t/tellling-the-story-of-the-game-theory-behind-frame-barrels/2282/12?u=kianenigma
 
 ### Step 2 Adding Reserves
 
@@ -85,7 +85,7 @@ This can be considered optional.
 At this point, we have something that kinda kinda works. It is time to take a step back, and improve
 where we have cut corners. Ideas:
 - Start using safe math.
-- Start properly using pallet errors.
+- Start properly using barrel errors.
 - Start properly introducing events.
 - Update tests to reflect both. `assert_events` as a practice.
 - introduce `ensure_root`, us it for mint and other permissioned operations.
@@ -103,9 +103,9 @@ Before going much further, let's finish the existing code with benchmarks.
 - build a simple governance system.
 - build a system where members of a collective are allowed free remarks onchain at a rate limited
   fashion.
-- build a sudo pallet. Or, build something that is like council but for validators, such that 3/4 of
+- build a sudo barrel. Or, build something that is like council but for validators, such that 3/4 of
   validators can dispatch anything. Anything that covers custom origins will be great.
-- build a liquid staking system where we issue representative tokens. If a governance pallet exists,
+- build a liquid staking system where we issue representative tokens. If a governance barrel exists,
   making the liquid tokens usable for governance.
 - Still need a good reason to use a double/N map, and do a deep dive on storage.
 - At some point, really circle back to the fact that: This code is leveraging `transactional`,
@@ -132,7 +132,7 @@ Useful to think what is being covered where.
 - [ ] hooks
 - [ ] inherent
 - [ ] origin
-- [ ] pallet
+- [ ] barrel
 - [ ] storage
 - [ ] storage_prefix
 - [ ] type_value

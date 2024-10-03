@@ -3,19 +3,19 @@ use crate::{
 	cli::{Cli, Subcommand},
 	service,
 };
-use sc_cli::{ChainSpec, RuntimeVersion, SubstrateCli};
+use sc_cli::{ChainSpec, RuntimeVersion, MatterCli};
 use sc_service::PartialComponents;
 
 #[cfg(feature = "try-runtime")]
 use try_runtime_cli::block_building_info::timestamp_with_aura_info;
 
-impl SubstrateCli for Cli {
+impl MatterCli for Cli {
 	fn impl_name() -> String {
-		"Substrate Node".into()
+		"Matter Node".into()
 	}
 
 	fn impl_version() -> String {
-		env!("SUBSTRATE_CLI_IMPL_VERSION").into()
+		env!("MATTER_CLI_IMPL_VERSION").into()
 	}
 
 	fn description() -> String {

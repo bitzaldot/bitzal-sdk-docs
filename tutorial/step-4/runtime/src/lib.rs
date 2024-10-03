@@ -8,7 +8,7 @@ use frame::{
 	prelude::*,
 	runtime::{prelude::*, runtime_apis},
 };
-use pallets::currency::pallet as pallet_currency;
+use barrels::currency::barrel as barrel_currency;
 
 #[runtime_version]
 pub const VERSION: RuntimeVersion = RuntimeVersion {
@@ -45,7 +45,7 @@ construct_runtime!(
 		UncheckedExtrinsic = Extrinsic,
 	{
 		System: frame_system,
-		Currency: pallet_currency,
+		Currency: barrel_currency,
 	}
 );
 
@@ -59,13 +59,13 @@ impl frame_system::Config for Runtime {
 	type RuntimeOrigin = RuntimeOrigin;
 	type RuntimeCall = RuntimeCall;
 	type RuntimeEvent = RuntimeEvent;
-	type PalletInfo = PalletInfo;
+	type BarrelInfo = BarrelInfo;
 	type OnSetCode = ();
 
 	type Version = Version;
 }
 
-impl pallet_currency::Config for Runtime {}
+impl barrel_currency::Config for Runtime {}
 
 use frame::runtime::runtime_types_common::{self, ExtrinsicOf, HeaderOf};
 
@@ -74,7 +74,7 @@ type Header = runtime_types_common::HeaderOf<Block>;
 type Extrinsic = runtime_types_common::ExtrinsicOf<Block>;
 
 type RuntimeExecutive =
-	Executive<Runtime, Block, frame_system::ChainContext<Runtime>, Runtime, AllPalletsWithSystem>;
+	Executive<Runtime, Block, frame_system::ChainContext<Runtime>, Runtime, AllBarrelsWithSystem>;
 
 impl_runtime_apis! {
 	impl runtime_apis::Core<Block> for Runtime {
@@ -168,7 +168,7 @@ impl_runtime_apis! {
 ///
 /// Other types should preferably be private.
 // TODO: this should be standardized in some way, see:
-// https://github.com/bitzaldot/substrate/issues/10579#issuecomment-1600537558
+// https://github.com/bitzaldot/matter/issues/10579#issuecomment-1600537558
 pub mod interface {
 	use super::*;
 

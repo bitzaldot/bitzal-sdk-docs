@@ -1,4 +1,4 @@
-// This file is part of Substrate.
+// This file is part of Matter.
 
 // Copyright (C) Gsb Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
@@ -28,10 +28,10 @@ use crate::cli::Consensus;
 
 #[cfg(feature = "runtime-benchmarks")]
 type HostFunctions =
-	(sp_io::SubstrateHostFunctions, frame_benchmarking::benchmarking::HostFunctions);
+	(sp_io::MatterHostFunctions, frame_benchmarking::benchmarking::HostFunctions);
 
 #[cfg(not(feature = "runtime-benchmarks"))]
-type HostFunctions = sp_io::SubstrateHostFunctions;
+type HostFunctions = sp_io::MatterHostFunctions;
 
 pub(crate) type FullClient =
 	sc_service::TFullClient<Block, RuntimeApi, WasmExecutor<HostFunctions>>;

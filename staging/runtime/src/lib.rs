@@ -1,4 +1,4 @@
-// This file is part of Substrate.
+// This file is part of Matter.
 
 // Copyright (C) Gsb Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
@@ -63,20 +63,20 @@ type SignedExtra = (
 	frame_system::CheckEra<Runtime>,
 	frame_system::CheckNonce<Runtime>,
 	frame_system::CheckWeight<Runtime>,
-	pallet_transaction_payment::ChargeTransactionPayment<Runtime>,
+	barrel_transaction_payment::ChargeTransactionPayment<Runtime>,
 );
 
 construct_runtime!(
 	pub struct Runtime {
 		System: frame_system,
-		Timestamp: pallet_timestamp,
+		Timestamp: barrel_timestamp,
 
-		Balances: pallet_balances,
-		Sudo: pallet_sudo,
-		TransactionPayment: pallet_transaction_payment,
+		Balances: barrel_balances,
+		Sudo: barrel_sudo,
+		TransactionPayment: barrel_transaction_payment,
 
-		TutorialCurrency: staging_pallets::currency,
-		TutorialStaking: staging_pallets::staking,
+		TutorialCurrency: staging_barrels::currency,
+		TutorialStaking: staging_barrels::staking,
 	}
 );
 
@@ -89,30 +89,30 @@ impl frame_system::Config for Runtime {
 	type Block = Block;
 	type Version = Version;
 	type BlockHashCount = ConstU32<1024>;
-	type AccountData = pallet_balances::AccountData<<Runtime as pallet_balances::Config>::Balance>;
+	type AccountData = barrel_balances::AccountData<<Runtime as barrel_balances::Config>::Balance>;
 }
 
-#[derive_impl(pallet_balances::config_preludes::TestDefaultConfig as pallet_balances::DefaultConfig)]
-impl pallet_balances::Config for Runtime {
+#[derive_impl(barrel_balances::config_preludes::TestDefaultConfig as barrel_balances::DefaultConfig)]
+impl barrel_balances::Config for Runtime {
 	type AccountStore = System;
 }
 
-#[derive_impl(pallet_sudo::config_preludes::TestDefaultConfig as pallet_sudo::DefaultConfig)]
-impl pallet_sudo::Config for Runtime {}
+#[derive_impl(barrel_sudo::config_preludes::TestDefaultConfig as barrel_sudo::DefaultConfig)]
+impl barrel_sudo::Config for Runtime {}
 
-#[derive_impl(pallet_timestamp::config_preludes::TestDefaultConfig as pallet_timestamp::DefaultConfig)]
-impl pallet_timestamp::Config for Runtime {}
+#[derive_impl(barrel_timestamp::config_preludes::TestDefaultConfig as barrel_timestamp::DefaultConfig)]
+impl barrel_timestamp::Config for Runtime {}
 
-#[derive_impl(pallet_transaction_payment::config_preludes::TestDefaultConfig as pallet_transaction_payment::DefaultConfig)]
-impl pallet_transaction_payment::Config for Runtime {
+#[derive_impl(barrel_transaction_payment::config_preludes::TestDefaultConfig as barrel_transaction_payment::DefaultConfig)]
+impl barrel_transaction_payment::Config for Runtime {
 	// TODO: this a hack to make all transactions have a fixed amount of fee. We declare length to
 	// fee function as a constant of 1, and no weight to fee.
-	type WeightToFee = FixedFee<1, <Self as pallet_balances::Config>::Balance>;
-	type OnChargeTransaction = pallet_transaction_payment::CurrencyAdapter<Balances, ()>;
+	type WeightToFee = FixedFee<1, <Self as barrel_balances::Config>::Balance>;
+	type OnChargeTransaction = barrel_transaction_payment::CurrencyAdapter<Balances, ()>;
 }
 
-impl staging_pallets::currency::Config for Runtime {}
-impl staging_pallets::staking::Config for Runtime {
+impl staging_barrels::currency::Config for Runtime {}
+impl staging_barrels::staking::Config for Runtime {
 	type EraDuration = ConstU32<200>;
 	type ValidatorCount = ConstU32<4>;
 }
@@ -121,9 +121,9 @@ type Block = frame::runtime::types_common::BlockOf<Runtime, SignedExtra>;
 type Header = HeaderFor<Runtime>;
 
 type RuntimeExecutive =
-	Executive<Runtime, Block, frame_system::ChainContext<Runtime>, Runtime, AllPalletsWithSystem>;
+	Executive<Runtime, Block, frame_system::ChainContext<Runtime>, Runtime, AllBarrelsWithSystem>;
 
-use pallet_transaction_payment::{FeeDetails, RuntimeDispatchInfo};
+use barrel_transaction_payment::{FeeDetails, RuntimeDispatchInfo};
 
 impl_runtime_apis! {
 	impl apis::Core<Block> for Runtime {
@@ -211,7 +211,7 @@ impl_runtime_apis! {
 		}
 	}
 
-	impl pallet_transaction_payment_rpc_runtime_api::TransactionPaymentApi<
+	impl barrel_transaction_payment_rpc_runtime_api::TransactionPaymentApi<
 		Block,
 		interface::Balance,
 	> for Runtime {
@@ -234,7 +234,7 @@ impl_runtime_apis! {
 ///
 /// Other types should preferably be private.
 // TODO: this should be standardized in some way, see:
-// https://github.com/bitzaldot/substrate/issues/10579#issuecomment-1600537558
+// https://github.com/bitzaldot/matter/issues/10579#issuecomment-1600537558
 pub mod interface {
 	use super::*;
 
@@ -242,7 +242,7 @@ pub mod interface {
 	pub type AccountId = <Runtime as frame_system::Config>::AccountId;
 	pub type Nonce = <Runtime as frame_system::Config>::Nonce;
 	pub type Hash = <Runtime as frame_system::Config>::Hash;
-	pub type Balance = <Runtime as pallet_balances::Config>::Balance;
+	pub type Balance = <Runtime as barrel_balances::Config>::Balance;
 
-	pub type MinimumBalance = <Runtime as pallet_balances::Config>::ExistentialDeposit;
+	pub type MinimumBalance = <Runtime as barrel_balances::Config>::ExistentialDeposit;
 }

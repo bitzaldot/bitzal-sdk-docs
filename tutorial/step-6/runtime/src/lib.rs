@@ -12,7 +12,7 @@ use frame::{
 		runtime_types_common::{self, ExtrinsicOf, HeaderOf},
 	},
 };
-use pallets::{currency::pallet as pallet_currency, staking::pallet as pallet_staking};
+use barrels::{currency::barrel as barrel_currency, staking::barrel as barrel_staking};
 
 #[runtime_version]
 pub const VERSION: RuntimeVersion = RuntimeVersion {
@@ -49,8 +49,8 @@ construct_runtime!(
 		UncheckedExtrinsic = Extrinsic,
 	{
 		System: frame_system,
-		Currency: pallet_currency,
-		Staking: pallet_staking,
+		Currency: barrel_currency,
+		Staking: barrel_staking,
 	}
 );
 
@@ -64,20 +64,20 @@ impl frame_system::Config for Runtime {
 	type RuntimeOrigin = RuntimeOrigin;
 	type RuntimeCall = RuntimeCall;
 	type RuntimeEvent = RuntimeEvent;
-	type PalletInfo = PalletInfo;
+	type BarrelInfo = BarrelInfo;
 	type OnSetCode = ();
 
 	type Version = Version;
 }
 
-impl pallet_currency::Config for Runtime {}
+impl barrel_currency::Config for Runtime {}
 
 parameter_types! {
 	pub const EraDuration: <Runtime as frame_system::Config>::BlockNumber = 5;
 	pub const ValidatorCount: u32 = 2;
 }
 
-impl pallet_staking::Config for Runtime {
+impl barrel_staking::Config for Runtime {
 	type EraDuration = EraDuration;
 	type ValidatorCount = ValidatorCount;
 }
@@ -87,7 +87,7 @@ type Header = runtime_types_common::HeaderOf<Block>;
 type Extrinsic = runtime_types_common::ExtrinsicOf<Block>;
 
 type RuntimeExecutive =
-	Executive<Runtime, Block, frame_system::ChainContext<Runtime>, Runtime, AllPalletsWithSystem>;
+	Executive<Runtime, Block, frame_system::ChainContext<Runtime>, Runtime, AllBarrelsWithSystem>;
 
 impl_runtime_apis! {
 	impl runtime_apis::Core<Block> for Runtime {
@@ -181,7 +181,7 @@ impl_runtime_apis! {
 ///
 /// Other types should preferably be private.
 // TODO: this should be standardized in some way, see:
-// https://github.com/bitzaldot/substrate/issues/10579#issuecomment-1600537558
+// https://github.com/bitzaldot/matter/issues/10579#issuecomment-1600537558
 pub mod interface {
 	use super::*;
 
